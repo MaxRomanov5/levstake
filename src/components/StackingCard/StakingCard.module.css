@@ -1,0 +1,25 @@
+.card{
+    padding: 16px;
+    background-color: #232a3c;
+    max-width: 186px;
+border-radius: 12px;
+box-shadow: 0px 0.9513888359069824px 1.9027776718139648px 0px #FFFFFF24 inset;
+
+}
+.cardWrap{
+    display: flex;
+    justify-content: left;
+  vertical-align: top;
+}
+.btn{
+border: none;
+background-color: transparent;
+font-family: Montserrat;
+font-size: 14px;
+font-weight: 700;
+line-height: 16px;
+letter-spacing: 0.04em;
+text-align: left;
+color: #9578F9;
+display: flex;
+}

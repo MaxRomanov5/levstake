@@ -1,0 +1,18 @@
+.tableCell{
+    font-family: 'Montserrat';
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+    text-align: left;
+    color: #FFFFFF;
+}
+.tableHead{
+    font-family: Montserrat;
+font-size: 12px;
+font-weight: 400;
+line-height: 18px;
+letter-spacing: 0.04em;
+text-align: left;
+color: #CACBCB;
+}
