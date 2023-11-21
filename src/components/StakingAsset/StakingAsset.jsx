@@ -1,4 +1,4 @@
-import { FormControl, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,  } from "@mui/material";
+import {Button, FormControl, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,  } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { useState } from "react"; 
 import images from "../../assets/images";
@@ -74,10 +74,7 @@ border:'0'
                     }
                 }}
   
-
-
-
-          id="demo-simple-select"
+          id="demo-simple-select1"
           variant='standard'
           value={age}
           label="Age"
@@ -124,7 +121,7 @@ border:'0'
 
 
 
-          id="demo-simple-select"
+          id="demo-simple-select2"
           variant='standard'
           value={leverage}
           label="Age"
@@ -159,7 +156,7 @@ border:'0'
       letterSpacing: '0.04em',
       textAlign: 'left',borderBottom:'0'}} align="left">3,2105</TableCell>
       
-                <TableCell sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',borderBottom:'0'}} align="left" ><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</TableCell>
+                <TableCell sx={{borderBottom:'0',padding:'0px'}} align="left" ><Button sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em'}}><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</Button></TableCell>
               </StyledTableRow>
               <StyledTableRow >
               <TableCell sx={{borderBottom:'0', display:'flex', padding:'8px', color:'primary.main',fontFamily: 'IBM Plex Mono',fontSize: '21px',fontWeight: '600',lineHeight: '34px',letterSpacing: '0.04em'}} align="left" ><img style={{marginRight:'16px'}} src={images.ethereum} alt="coin" width={32} height={32}></img> Coin</TableCell>
@@ -279,7 +276,7 @@ border:'0'
       letterSpacing: '0.04em',
       textAlign: 'left',borderBottom:'0'}} align="left">3,2105</TableCell>
       
-                <TableCell sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',borderBottom:'0'}} align="left" ><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</TableCell>
+      <TableCell sx={{borderBottom:'0',padding:'0px'}} align="left" ><Button sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em'}}><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</Button></TableCell>
               </StyledTableRow>
               <StyledTableRow >
               <TableCell sx={{borderBottom:'0', display:'flex', padding:'8px', color:'primary.main',fontFamily: 'IBM Plex Mono',fontSize: '21px',fontWeight: '600',lineHeight: '34px',letterSpacing: '0.04em'}} align="left" ><img style={{marginRight:'16px'}} src={images.ethereum} alt="coin" width={32} height={32}></img> Coin</TableCell>
@@ -399,7 +396,7 @@ border:'0'
       letterSpacing: '0.04em',
       textAlign: 'left',borderBottom:'0'}} align="left">3,2105</TableCell>
       
-                <TableCell sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',borderBottom:'0'}} align="left" ><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</TableCell>
+      <TableCell sx={{borderBottom:'0',padding:'0px'}} align="left" ><Button sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em'}}><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</Button></TableCell>
               </StyledTableRow>
               <StyledTableRow >
               <TableCell sx={{borderBottom:'0', display:'flex', padding:'8px', color:'primary.main',fontFamily: 'IBM Plex Mono',fontSize: '21px',fontWeight: '600',lineHeight: '34px',letterSpacing: '0.04em'}} align="left" ><img style={{marginRight:'16px'}} src={images.ethereum} alt="coin" width={32} height={32}></img> Coin</TableCell>
@@ -519,7 +516,7 @@ border:'0'
       letterSpacing: '0.04em',
       textAlign: 'left',borderBottom:'0'}} align="left">3,2105</TableCell>
       
-                <TableCell sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',borderBottom:'0'}} align="left" ><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</TableCell>
+      <TableCell sx={{borderBottom:'0',padding:'0px'}} align="left" ><Button sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em'}}><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</Button></TableCell>
               </StyledTableRow>
            
         

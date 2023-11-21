@@ -10,7 +10,7 @@ if(a){
   return children
 }
 
-        return <Navigate to="/home"  />
+        return <Navigate to="/"  />
     
 };
 ProtectedRoute.propTypes = {

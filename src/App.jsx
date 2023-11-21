@@ -1,4 +1,5 @@
 import "./App.css";
+import Footer from "./sections/Footer/Footer";
 import Header from "./sections/Header/Header.jsx";
 
 function App() {
@@ -6,8 +7,9 @@ function App() {
   <div className='bg'></div>
   <div className="container">
 <Header/>
-
+<Footer></Footer>
 </div>
+
 </>
   )
 }

@@ -8,7 +8,8 @@ import arrow from './Arrow.svg'
 import rocketPrpl from './rocketprpl.svg'
 import buySell from './buySell.svg'
 import hdmi from './hdmi.svg'
-
+import arrowForm from './arrowForm.svg'
+import question from './question.svg'
 export default {
     levlion,
     levtext,
@@ -19,5 +20,7 @@ export default {
     arrow,
     rocketPrpl,
     buySell,
-    hdmi
+    hdmi,
+    arrowForm,question,
+    
 }

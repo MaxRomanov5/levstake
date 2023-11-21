@@ -10,7 +10,7 @@ body{
     
 }
 .bg{
-    background-image: url(./assets/bgEffect.png),url(./assets/bgmob.png);
+    background-image: url(./assets/bgEffect2.png),url(./assets/bgmob2.png);
     background-repeat: no-repeat;
 z-index: -100;
     position: absolute;
@@ -21,7 +21,7 @@ z-index: -100;
 @media screen and (min-resolution: 192dpi) and (max-width: 768px), screen and (min-resolution: 2dppx) and (max-width: 768px),
 screen and (min-device-pixel-ratio: 2) and (max-width: 768px){
     .bg{
-    background-image: url(./assets/bgSecondmob2x.png),url(./assets/bgmainmob2x.png);  
+    background-image: url(./assets/bgSecondmob2x2.png),url(./assets/bgmainmob2x2.png);  
     }
     }
 

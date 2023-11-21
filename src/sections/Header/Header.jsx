@@ -26,7 +26,8 @@ const Header = () => {
           justifyContent: "space-between",
         }}
       >
-        <Logo isLogin={true} />
+        <NavLink to='/'>   <Logo isLogin={true} /></NavLink>
+     
 
         {matches ? (
           <MobileMenu />
@@ -49,7 +50,7 @@ const Header = () => {
                   Contacts<div className={styled.line}></div>
                 </Typography>
               </NavLink>
-              <NavLink to="/home">
+              <NavLink to="/">
                 <Typography
                   variant="subtitle1"
                   className={styled.current}
@@ -102,8 +103,8 @@ const Header = () => {
         )}
       </header>
       <Routes>
+        
         <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/feez" element={<Feez />} />
         <Route path="/faq" element={<FAQ />} />

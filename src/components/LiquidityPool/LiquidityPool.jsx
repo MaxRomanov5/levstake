@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useMediaQuery, useTheme } from "@mui/material";
+import {Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useMediaQuery, useTheme } from "@mui/material";
 
 const LiquidityPool = () => {
     const theme= useTheme()
@@ -43,16 +43,16 @@ const LiquidityPool = () => {
     color:'white',
     letterSpacing: '0.04em',
     textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">10.000</TableCell>
-              <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
+              <TableCell sx={{padding:'0px 8px', fontFamily: 'Montserrat',
     fontSize: '12px',
     fontWeight: '500',
     lineHeight: '17px',
     color:'white',
     letterSpacing: '0.04em',
     textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">0,8988</TableCell>
-              <TableCell sx={{padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',borderBottomColor:'#3A3B3C'}} align="left" ><span style={{marginRight:'8px'}}>$</span>BUY {
+              <TableCell sx={{ borderBottomColor:'#3A3B3C'}} align="left" ><Button sx={ {padding:'16px 8px',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',color:'purple.main'}} ><span style={{marginRight:'8px'}}>$</span>BUY {
               mob && 'Stake now'
-             }</TableCell>
+             }</Button></TableCell>
             </TableRow>
             <TableRow >
               <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
@@ -85,9 +85,9 @@ const LiquidityPool = () => {
     color:'white',
     letterSpacing: '0.04em',
     textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">0,8988</TableCell>
-              <TableCell sx={{padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',borderBottomColor:'#3A3B3C'}} align="left" ><span style={{marginRight:'8px'}}>$</span>BUY {
+              <TableCell sx={{ borderBottomColor:'#3A3B3C'}} align="left" ><Button sx={ {padding:'16px 8px',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',color:'purple.main'}} ><span style={{marginRight:'8px'}}>$</span>BUY {
               mob && 'Stake now'
-             }</TableCell>
+             }</Button></TableCell>
             </TableRow>
             <TableRow >
               <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
@@ -120,9 +120,9 @@ const LiquidityPool = () => {
     color:'white',
     letterSpacing: '0.04em',
     textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">0,8988</TableCell>
-              <TableCell sx={{padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',borderBottomColor:'#3A3B3C'}} align="left" ><span style={{marginRight:'8px'}}>$</span>BUY {
+             <TableCell sx={{ borderBottomColor:'#3A3B3C'}} align="left" ><Button sx={ {padding:'16px 8px',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',color:'purple.main'}} ><span style={{marginRight:'8px'}}>$</span>BUY {
               mob && 'Stake now'
-             }</TableCell>
+             }</Button></TableCell>
             </TableRow>
             <TableRow >
               <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
@@ -155,9 +155,9 @@ const LiquidityPool = () => {
     color:'white',
     letterSpacing: '0.04em',
     textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">0,8988</TableCell>
-              <TableCell sx={{padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',borderBottomColor:'#3A3B3C'}} align="left" ><span style={{marginRight:'8px'}}>$</span>BUY {
+             <TableCell sx={{ borderBottomColor:'#3A3B3C'}} align="left" ><Button sx={ {padding:'16px 8px',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',color:'purple.main'}} ><span style={{marginRight:'8px'}}>$</span>BUY {
               mob && 'Stake now'
-             }</TableCell>
+             }</Button></TableCell>
             </TableRow>
       
         </TableBody>
