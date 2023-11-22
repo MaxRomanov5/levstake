@@ -10,6 +10,7 @@ import buySell from './buySell.svg'
 import hdmi from './hdmi.svg'
 import arrowForm from './arrowForm.svg'
 import question from './question.svg'
+import metamask from './metamask.png'
 export default {
     levlion,
     levtext,
@@ -22,5 +23,6 @@ export default {
     buySell,
     hdmi,
     arrowForm,question,
+    metamask
     
 }

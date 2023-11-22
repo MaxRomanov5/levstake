@@ -1,0 +1,12 @@
+.box{
+    padding: 24px;
+    background-color: #FFFFFF24;
+    border-radius: 12px;
+    max-width: 640px;
+   
+}
+.section{
+  padding: 245px 0;
+  display: flex;
+  justify-content: center;
+}

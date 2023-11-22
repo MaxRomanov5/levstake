@@ -10,6 +10,7 @@ import BuySellBtn from "../../components/BuySellBtn/BuySellBtn.jsx";
 import MobileMenu from "../../components/MobileMenu/MobileMenu.jsx";
 import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import styled from "./Header.module.css";
+import ConnectWallet from "../../pages/ConnectWallet/ConnectWallet.jsx";
 
 const Header = () => {
   const theme = useTheme();
@@ -108,7 +109,7 @@ const Header = () => {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/feez" element={<Feez />} />
         <Route path="/faq" element={<FAQ />} />
-
+        <Route path="/connectWallet" element={<ConnectWallet/>}></Route>
         <Route
           path="/dashboard"
           element={
