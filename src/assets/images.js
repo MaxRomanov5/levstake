@@ -11,6 +11,11 @@ import hdmi from './hdmi.svg'
 import arrowForm from './arrowForm.svg'
 import question from './question.svg'
 import metamask from './metamask.png'
+import tableArrowOpen from './tableArrowOpen.svg'
+import tableArrowClose from './tableArrowClose.svg'
+import linkGreen from './linkGreen.svg'
+import status from './Status.svg'
+import iconClose from './iconClose.svg'
 export default {
     levlion,
     levtext,
@@ -23,6 +28,11 @@ export default {
     buySell,
     hdmi,
     arrowForm,question,
-    metamask
+    metamask,
+    tableArrowOpen,
+    tableArrowClose,
+    linkGreen,
+    status,
+    iconClose
     
 }

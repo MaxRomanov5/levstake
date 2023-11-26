@@ -5,8 +5,10 @@ const Feez = () => {
 const [structure, setStructure] = useState('Exchange');
 
 const  handleStructure =(e, newStr)=>{
- 
-  setStructure(newStr)
+  if (newStr !== null) {
+    setStructure(newStr);
+  }
+
 }
     return (
         <div>

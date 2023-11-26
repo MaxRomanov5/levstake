@@ -119,7 +119,7 @@ textAlign: 'left',
                 '& .MuiMenu-list':{
                     paddingTop:'0px',
                     paddingBottom:'0px'
-                },
+                },'& .MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiMenuItem-root':{display:'flex',gap:'8px'},
                 '& .MuiMenuItem-gutters.MuiButtonBase-root.MuiMenuItem-gutters.MuiMenuItem-root':{
                     backgroundColor:'transparent',
                     '&:hover':{

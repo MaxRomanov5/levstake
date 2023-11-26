@@ -27,7 +27,7 @@ const Header = () => {
           justifyContent: "space-between",
         }}
       >
-        <NavLink to='/'>   <Logo isLogin={true} /></NavLink>
+        <NavLink to='/levstake/'>   <Logo isLogin={true} /></NavLink>
      
 
         {matches ? (
@@ -36,7 +36,7 @@ const Header = () => {
           <>
           <div style={{display:'flex',alignItems:'center',justifyContent:'right'}}>
             <nav style={{ display: "flex", gap: 15 }}>
-              <NavLink to="/contacts">
+              <NavLink to="/levstake/contacts">
                 <Typography
                   variant="subtitle1"
                   className={styled.current}
@@ -51,7 +51,7 @@ const Header = () => {
                   Contacts<div className={styled.line}></div>
                 </Typography>
               </NavLink>
-              <NavLink to="/">
+              <NavLink to="/levstake/">
                 <Typography
                   variant="subtitle1"
                   className={styled.current}
@@ -66,7 +66,7 @@ const Header = () => {
                   Home<div className={styled.line}></div>
                 </Typography>
               </NavLink>
-              <NavLink to="/feez">
+              <NavLink to="/levstake/feez">
                 <Typography
                   variant="subtitle1"
                   className={styled.current}
@@ -81,7 +81,7 @@ const Header = () => {
                   Fee structure<div className={styled.line}></div>
                 </Typography>
               </NavLink>
-              <NavLink to="/faq">
+              <NavLink to="/levstake/faq">
                 <Typography
                   variant="subtitle1"
                   className={styled.current}
@@ -98,27 +98,29 @@ const Header = () => {
               </NavLink>
               {/* <NavLink to="/dashboard">Dashboard</NavLink> */}
             </nav>
-            <BuySellBtn style={{marginLeft:'64px'}} text={"Buy/Sell"}></BuySellBtn>
+           <BuySellBtn style={{marginLeft:'64px'}} text={"Buy/Sell"}></BuySellBtn>
             </div>
           </>
         )}
       </header>
       <Routes>
-        
-        <Route path="/" element={<Home />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/feez" element={<Feez />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/connectWallet" element={<ConnectWallet/>}></Route>
+        <Route path="/levstake">
+        <Route path="/levstake/" element={<Home />} />
+        <Route path="/levstake/contacts" element={<Contacts />} />
+        <Route path="/levstake/feez" element={<Feez />} />
+        <Route path="/levstake/faq" element={<FAQ />} />
+        <Route path="/levstake/connectWallet" element={<ConnectWallet/>}></Route>
         <Route
-          path="/dashboard"
+          path="/levstake/dashboard"
           element={
             <Auth>
               <Dashboard />{" "}
             </Auth>
           }
         />
+        </Route>
       </Routes>
+      
     </>
   );
 };
