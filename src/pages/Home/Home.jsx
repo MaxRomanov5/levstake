@@ -7,8 +7,11 @@ import images from "../../assets/images";
 import StackingAssetsSection from "../../sections/StackingAssetsSection/StackingAssetsSection.jsx";
 import LiquidityPoolSection from "../../sections/LiquidityPoolSection/LiquidityPoolSection.jsx";
 import { NavLink } from "react-router-dom";
-
+import { useUser } from '../../Context/userContext.jsx'
 const Home = () => {
+ 
+  const { isLoggedIn } = useUser();
+
     return (
         <div>
          <Hero></Hero>
@@ -16,7 +19,7 @@ const Home = () => {
          <StackingTable></StackingTable>
          <StackingAssetsSection></StackingAssetsSection>
          <LiquidityPoolSection></LiquidityPoolSection>
-         <NavLink to='./levstake/'>
+         <NavLink to='/levstake/'>
          <Stack sx={{marginBottom:'24px'}} justifyContent='left' alignItems='center' flexDirection='row' height='40px' flexWrap='wrap' >
             <img style={{height:'inherit',marginRight:'14px'}} src={img.levlion} alt="levstake" />
             <img style={{height:'80%'}} src={img.levtext} alt="levstake" />
@@ -24,7 +27,7 @@ const Home = () => {
            </NavLink>
            <Stack flexDirection='row' sx={{marginBottom:'24px'}}>
            <Button variant="contained" sx={{marginRight:'16px', backgroundColor:'purpleBG.main',padding:"12px 16px",borderRadius:'8px',display:'flex'}}><img style={{marginRight:'8px'}} src={images.buySell} alt="digitalKey"></img><Typography variant="subtitle1" sx={{fontSize:'14px',lineHeight:'16.24px',color:'primary.main',fontWeight:'500'}}>BUY/SELL</Typography></Button>
-          <NavLink to='/levstake/connectWallet'> <Button variant="contained" sx={{backgroundColor:'transparent',padding:"12px 16px",borderRadius:'8px',display:'flex',border:'2px solid white'}}><img style={{marginRight:'8px'}} src={images.hdmi} alt="hdmi"></img><Typography variant="subtitle1" sx={{fontSize:'14px',lineHeight:'16.24px',color:'primary.main',fontWeight:'500'}}>Connect wallet</Typography></Button></NavLink>
+          <NavLink to={isLoggedIn?'/levstake/dashboard':'/levstake/connectWallet'}> <Button variant="contained" sx={{backgroundColor:'transparent',padding:"12px 16px",borderRadius:'8px',display:'flex',border:'2px solid white'}}><img style={{marginRight:'8px'}} src={images.hdmi} alt="hdmi"></img><Typography variant="subtitle1" sx={{fontSize:'14px',lineHeight:'16.24px',color:'primary.main',fontWeight:'500'}}>Connect wallet</Typography></Button></NavLink>
            </Stack>
         
         </div>

@@ -3,8 +3,9 @@ import BurgerButton from "../BurgerButton/BurgerButton";
 import { useState } from "react";
 import BuySellBtn from "../BuySellBtn/BuySellBtn";
 import ModalMenu from "../ModalMenu/ModalMenu";
+import UserBlock from "../UserBlock/UserBlock";
 
-const MobileMenu = () => {
+const MobileMenu = ({isLogin}) => {
     const [isClicked, setIsClicked] = useState(false);
 
     function handleClick() {
@@ -12,7 +13,7 @@ const MobileMenu = () => {
     }
     return (
      <Stack flexDirection='row'  justifyContent='right'>
-         <BuySellBtn text={'Buy/Sell'}></BuySellBtn>
+        {isLogin ? <UserBlock></UserBlock>: <BuySellBtn text={'Buy/Sell'}></BuySellBtn>} 
             <BurgerButton isClicked={isClicked} handleClick={handleClick}></BurgerButton>
             {isClicked && <ModalMenu handleClick={handleClick}></ModalMenu>}
             </Stack>

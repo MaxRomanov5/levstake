@@ -11,10 +11,12 @@ import MobileMenu from "../../components/MobileMenu/MobileMenu.jsx";
 import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import styled from "./Header.module.css";
 import ConnectWallet from "../../pages/ConnectWallet/ConnectWallet.jsx";
-
-const Header = () => {
+import localStorage from "../../helpers/localStorage.js";
+import { useUser } from '../../Context/userContext.jsx'
+const Header = ({isLogin}) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+  console.log(isLogin);
 
   return (
     <>
@@ -31,7 +33,7 @@ const Header = () => {
      
 
         {matches ? (
-          <MobileMenu />
+          <MobileMenu isLogin={isLogin} />
         ) : (
           <>
           <div style={{display:'flex',alignItems:'center',justifyContent:'right'}}>

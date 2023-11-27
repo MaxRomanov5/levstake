@@ -16,6 +16,7 @@ import tableArrowClose from './tableArrowClose.svg'
 import linkGreen from './linkGreen.svg'
 import status from './Status.svg'
 import iconClose from './iconClose.svg'
+import metaLogo from './full-metamask-logo.png'
 export default {
     levlion,
     levtext,
@@ -34,5 +35,5 @@ export default {
     linkGreen,
     status,
     iconClose
-    
+    ,metaLogo
 }

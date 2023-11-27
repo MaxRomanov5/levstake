@@ -1,15 +1,14 @@
 import images from '../../assets/images';
 import styled from './ConnectWallet.module.css'
-import { useNavigate } from "react-router-dom";
+
 import {Typography,Stack,Button} from '@mui/material'
 import api from '../../API/levstake.js'
+import { useNavigate } from "react-router-dom";
 import { useUser } from '../../Context/userContext.jsx'
+
 const ConnectWallet = () => {
   const navigate = useNavigate();
-  const { logIn } = useUser();
-// api.getPositions()
- 
-  
+  const {logIn} = useUser()
 async function mainConnecting (){
   try {
     const wallet = await api.metaMaskConnecting()

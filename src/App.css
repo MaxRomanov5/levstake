@@ -9,24 +9,62 @@ body{
 
     
 }
+.bgEff{
+  
+    background: linear-gradient(to left,#151f32, #1c2539);
+    z-index: -1000;
+    position: absolute;
+top: 721px;
+left: 0;
+    background-position: top;
+
+    width: 100%;
+    height: auto;
+    height:100%;
+}
 .bg{
-    background-image: url(./assets/bgEffect2.png),url(./assets/bgmob2.png);
+    background-image: url(./assets/bgeffect1x.png),url(./assets/bgfullmob1x.png);
     background-repeat: no-repeat;
 z-index: -100;
     position: absolute;
-    background-size: cover;
+
+    background-position: top;
+
     width: 100%;
-    height: 721px;
+    height: auto;
+    height:100%;
 }
-@media screen and (min-resolution: 192dpi) and (max-width: 768px), screen and (min-resolution: 2dppx) and (max-width: 768px),
-screen and (min-device-pixel-ratio: 2) and (max-width: 768px){
+/* @media screen and (min-resolution: 192dpi) , screen and (min-resolution: 2dppx),
+screen and (min-device-pixel-ratio: 2) {
     .bg{
-    background-image: url(./assets/bgSecondmob2x2.png),url(./assets/bgmainmob2x2.png);  
+    background-image: url(./assets/bgfulltab1x.png); 
     }
-    }
+    } */
 
     .container{
         padding-left: 16px;
         padding-right: 16px;
     }
 
+    @media screen and (min-width: 420px){
+        .bg{
+            background-image: url(./assets/bgeffect1x.png), url(./assets/bgfulltab1x.png); 
+            background-position: left top,right top 3px;
+        }
+        .bgEff{
+            top: 720px;
+            background: linear-gradient(to left,#172035, #0F1627);}
+    }
+    @media screen and (min-width: 1020px){
+        .bg{
+            background-image: url(./assets/bgeffect1x.png),url(./assets/bgfulldesk1x.png); 
+            background-position: right top,right top;
+        }
+    }
+    @media screen and (min-width: 1440px){
+        .bg{
+            background-image: url(./assets/bgeffect1x.png), url(./assets/bgfulldesk1x.png); 
+            background-position: center top;
+
+        }
+    }

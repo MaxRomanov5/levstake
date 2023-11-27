@@ -3,18 +3,16 @@
 import {Navigate} from "react-router-dom"
 import PropTypes from 'prop-types';
 import { useUser } from '../../Context/userContext.jsx'
+import localStorage from "../../helpers/localStorage.js";
 const ProtectedRoute = ({children}) => {
   const { isLoggedIn} = useUser();
 
-if(isLoggedIn){
+if(localStorage.load('TOKEN')){
   return children
 }
 
         return <Navigate to="/levstake/connectWallet"  />
     
 };
-ProtectedRoute.propTypes = {
 
-  children: PropTypes.array
-};
 export default ProtectedRoute;

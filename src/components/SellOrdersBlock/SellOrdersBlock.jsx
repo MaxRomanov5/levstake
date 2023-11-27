@@ -10,7 +10,7 @@ const SellOrdersBlock = () => {
 const [active, setActive] = useState('active');
 const theme = useTheme()
 const mob = useMediaQuery(theme.breakpoints.up('sm'))
-console.log(mob);
+
 function handleActive(e) {
    setActive(e.target.value)
 }
