@@ -12,15 +12,25 @@ const ConnectWallet = () => {
 async function mainConnecting (){
   try {
     const wallet = await api.metaMaskConnecting()
- 
-    const authString = await api.getAuthData()
+ if(wallet){
+  const authString = await api.getAuthData()
+  if(authString){
+    const signature = await api.signSign(authString,wallet)
+    if(signature){
+  const token=  await api.getToken(wallet,signature)
+   if(token){
+    logIn()
+   }
+    
+    }
+  }
+ }
+   
    
   
-   const signature = await api.signSign(authString,wallet)
-
-    await api.getToken(wallet,signature)
    
-    logIn()
+
+  
    navigate("/levstake/dashboard", { replace: true });
   } catch (error) {
     
