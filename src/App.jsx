@@ -19,7 +19,7 @@ logIn()
   return (<>
  
   <div className='bg'></div>
-  {/* <div className="bgEff"></div> */}
+  <div className="bgEff"></div>
   <div className="container">
 <Header isLogin={isLoggedIn}/>
 <Footer></Footer>
