@@ -14,12 +14,12 @@ body{
     background: linear-gradient(to left,#151f32, #1c2539);
     z-index: -1000;
     position: absolute;
-top: 718px;
+top: 721px;
 left: 0;
     background-position: top;
 
     width: 100%;
-    height: auto;
+    height: 100px;
     height:100%;
 }
 .bg{
