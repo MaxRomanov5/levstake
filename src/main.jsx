@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 <UserProvider>
     <ThemeProvider theme={theme}>
-    <BrowserRouter basename={import.meta.env.DEV ? '/' : '/levstake/'}>
+    <BrowserRouter >
    
     <App />
  
