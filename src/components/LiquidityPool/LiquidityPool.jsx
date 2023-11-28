@@ -16,7 +16,7 @@ const LiquidityPool = ({type}) => {
             <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em',margin:'0 auto'}} align="left" >MKT
             <br></br> Price</TableCell>
            <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >LIQ Price</TableCell>
-           {type === 'home' &&  <TableCell></TableCell>}
+           {type === 'home' &&  <TableCell></TableCell>}  
           </TableRow>
         </TableHead>
         <TableBody >
