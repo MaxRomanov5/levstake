@@ -19,7 +19,9 @@ async function mainConnecting (){
     if(signature){
   const token=  await api.getToken(wallet,signature)
    if(token){
+   
     logIn()
+    navigate("/dashboard", { replace: true });
    }
     
     }
@@ -31,7 +33,7 @@ async function mainConnecting (){
    
 
   
-   navigate("/dashboard", { replace: true });
+  
   } catch (error) {
     
     console.log(error);
