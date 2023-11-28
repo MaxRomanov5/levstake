@@ -13,10 +13,11 @@ import styled from "./Header.module.css";
 import ConnectWallet from "../../pages/ConnectWallet/ConnectWallet.jsx";
 import localStorage from "../../helpers/localStorage.js";
 import { useUser } from '../../Context/userContext.jsx'
+import UserBlock from "../../components/UserBlock/UserBlock.jsx";
 const Header = ({isLogin}) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
-  console.log(isLogin);
+
 
   return (
     <>
@@ -24,7 +25,7 @@ const Header = ({isLogin}) => {
         style={{
           padding: "16px 0",
           display: "flex",
-          marginBottom:'48px',
+        
           alignItems: "center",
           justifyContent: "space-between",
         }}
@@ -36,23 +37,9 @@ const Header = ({isLogin}) => {
           <MobileMenu isLogin={isLogin} />
         ) : (
           <>
-          <div style={{display:'flex',alignItems:'center',justifyContent:'right'}}>
+          <div style={{display:'flex',alignItems:'center',justifyContent:'right',gap:'50px'}}>
             <nav style={{ display: "flex", gap: 15 }}>
-              <NavLink to="/levstake/contacts">
-                <Typography
-                  variant="subtitle1"
-                  className={styled.current}
-                  sx={{
-                    fontSize: "16px",
-                    fontWeight: "500",
-                    color: "primary.main",
-                    lineHeight: "16px",
-                    padding: "8px",
-                  }}
-                >
-                  Contacts<div className={styled.line}></div>
-                </Typography>
-              </NavLink>
+             
               <NavLink to="/levstake/">
                 <Typography
                   variant="subtitle1"
@@ -66,6 +53,21 @@ const Header = ({isLogin}) => {
                   }}
                 >
                   Home<div className={styled.line}></div>
+                </Typography>
+              </NavLink>
+              <NavLink to="/levstake/contacts">
+                <Typography
+                  variant="subtitle1"
+                  className={styled.current}
+                  sx={{
+                    fontSize: "16px",
+                    fontWeight: "500",
+                    color: "primary.main",
+                    lineHeight: "16px",
+                    padding: "8px",
+                  }}
+                >
+                  Contacts<div className={styled.line}></div>
                 </Typography>
               </NavLink>
               <NavLink to="/levstake/feez">
@@ -100,7 +102,7 @@ const Header = ({isLogin}) => {
               </NavLink>
               {/* <NavLink to="/dashboard">Dashboard</NavLink> */}
             </nav>
-           <BuySellBtn style={{marginLeft:'64px'}} text={"Buy/Sell"}></BuySellBtn>
+           {isLogin ? <UserBlock></UserBlock>:<BuySellBtn style={{marginLeft:'64px'}} text={"Buy/Sell"}></BuySellBtn>}
             </div>
           </>
         )}

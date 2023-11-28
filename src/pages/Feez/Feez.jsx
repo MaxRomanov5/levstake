@@ -1,8 +1,12 @@
-import {Typography,Stack,ToggleButtonGroup,ToggleButton,TableContainer,Table,TableCell,TableRow,TableHead,TableBody} from '@mui/material'
+import {useMediaQuery,Typography,Stack,ToggleButtonGroup,ToggleButton,TableContainer,Table,TableCell,TableRow,TableHead,TableBody} from '@mui/material'
 import { useState } from 'react';
 import FeedbackForm from '../../components/FeedbackForm/FeedbackForm';
+import { useTheme } from '@emotion/react';
 const Feez = () => {
 const [structure, setStructure] = useState('Exchange');
+const theme = useTheme()
+const tab = useMediaQuery(theme.breakpoints.up('lg'))
+
 
 const  handleStructure =(e, newStr)=>{
   if (newStr !== null) {
@@ -12,12 +16,12 @@ const  handleStructure =(e, newStr)=>{
 }
     return (
         <div>
-                <Typography sx={{marginBottom:'24px',textAlign:'center'}} color='primary.main' variant="h2">Fee structure</Typography> 
+                <Typography sx={{marginBottom:'24px',marginTop:'78px',textAlign:'center',...(tab&&{fontSize:'64px',lineHeight:'70px'})}} color='primary.main' variant="h2">Fee structure</Typography> 
               <Typography sx={{marginBottom:'80px',textAlign:'center'}} color='primary.main' variant="subtitle1" >Some subtext</Typography> 
               <Typography variant='h2' color='primary.main' sx={{fontSize:'40px',lineHeight:'44px',textAlign:'center',marginBottom:'16px'}}>How our fees stack against others</Typography>
 
           <Typography variant='subtitle1' color='primary.main' sx={{marginBottom:'48px',textAlign:'center'}}>We offer market competitive fees to sustain responsible trading.</Typography>
-<Stack sx={{marginBottom:'80px'}}>
+<Stack sx={{marginBottom:'80px',...(tab&&{flexDirection:'row',gap:'40px',justifyContent:'center'})}}>
 <Stack alignItems='center' sx={{marginBottom:'40px'}}>
 <Typography variant='h2' color='success.main' sx={{marginBottom:'24px'}}>0.04%</Typography>
 <Typography variant='subtitle1' color='primary.main' sx={{fontSize:'16px',marginBottom:'16px'}}>Market maker fee</Typography>
@@ -33,8 +37,13 @@ const  handleStructure =(e, newStr)=>{
 <Typography variant='subtitle1' color='primary.main' sx={{fontSize:'16px',marginBottom:'16px'}}>Market maker fee</Typography>
 <Typography color='#CACBCB' variant='tableCellMain'>On high volumes over $1,000,000 USD</Typography>
 </Stack>
+<Stack alignItems='center' sx={{marginBottom:'40px'}}>
+<Typography variant='h2' color='success.main' sx={{marginBottom:'24px'}}>0.04%</Typography>
+<Typography variant='subtitle1' color='primary.main' sx={{fontSize:'16px',marginBottom:'16px'}}>Market maker fee</Typography>
+<Typography color='#CACBCB' variant='tableCellMain'>On high volumes over $1,000,000 USD</Typography>
 </Stack>
-<Typography variant='h2' color='primary.main' sx={{fontSize:'40px',lineHeight:'44px',textAlign:'center',marginBottom:'16px'}}>Fee structure</Typography>
+</Stack>
+<Typography variant='h2' color='primary.main' sx={{fontSize:'40px',lineHeight:'44px',textAlign:'center',marginBottom:'16px',...(tab&&{fontSize:'64px',lineHeight:'70px'})}}>Fee structure</Typography>
 
 
           <Typography variant='subtitle1' color='primary.main' sx={{marginBottom:'48px',textAlign:'center'}}>We offer market competitive fees to sustain responsible trading.</Typography>
@@ -79,7 +88,7 @@ sx={{display:'flex',justifyContent:'center',position:'relative',marginBottom:'56
 
 
 
-    <TableContainer sx={{overflow:'scroll',padding:'24px',backgroundColor:'#FFFFFF1A',borderRadius:'8px',marginBottom:'80px'}}>
+    <TableContainer sx={{overflow:'scroll',margin:'0 auto',padding:'24px',backgroundColor:'#FFFFFF1A',borderRadius:'8px',marginBottom:'80px',maxWidth:'600px'}}>
       <Table sx={{padding:'8px',overflow:'scroll'}}  aria-label="customized table">
         <TableHead sx={{color:'#CACBCB'}}>
           <TableRow >

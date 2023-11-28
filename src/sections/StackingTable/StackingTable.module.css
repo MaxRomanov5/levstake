@@ -1,0 +1,21 @@
+.sec{
+    padding-top:73px;
+    padding-bottom:120px;
+}
+
+@media screen  and (min-width: 888px){
+
+    .sec{
+        max-width: 950px;
+        margin: 0 auto;
+    }
+}
+
+@media screen  and (min-width: 1235px){
+
+    .sec{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+}

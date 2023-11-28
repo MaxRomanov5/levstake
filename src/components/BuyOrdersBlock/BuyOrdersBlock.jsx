@@ -8,14 +8,15 @@ import { useTheme } from '@emotion/react';
 const BuyOrdersBlock = () => {
   const theme = useTheme()
   const mob = useMediaQuery(theme.breakpoints.up('sm'))
+  const tab  = useMediaQuery(theme.breakpoints.up('md'))
 const [active, setActive] = useState('active');
 
 function handleActive(e) {
    setActive(e.target.value)
 }
 
-    return (<div style={{backgroundColor:'#FFFFFF0F',borderRadius:'8px',marginBottom:'8px',padding:'16px'}}>
-        <div style={{display:'flex',flexDirection:'column',gap:'10px',}}>
+    return (<div style={{backgroundColor:'#161C2A',borderRadius:'8px',marginBottom:'8px',padding:'16px'}}>
+        <div style={{display:'flex',flexDirection:'column',gap:'10px',...(tab&&{flexDirection:'row',justifyContent:'space-between'})}}>
           <Typography variant='subtitle1' sx={{fontWeight:'600',color:'white',textAlign:'center'}}>Buy Orders</Typography>
           <div style={{display:'flex',gap:'10px',flexDirection:mob?'row':'column',alignItems:'center',justifyContent:'center'}}>
           <FilterOrders></FilterOrders>

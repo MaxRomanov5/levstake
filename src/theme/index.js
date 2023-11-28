@@ -6,7 +6,9 @@ export default createTheme({
             xs:  320,
             sm: 428 ,
             md: 768 ,
+            mt:920,
             lg:1024,
+            lt:1230,
             xl: 1440,
         }
     },

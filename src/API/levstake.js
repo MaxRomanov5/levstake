@@ -79,6 +79,7 @@ return sign
             Notify.failure('You denied message signature. Please, try again! ')
             return
         }
+      
         Notify.failure('Something go wrong! Please, try again!')
     }
   };

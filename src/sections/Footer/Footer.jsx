@@ -1,9 +1,11 @@
-import {  Typography,Stack } from "@mui/material";
-
+import {  Typography,Stack,useMediaQuery } from "@mui/material";
+import { useTheme } from '@emotion/react';
 
 const Footer = () => {
+    const theme = useTheme()
+const tab = useMediaQuery(theme.breakpoints.up('md'))
     return (
-       <footer style={{paddingBottom:'8px'}}>
+       <footer style={{paddingBottom:'8px',...(tab&&{display:'flex',justifyContent:'space-between'})}}>
           
            <Typography sx={{marginBottom:'24px',display:'block'}} variant="tableCellMain">All rights reserved @ Levstake Ltd. 2022</Typography>
            <Stack flexDirection='row' gap='32px' justifyContent='start'>

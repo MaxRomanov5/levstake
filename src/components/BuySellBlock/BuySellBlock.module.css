@@ -27,3 +27,19 @@ text-align: left;
 .input:hover,.input:focus{
 
 }
+
+
+/* @media screen and (min-width: 768px){
+    .mainBox{
+       flex-direction: row;
+        gap: 24px;
+        
+    }
+    .buySell{
+        max-width: 538px;
+    }
+    .pool{
+        order: -1;
+        width: 100%;
+    }
+} */

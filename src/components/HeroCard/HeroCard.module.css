@@ -14,3 +14,16 @@ padding: 24px;
     width: 330px;
 }
 }
+@media screen  and (min-width: 600px){
+    .card{
+        width: 440px;
+    }
+    }
+
+    @media screen  and (min-width: 920px){
+        .card{
+            width: 100%;
+            max-width: 330px;
+        }
+       
+        }

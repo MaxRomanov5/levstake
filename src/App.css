@@ -46,6 +46,24 @@ screen and (min-device-pixel-ratio: 2) {
         padding-right: 16px;
     }
 
+
+@media screen  and (min-width: 888px){
+
+    .container{
+        max-width: 950px;
+        margin: 0 auto;
+    }
+}
+
+@media screen  and (min-width: 1235px){
+
+    .container{
+        max-width: 1235px;
+        margin: 0 auto;
+    }
+
+}
+
     @media screen and (min-width: 420px){
         .bg{
             background-image: url(./assets/bgeffect1x.png), url(./assets/bgfulltab1x.png); 
@@ -63,8 +81,9 @@ screen and (min-device-pixel-ratio: 2) {
     }
     @media screen and (min-width: 1440px){
         .bg{
+            background-size: cover;
             background-image: url(./assets/bgeffect1x.png), url(./assets/bgfulldesk1x.png); 
-            background-position: center top;
+ max-height: 721px;
 
         }
     }

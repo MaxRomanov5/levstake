@@ -8,9 +8,16 @@ const Dashboard = () => {
     return (
         <div>
             <div className={styled.mainBox}>
-            <BuySellBlock></BuySellBlock>
+                <div className={styled.buySell}>
+                <BuySellBlock ></BuySellBlock>
+                </div>
+          
+            <div className={styled.pool}>
             <Typography variant="subtitle1" color='primary.main'  sx={{fontWeight:'600',marginTop:'24px',marginBottom:'8px'}}>Liquidity pool</Typography>
-            <LiquidityPool type='dashboard'></LiquidityPool>
+
+            <LiquidityPool  type='dashboard'></LiquidityPool>
+            </div>
+
             </div>
          
                 <BuyOrdersBlock></BuyOrdersBlock>

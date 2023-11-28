@@ -5,6 +5,9 @@
     gap: 24px;
     background-color: #FFFFFF1A;
     border-radius: 8px;
+ 
+    max-width: 600px;
+    margin: 0 auto;
     margin-bottom: 98px;
 }
 .inputBox{
