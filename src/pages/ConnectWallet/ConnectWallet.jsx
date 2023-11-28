@@ -31,7 +31,7 @@ async function mainConnecting (){
    
 
   
-   navigate("/levstake/dashboard", { replace: true });
+   navigate("/dashboard", { replace: true });
   } catch (error) {
     
     console.log(error);

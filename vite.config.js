@@ -6,11 +6,12 @@ import react from '@vitejs/plugin-react'
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [react()],
-    base: '/levstake/',
+    base: '/',
   }
 
   if (command !== 'serve') {
-    config.base = '/levstake/'
+  
+    config.base = '/'
   }
 
   return config
