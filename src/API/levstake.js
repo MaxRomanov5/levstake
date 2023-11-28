@@ -22,6 +22,7 @@ async function getToken(address,signature){
       
       Notify.success('Success authorization!')
        localStorage.save('TOKEN',res.data.token)
+       return res.data.token
     } catch (err){
 Notify.failure('Something go wrong! Please, try again!')
     }
