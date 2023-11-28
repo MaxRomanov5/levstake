@@ -30,7 +30,7 @@ const Header = ({isLogin}) => {
           justifyContent: "space-between",
         }}
       >
-        <NavLink to='/'>   <Logo isLogin={true} /></NavLink>
+        <NavLink to='/levstake/'>   <Logo isLogin={true} /></NavLink>
      
 
         {matches ? (
@@ -40,7 +40,7 @@ const Header = ({isLogin}) => {
           <div style={{display:'flex',alignItems:'center',justifyContent:'right',gap:'50px'}}>
             <nav style={{ display: "flex", gap: 15 }}>
              
-              <NavLink to="/">
+              <NavLink to="/levstake/">
                 <Typography
                   variant="subtitle1"
                   className={styled.current}
@@ -55,7 +55,7 @@ const Header = ({isLogin}) => {
                   Home<div className={styled.line}></div>
                 </Typography>
               </NavLink>
-              <NavLink to="/contacts">
+              <NavLink to="/levstake/contacts">
                 <Typography
                   variant="subtitle1"
                   className={styled.current}
@@ -70,7 +70,7 @@ const Header = ({isLogin}) => {
                   Contacts<div className={styled.line}></div>
                 </Typography>
               </NavLink>
-              <NavLink to="/feez">
+              <NavLink to="/levstake/feez">
                 <Typography
                   variant="subtitle1"
                   className={styled.current}
@@ -85,7 +85,7 @@ const Header = ({isLogin}) => {
                   Fee structure<div className={styled.line}></div>
                 </Typography>
               </NavLink>
-              <NavLink to="/faq">
+              <NavLink to="/levstake/faq">
                 <Typography
                   variant="subtitle1"
                   className={styled.current}
@@ -109,13 +109,13 @@ const Header = ({isLogin}) => {
       </header>
       <Routes>
         
-        <Route path="/" element={<Home />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/feez" element={<Feez />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/connectWallet" element={<ConnectWallet/>}></Route>
+        <Route path="/levstake/" element={<Home />} />
+        <Route path="/levstake/contacts" element={<Contacts />} />
+        <Route path="/levstake/feez" element={<Feez />} />
+        <Route path="/levstake/faq" element={<FAQ />} />
+        <Route path="/levstake/connectWallet" element={<ConnectWallet/>}></Route>
         <Route
-          path="/dashboard"
+          path="/levstake/dashboard"
           element={
             <Auth>
               <Dashboard />{" "}

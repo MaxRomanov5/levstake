@@ -11,7 +11,7 @@ if(localStorage.load('TOKEN')){
   return children
 }
 
-        return <Navigate to="/connectWallet"  />
+        return <Navigate to="/levstake/connectWallet"  />
     
 };
 
