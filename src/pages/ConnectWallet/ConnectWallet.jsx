@@ -1,18 +1,24 @@
 import images from '../../assets/images';
 import styled from './ConnectWallet.module.css'
 
-import {Typography,Stack,Button} from '@mui/material'
+import {Typography,Stack,Button,useMediaQuery,useTheme} from '@mui/material'
 import api from '../../API/levstake.js'
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../../Context/userContext.jsx'
 
 const ConnectWallet = () => {
+
+  const theme= useTheme()
+  const mob = useMediaQuery(theme.breakpoints.down('md'))
   const navigate = useNavigate();
-  const {logIn} = useUser()
+  const {logIn,isLoggedIn} = useUser()
 async function mainConnecting (){
+
   try {
     const wallet = await api.metaMaskConnecting()
+    console.log(1);
  if(wallet){
+
   const authString = await api.getAuthData()
   if(authString){
     const signature = await api.signSign(authString,wallet)
@@ -27,16 +33,18 @@ async function mainConnecting (){
     }
   }
  }
-   
-   
-  
-   
 
-  
-  
   } catch (error) {
-    
-    console.log(error);
+    if(error.message ==="Cannot read properties of undefined (reading 'request')" && !isLoggedIn){
+if(mob ){
+  window.location.href = 'https://metamask.app.link/dapp/maxromanov5.github.io/levstake/';
+}else{
+  window.open('https://metamask.io/download/', '_blank');
+  location.reload();
+}
+
+    }
+    console.log(error.message);
   }
   
 
