@@ -6,7 +6,7 @@ import api from '../../API/levstake.js'
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../../Context/userContext.jsx'
 import ModalConnect from '../../components/ModalConnect/ModalConnect.jsx'
-import { useWeb3Modal } from '@web3modal/wagmi/react'
+import { useWeb3Modal,useWeb3ModalState } from '@web3modal/wagmi/react'
 
 const ConnectWallet = () => {
 
@@ -16,19 +16,21 @@ const ConnectWallet = () => {
   const {logIn,isLoggedIn} = useUser()
 const [isOpen, setIsOpen] = useState(false);
 const { open, close } = useWeb3Modal()
+const state = useWeb3ModalState()
 
-
-console.log(useWeb3Modal);
+console.log(state);
 async function mainConnecting (){
 
   try {
     await open()
     const wallet = await api.metaMaskConnecting()
-
+    
  if(wallet){
-close()
+await open()
   const authString = await api.getAuthData()
+
   if(authString){
+  
     const signature = await api.signSign(authString,wallet)
     if(signature){
    
@@ -45,12 +47,7 @@ close()
 
   } catch (error) {
     if(error.message ==="Cannot read properties of undefined (reading 'request')" && !isLoggedIn){
-if(mob ){
 
-}else{
-  window.open('https://metamask.io/download/', '_blank');
-  setIsOpen(true)
-}
 
     }
     console.log(error.message);

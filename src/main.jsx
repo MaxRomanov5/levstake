@@ -16,7 +16,7 @@ const projectId = '2e39f4ecdaa2c19933cac1ffee100b74'
 const metadata = {
   name: 'Web3Modal',
   description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
+  url: 'https://maxromanov5.github.io/levstake/',
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 const chains = [mainnet, arbitrum]
