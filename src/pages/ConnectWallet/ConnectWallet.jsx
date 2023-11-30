@@ -26,12 +26,12 @@ const { open, close } = useWeb3Modal()
 const { address, isConnecting, isDisconnected } = useAccount()
 
 
-// const signMessage = useSignMessage({
-//   message: 'gm wagmi frens',
-//   onSuccess(data) {
-//     console.log('Success', data)
-//   },
-// })
+const signMessage = useSignMessage({
+  message: 'gm wagmi frens',
+  onSuccess(data) {
+    console.log('Success', data)
+  },
+})
 
 useEffect(() => {
   console.log(!isConnecting);
@@ -79,7 +79,7 @@ async function mainConnecting (){
 
   if(authString){
   
-    const signature = await api.signSign(authString,address)
+    const signature = signMessage.signMessage()
  
     if(signature){
    
