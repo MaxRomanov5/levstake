@@ -45,18 +45,91 @@ async function mainConnecting (){
     
    
 
-    // const signClient = await SignClient.init({
-    //   projectId: '2e39f4ecdaa2c19933cac1ffee100b74',
-    //   // optional parameters
-    //   relayUrl: 'https://maxromanov5.github.io/levstake/',
-    //   metadata: {
-    //     name: 'Example Dapp1233',
-    //     description: 'Example Dapp',
-    //     url: 'https://maxromanov5.github.io/levstake/',
-    //     icons: ['https://walletconnect.com/walletconnect-logo.png']
-    //   }
-    // })
+    const signClient = await SignClient.init({
+      projectId: '2e39f4ecdaa2c19933cac1ffee100b74',
+      // optional parameters
+      relayUrl: 'https://maxromanov5.github.io/levstake/',
+      metadata: {
+        name: 'Example Dapp1233',
+        description: 'Example Dapp',
+        url: 'https://maxromanov5.github.io/levstake/',
+        icons: ['https://walletconnect.com/walletconnect-logo.png']
+      }
+    })
+    signClient.on('session_event', ({ event }) => {
+      // Handle session events, such as "chainChanged", "accountsChanged", etc.
+    })
+    
+    signClient.on('session_update', ({ topic, params }) => {
+      const { namespaces } = params
+      const _session = signClient.session.get(topic)
+      // Overwrite the `namespaces` of the existing session with the incoming one.
+      const updatedSession = { ..._session, namespaces }
+      // Integrate the updated session state into your dapp state.
+      onSessionUpdate(updatedSession)
+    })
+    
+    signClient.on('session_delete', () => {
+      // Session was deleted -> reset the dapp state, clean up from user session, etc.
+    })
 
+
+    const walletConnectModal = new WalletConnectModal({
+      projectId: '2e39f4ecdaa2c19933cac1ffee100b74',
+      // `standaloneChains` can also be specified when calling `walletConnectModal.openModal(...)` later on.
+      standaloneChains: ['eip155:1']
+    })
+
+
+    try {
+      const { uri, approval } = await signClient.connect({
+        // Optionally: pass a known prior pairing (e.g. from `signClient.core.pairing.getPairings()`) to skip the `uri` step.
+        pairingTopic: pairing?.topic,
+        // Provide the namespaces and chains (e.g. `eip155` for EVM-based chains) we want to use in this session.
+        requiredNamespaces: {
+          eip155: {
+            methods: [
+              'eth_sendTransaction',
+              'eth_signTransaction',
+              'eth_sign',
+              'personal_sign',
+              'eth_signTypedData'
+            ],
+            chains: ['eip155:1'],
+            events: ['chainChanged', 'accountsChanged']
+          }
+        }
+      })
+    
+      // Open QRCode modal if a URI was returned (i.e. we're not connecting an existing pairing).
+      if (uri) {
+        walletConnectModal.openModal({ uri })
+        // Await session approval from the wallet.
+        const session = await approval()
+        // Handle the returned session (e.g. update UI to "connected" state).
+        // * You will need to create this function *
+        onSessionConnect(session)
+        // Close the QRCode modal in case it was open.
+        walletConnectModal.closeModal()
+      }
+    } catch (e) {
+      console.error(e)
+    }
+
+    const result = await signClient.request({
+      topic: session.topic,
+      chainId: 'eip155:1',
+      request: {
+        method: "personal_sign",
+        params: [
+          "0x7468697320697320612074657374206d65737361676520746f206265207369676e6564",
+          "0x1d85568eEAbad713fBB5293B45ea066e552A90De",
+        ],
+      },
+    });
+
+    const lastKeyIndex = signClient.session.getAll().length - 1
+const lastSession = signClient.session.getAll()[lastKeyIndex]
     // console.log(address);
     // const a = await signMessage.signMessage()
 
