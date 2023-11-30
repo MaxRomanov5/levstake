@@ -6,7 +6,8 @@ import localStorage from "../helpers/localStorage";
  async function getAuthData(){
      try{
         const res = await axios.get('https://levstake.frwd.one/api/auth/data/')
-        return res.data.auth_data_string[0]
+        const a = hexer(res.data.auth_data_string[0])
+        return a
      } catch (err){
 Notify.failure('Something go wrong! Please, try again!')
      }
