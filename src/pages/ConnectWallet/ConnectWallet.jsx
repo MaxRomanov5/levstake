@@ -24,14 +24,16 @@ const ConnectWallet = () => {
 
 // const { address, isConnecting, isDisconnected } = useAccount()
 
-const [account, setAccount] = useState('');
+const [account, setAccount] = useState('s');
   const { sdk, connected, connecting, provider, chainId } = useSDK();
 
   const connect = async () => {
     try {
-      await sdk?.connect();
+      console.log(sdk);
+     const a = await sdk.connect();
+     setAccount(accounts[0]);
     } catch (err) {
-      console.warn(`failed to connect..`, err);
+      console.log(`failed to connect..`, err);
     }
   };
 
@@ -94,7 +96,9 @@ async function mainConnecting (){
 
     return (
         <section className={styled.section}>
+         
         <div className={styled.box}>
+        <div>{account}</div>
             <Typography color='primary.main' variant='h2' sx={{fontSize:'32px',lineHeight:'35px',marginBottom:'32px'}}>Connect wallet to start</Typography>
             <Stack sx={{backgroundColor:'white',padding:'32px 24px',borderRadius:'8px',gap:'16px'}} justifyContent='space-between' alignItems='center' >
 <img style={{width:'152px',height:'28px'}}  src={images.metamask} alt="metamask" />
