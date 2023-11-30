@@ -54,42 +54,46 @@ const [account, setAccount] = useState('');
 
 async function mainConnecting (){
 
-  try {
-
-      // await open()
-
-    const wallet = await api.metaMaskConnecting() 
-
-
-    const authString = await api.getAuthData()
-
-  if(authString){
-  
-    // const signature = signMessage.signMessage({message:authString})
-   
-    if(address){
-      const token=  await api.getToken(address,signature)
-    
-      if(token){
-       
-        logIn()
-        navigate("/levstake/dashboard", { replace: true });
-    
-    }
-      
-    }
-
- }
-
-
-
-  } catch (error) {
-    if(error.message ==="Cannot read properties of undefined (reading 'request')" && !isLoggedIn){
-
-
-    }
-    console.log(error.message);
+  if(sdk){
+    sdk.connect()
   }
+
+//   try {
+
+//       // await open()
+
+//     const wallet = await api.metaMaskConnecting() 
+
+
+//     const authString = await api.getAuthData()
+
+//   if(authString){
+  
+//     // const signature = signMessage.signMessage({message:authString})
+   
+//     if(address){
+//       const token=  await api.getToken(address,signature)
+    
+//       if(token){
+       
+//         logIn()
+//         navigate("/levstake/dashboard", { replace: true });
+    
+//     }
+      
+//     }
+
+//  }
+
+
+
+//   } catch (error) {
+//     if(error.message ==="Cannot read properties of undefined (reading 'request')" && !isLoggedIn){
+
+
+//     }
+//     console.log(error.message);
+//   }
   
 
 }
