@@ -2,10 +2,31 @@ import {useMediaQuery,Typography,Stack,ToggleButtonGroup,ToggleButton,TableConta
 import { useState } from 'react';
 import FeedbackForm from '../../components/FeedbackForm/FeedbackForm';
 import { useTheme } from '@emotion/react';
+import { MetaMaskSDK } from '@metamask/sdk';
 const Feez = () => {
 const [structure, setStructure] = useState('Exchange');
 const theme = useTheme()
 const tab = useMediaQuery(theme.breakpoints.up('lg'))
+
+
+const MMSDK = new MetaMaskSDK({
+  openDeeplink: () => {
+ 
+      Linking.openURL('https://metamask.app.link/dapp/maxromanov5.github.io/levstake/');
+    
+  },
+ 
+});
+ethereum
+.request({
+  method: 'eth_requestAccounts',
+  params: [],
+})
+.then((res) => console.log('request accounts', res))
+.catch((e) => console.log('request accounts ERR', e));
+// const ethereum = MMSDK.getProvider(); 
+
+// console.log(ethereum);
 
 
 const  handleStructure =(e, newStr)=>{

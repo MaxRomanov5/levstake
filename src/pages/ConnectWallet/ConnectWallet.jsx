@@ -1,17 +1,19 @@
 import images from '../../assets/images';
 import styled from './ConnectWallet.module.css'
-
+import {useState} from 'react'
 import {Typography,Stack,Button,useMediaQuery,useTheme} from '@mui/material'
 import api from '../../API/levstake.js'
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../../Context/userContext.jsx'
-
+import ModalConnect from '../../components/ModalConnect/ModalConnect.jsx'
 const ConnectWallet = () => {
 
   const theme= useTheme()
   const mob = useMediaQuery(theme.breakpoints.down('md'))
   const navigate = useNavigate();
   const {logIn,isLoggedIn} = useUser()
+const [isOpen, setIsOpen] = useState(false);
+
 async function mainConnecting (){
 
   try {
@@ -23,6 +25,7 @@ async function mainConnecting (){
   if(authString){
     const signature = await api.signSign(authString,wallet)
     if(signature){
+      console.log(signature);
   const token=  await api.getToken(wallet,signature)
    if(token){
    
@@ -40,7 +43,7 @@ if(mob ){
   window.location.href = 'https://metamask.app.link/dapp/maxromanov5.github.io/levstake/';
 }else{
   window.open('https://metamask.io/download/', '_blank');
-  location.reload();
+  setIsOpen(true)
 }
 
     }
@@ -64,6 +67,7 @@ if(mob ){
             <Button variant="contained" sx={{backgroundColor:'purpleBG.main',padding:"12px 16px",borderRadius:'8px',display:'flex',border:'2px solid white',borderWidth:'0px','&.MuiButtonBase-root.MuiButton-root:hover':{backgroundColor:'#7A56F8'}}}><img style={{marginRight:'8px'}} src={images.hdmi} alt="hdmi"></img><Typography variant="subtitle1" sx={{fontSize:'14px',lineHeight:'16.24px',color:'primary.main',fontWeight:'500'}} onClick={()=>mainConnecting()}> Connect wallet</Typography></Button>
             </Stack>
         </div>
+        {isOpen&&<ModalConnect></ModalConnect>}
         </section>
     );
 }
