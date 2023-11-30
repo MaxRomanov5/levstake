@@ -18,14 +18,14 @@ async function mainConnecting (){
 
   try {
     const wallet = await api.metaMaskConnecting()
-    console.log(1);
+
  if(wallet){
 
   const authString = await api.getAuthData()
   if(authString){
     const signature = await api.signSign(authString,wallet)
     if(signature){
-      console.log(signature);
+   
   const token=  await api.getToken(wallet,signature)
    if(token){
    
