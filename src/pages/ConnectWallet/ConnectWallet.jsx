@@ -46,7 +46,7 @@ close()
   } catch (error) {
     if(error.message ==="Cannot read properties of undefined (reading 'request')" && !isLoggedIn){
 if(mob ){
-  window.location.href = 'https://metamask.app.link/dapp/maxromanov5.github.io/levstake/';
+
 }else{
   window.open('https://metamask.io/download/', '_blank');
   setIsOpen(true)
