@@ -2,15 +2,13 @@ import {useMediaQuery,Typography,Stack,ToggleButtonGroup,ToggleButton,TableConta
 import { useState } from 'react';
 import FeedbackForm from '../../components/FeedbackForm/FeedbackForm';
 import { useTheme } from '@emotion/react';
-import { useWeb3Modal } from '@web3modal/wagmi/react'
+
 
 const Feez = () => {
 const [structure, setStructure] = useState('Exchange');
 const theme = useTheme()
 const tab = useMediaQuery(theme.breakpoints.up('lg'))
-const { open, close } = useWeb3Modal()
 
-open()
 // ethereum
 // .request({
 //   method: 'eth_requestAccounts',

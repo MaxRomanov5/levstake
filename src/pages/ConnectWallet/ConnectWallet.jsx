@@ -6,6 +6,8 @@ import api from '../../API/levstake.js'
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../../Context/userContext.jsx'
 import ModalConnect from '../../components/ModalConnect/ModalConnect.jsx'
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+
 const ConnectWallet = () => {
 
   const theme= useTheme()
@@ -13,14 +15,18 @@ const ConnectWallet = () => {
   const navigate = useNavigate();
   const {logIn,isLoggedIn} = useUser()
 const [isOpen, setIsOpen] = useState(false);
+const { open, close } = useWeb3Modal()
 
+
+console.log(useWeb3Modal);
 async function mainConnecting (){
 
   try {
+    await open()
     const wallet = await api.metaMaskConnecting()
 
  if(wallet){
-
+close()
   const authString = await api.getAuthData()
   if(authString){
     const signature = await api.signSign(authString,wallet)
