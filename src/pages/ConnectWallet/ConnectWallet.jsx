@@ -1,14 +1,17 @@
 import images from '../../assets/images';
 import styled from './ConnectWallet.module.css'
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import {Typography,Stack,Button,useMediaQuery,useTheme} from '@mui/material'
 import api from '../../API/levstake.js'
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../../Context/userContext.jsx'
 import ModalConnect from '../../components/ModalConnect/ModalConnect.jsx'
 import { useWeb3Modal,useWeb3ModalState } from '@web3modal/wagmi/react'
-
+import SignClient from '@walletconnect/sign-client'
+import { useAccount } from 'wagmi'
+import { useSignMessage } from 'wagmi'
 const ConnectWallet = () => {
+
 
   const theme= useTheme()
   const mob = useMediaQuery(theme.breakpoints.down('md'))
@@ -17,33 +20,69 @@ const ConnectWallet = () => {
 const [isOpen, setIsOpen] = useState(false);
 const { open, close } = useWeb3Modal()
 const state = useWeb3ModalState()
+const { address, isConnecting, isDisconnected } = useAccount()
 
-console.log(state);
+
+const signMessage = useSignMessage({
+  message: 'gm wagmi frens',
+  onSuccess(data) {
+    console.log('Success', data)
+  },
+})
+
+
+useEffect(() => {
+
+
+}, [address]);
+
 async function mainConnecting (){
 
   try {
-    await open()
-    const wallet = await api.metaMaskConnecting()
-    
- if(wallet){
-await open()
-  const authString = await api.getAuthData()
-
-  if(authString){
-  
-    const signature = await api.signSign(authString,wallet)
-    if(signature){
-   
-  const token=  await api.getToken(wallet,signature)
-   if(token){
-   
-    logIn()
-    navigate("/levstake/dashboard", { replace: true });
-   }
-    
+    if(!address){
+      await open()
+      return
     }
-  }
- }
+   
+
+    // const signClient = await SignClient.init({
+    //   projectId: '2e39f4ecdaa2c19933cac1ffee100b74',
+    //   // optional parameters
+    //   relayUrl: 'https://maxromanov5.github.io/levstake/',
+    //   metadata: {
+    //     name: 'Example Dapp1233',
+    //     description: 'Example Dapp',
+    //     url: 'https://maxromanov5.github.io/levstake/',
+    //     icons: ['https://walletconnect.com/walletconnect-logo.png']
+    //   }
+    // })
+
+    console.log(address);
+    const a = await signMessage.signMessage()
+
+
+
+//     const wallet = await api.metaMaskConnecting()
+    
+//  if(wallet){
+// await open()
+//   const authString = await api.getAuthData()
+
+//   if(authString){
+  
+//     const signature = await api.signSign(authString,wallet)
+//     if(signature){
+   
+//   const token=  await api.getToken(wallet,signature)
+//    if(token){
+   
+//     logIn()
+//     navigate("/levstake/dashboard", { replace: true });
+//    }
+    
+    // }
+  // }
+//  }
 
   } catch (error) {
     if(error.message ==="Cannot read properties of undefined (reading 'request')" && !isLoggedIn){
@@ -55,10 +94,6 @@ await open()
   
 
 }
-
-
-
-
 
 
     return (
