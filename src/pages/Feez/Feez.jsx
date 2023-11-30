@@ -2,21 +2,15 @@ import {useMediaQuery,Typography,Stack,ToggleButtonGroup,ToggleButton,TableConta
 import { useState } from 'react';
 import FeedbackForm from '../../components/FeedbackForm/FeedbackForm';
 import { useTheme } from '@emotion/react';
-// import { MetaMaskSDK } from '@metamask/sdk';
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+
 const Feez = () => {
 const [structure, setStructure] = useState('Exchange');
 const theme = useTheme()
 const tab = useMediaQuery(theme.breakpoints.up('lg'))
+const { open, close } = useWeb3Modal()
 
-
-// const MMSDK = new MetaMaskSDK({
-//   openDeeplink: () => {
- 
-//       Linking.openURL('https://metamask.app.link/dapp/maxromanov5.github.io/levstake/');
-    
-//   },
- 
-// });
+open()
 // ethereum
 // .request({
 //   method: 'eth_requestAccounts',
