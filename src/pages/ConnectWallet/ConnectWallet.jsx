@@ -24,14 +24,14 @@ const ConnectWallet = () => {
 
 // const { address, isConnecting, isDisconnected } = useAccount()
 
-const [account, setAccount] = useState('s');
+const [account, setAccount] = useState('');
   const { sdk, connected, connecting, provider, chainId } = useSDK();
 
   const connect = async () => {
     try {
-      console.log(sdk);
+    
      const a = await sdk.connect();
-     setAccount(accounts[0]);
+     setAccount(a);
     } catch (err) {
       console.log(`failed to connect..`, err);
     }
@@ -48,9 +48,7 @@ const [account, setAccount] = useState('s');
 
 async function mainConnecting (){
 
-  if(sdk){
-    sdk.connect()
-  }
+
 
 //   try {
 
