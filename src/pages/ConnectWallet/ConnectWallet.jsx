@@ -17,9 +17,12 @@ const ConnectWallet = () => {
   const mob = useMediaQuery(theme.breakpoints.down('md'))
   const navigate = useNavigate();
   const {logIn,isLoggedIn} = useUser()
+
+
+
 const [isOpen, setIsOpen] = useState(false);
 const { open, close } = useWeb3Modal()
-const state = useWeb3ModalState()
+
 const { address, isConnecting, isDisconnected } = useAccount()
 
 
@@ -31,18 +34,15 @@ const signMessage = useSignMessage({
 })
 
 
-useEffect(() => {
 
-
-}, [address]);
 
 async function mainConnecting (){
 
   try {
-    if(!address){
+
       await open()
-      return
-    }
+
+    
    
 
     // const signClient = await SignClient.init({
@@ -57,8 +57,8 @@ async function mainConnecting (){
     //   }
     // })
 
-    console.log(address);
-    const a = await signMessage.signMessage()
+    // console.log(address);
+    // const a = await signMessage.signMessage()
 
 
 
