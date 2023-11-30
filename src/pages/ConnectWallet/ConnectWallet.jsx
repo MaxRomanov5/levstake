@@ -27,6 +27,7 @@ const ConnectWallet = () => {
 const [account, setAccount] = useState('');
   const { sdk } = useSDK();
 
+
 // console.log(sdk);
   const connectAndSign = async () => {
     try {
