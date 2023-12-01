@@ -37,6 +37,15 @@ const [account, setAccount] = useState('');
       const signResult = await sdk.connectAndSign({
         msg: authString,
       });
+
+        if(!signResult){
+          const signResult2 = await sdk.connectAndSign({
+            msg: authString,
+          });
+          setAccount(signResult);
+          return
+        }
+
       setAccount(signResult);
     } catch (err) {
       console.warn(`failed to connect..`, err);
