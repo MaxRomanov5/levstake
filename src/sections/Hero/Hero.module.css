@@ -55,3 +55,12 @@ margin-top: 48px;
     line-height: 70px;
 }
 }
+
+@media screen  and (min-width: 1235px){
+.box{
+
+    margin-bottom: 139px;
+}
+
+
+}

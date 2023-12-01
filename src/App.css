@@ -5,27 +5,31 @@ body{
    
 
     font-family:"IBM Plex Mono",
- 
+    
 
     
 }
+#root{
+    background: linear-gradient(to left,#24243c, #182035);
+    z-index: -11111;
+}
 .bgEff{
   
-    background: linear-gradient(to left,#0F1627, #182035);
+
     z-index: -1000;
     position: absolute;
 height: 100%;
 left: 0;
     background-position: top;
-top: ;
+top: 723px;
     width: 100%;
  
-    height:100%;
+    height: calc(100% - 720px);
 }
 .bg{
     background-image: url(./assets/bgeffect1x.png),url(./assets/bgfullmob1x.png);
     background-repeat: no-repeat;
-z-index: -100;
+
     position: absolute;
 
     background-position: top;
@@ -42,6 +46,8 @@ screen and (min-device-pixel-ratio: 2) {
     } */
 
     .container{
+        position: relative;
+        z-index: 100000;
         padding-left: 16px;
         padding-right: 16px;
     }
@@ -69,15 +75,27 @@ screen and (min-device-pixel-ratio: 2) {
             background-image: url(./assets/bgeffect1x.png), url(./assets/bgfulltab1x.png); 
             background-position: left top,right top 3px;
         }
+        #root{
+            background: linear-gradient(to left,#20202b, #0F1627);
+        }
         .bgEff{
-            top: 720px;
-            background: linear-gradient(to left,#172035, #0F1627);}
+            top: 723px;
+            background: linear-gradient(to left,#20202b, #0F1627);}
     }
     @media screen and (min-width: 1020px){
         .bg{
             background-image: url(./assets/bgeffect1x.png),url(./assets/bgfulldesk1x.png); 
             background-position: right top,right top;
         }
+
+        #root{
+            background: linear-gradient(to left,#1c2233, #131328);
+        }
+        .bgEff{
+            top: 720px;
+            
+        }
+    
     }
     @media screen and (min-width: 1440px){
         .bg{
@@ -87,3 +105,4 @@ screen and (min-device-pixel-ratio: 2) {
 
         }
     }
+
