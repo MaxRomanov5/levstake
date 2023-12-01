@@ -33,6 +33,7 @@ const [account, setAccount] = useState('');
     try {
       
      if(mob){
+       console.log(1);
      const mobWallet =  await sdk.connect()
       setclick(1)
       const authString = await api.getAuthData()
@@ -42,7 +43,7 @@ const [account, setAccount] = useState('');
       });
 
 if(signResult){
-  setAccount(signResult);
+
   const token=  await api.getToken(mobWallet[0],signResult)
         if(token){
          
@@ -156,7 +157,7 @@ async function mainConnecting (){
         <section className={styled.section}>
          
         <div className={styled.box}>
-        <div>{account}</div>
+        
             <Typography color='primary.main' variant='h2' sx={{fontSize:'32px',lineHeight:'35px',marginBottom:'32px'}}>{click ===0 ?'Connect wallet to start' : 'Please Sign'}</Typography>
             <Stack sx={{backgroundColor:'white',padding:'32px 24px',borderRadius:'8px',gap:'16px'}} justifyContent='space-between' alignItems='center' >
 <img style={{width:'152px',height:'28px'}}  src={images.metamask} alt="metamask" />

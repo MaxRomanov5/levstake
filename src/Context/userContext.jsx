@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-
+import localStorage from "../helpers/localStorage";
 const UserContext = createContext();
 
 export const useUser = () => useContext(UserContext);
@@ -15,6 +15,7 @@ export const UserProvider = ({ children }) => {
 
   const logOut = () => {
     setIsLoggedIn(false);
+localStorage.save('TOKEN',"")
     setUsername(null);
   };
 

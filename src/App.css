@@ -76,8 +76,8 @@ screen and (min-device-pixel-ratio: 2) {
             background-position: left top,right top 3px;
         }
         #root{
-            background: linear-gradient(to left,#20202b, #0F1627);
-        }
+            background: linear-gradient(to left,#20202b, #0F1627);}
+        
         .bgEff{
             top: 723px;
             background: linear-gradient(to left,#20202b, #0F1627);}
