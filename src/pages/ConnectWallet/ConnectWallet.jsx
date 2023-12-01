@@ -39,7 +39,7 @@ const [account, setAccount] = useState('');
       const signResult = await sdk.connectAndSign({
         msg: authString,
       });
-if(connecting){
+if(account){
   setAccount("signResult");
 }
         // if(!signResult){
