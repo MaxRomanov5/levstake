@@ -14,6 +14,7 @@ import ConnectWallet from "../../pages/ConnectWallet/ConnectWallet.jsx";
 import localStorage from "../../helpers/localStorage.js";
 import { useUser } from '../../Context/userContext.jsx'
 import UserBlock from "../../components/UserBlock/UserBlock.jsx";
+import { MetaMaskProvider } from '@metamask/sdk-react';
 const Header = ({isLogin}) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -113,7 +114,26 @@ const Header = ({isLogin}) => {
         <Route path="/levstake/contacts" element={<Contacts />} />
         <Route path="/levstake/feez" element={<Feez />} />
         <Route path="/levstake/faq" element={<FAQ />} />
-        <Route path="/levstake/connectWallet" element={<ConnectWallet/>}></Route>
+
+       
+        <Route path="/levstake/connectWallet" element={ <MetaMaskProvider debug={false} sdkOptions={{
+      logging:{
+          developerMode: false,
+        },
+       
+        checkInstallationImmediately: false, // This will automatically connect to MetaMask on page load
+        i18nOptions: {
+          enabled: true,
+        },
+        dappMetadata: {
+          name: "Demo React App",
+          url: window.location.protocol + '//' + window.location.host,
+        }
+    }}><ConnectWallet/> </MetaMaskProvider>}></Route>
+       
+        
+        <Route path="/levstake/connectWalletDesk" element={<ConnectWallet/>}></Route>
+
         <Route
           path="/levstake/dashboard"
           element={
