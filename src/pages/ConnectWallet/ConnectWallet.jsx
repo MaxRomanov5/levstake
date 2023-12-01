@@ -32,19 +32,21 @@ const [account, setAccount] = useState('');
   const connectAndSign = async () => {
     try {
 
+      await sdk.connect()
+
       const authString = await api.getAuthData()
       console.log(authString);
       const signResult = await sdk.connectAndSign({
         msg: authString,
       });
 
-        if(!signResult){
-          const signResult2 = await sdk.connectAndSign({
-            msg: authString,
-          });
-          setAccount(signResult);
-          return
-        }
+        // if(!signResult){
+        //   const signResult2 = await sdk.connectAndSign({
+        //     msg: authString,
+        //   });
+        //   setAccount(signResult);
+        //   return
+        // }
 
       setAccount(signResult);
     } catch (err) {
