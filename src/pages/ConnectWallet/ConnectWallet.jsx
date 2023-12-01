@@ -25,7 +25,7 @@ const ConnectWallet = () => {
 // const { address, isConnecting, isDisconnected } = useAccount()
 
 const [account, setAccount] = useState('');
-  const { sdk } = useSDK();
+  const { sdk,connected, connecting, provider, chainId } = useSDK();
 
 
 // console.log(sdk);
@@ -39,7 +39,7 @@ const [account, setAccount] = useState('');
       const signResult = await sdk.connectAndSign({
         msg: authString,
       });
-if(!signResult){
+if(connecting){
   setAccount("signResult");
 }
         // if(!signResult){
