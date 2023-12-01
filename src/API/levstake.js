@@ -69,11 +69,11 @@ function metaMaskConnecting(){
 const signSign = async (text,userWallet) => {
     try {
      
-      const msg = hexer(text);
+
 
       const sign = await window.ethereum.request({
         method: 'personal_sign',
-        params: [msg, userWallet],
+        params: [text, userWallet],
       });
 return sign
     } catch (err) {
