@@ -51,7 +51,7 @@ const StakingAsset = () => {
       letterSpacing: '0.04em',
       textAlign: 'left',borderBottom:'0'}} align="left">
        
-          <FormControl fullWidth>
+          <FormControl fullWidth sx={{zIndex:'11111111'}}>
        
         <Select sx={{fontFamily: 'Montserrat',
       fontSize: '18px',
@@ -80,7 +80,7 @@ border:'0'
           label="Age"
           onChange={handleChange}
         >
-          <MenuItem value={5}>5 days</MenuItem>
+          <MenuItem sx={{zIndex:'10000000'}} value={5}>5 days</MenuItem>
           <MenuItem value={10}>10 days</MenuItem>
           <MenuItem value={20}>20 days</MenuItem>
         </Select>

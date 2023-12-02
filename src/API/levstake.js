@@ -86,4 +86,27 @@ return sign
     }
   };
 
-export default {getAuthData,signSign,metaMaskConnecting,getToken,getPositions}
+  async function signDeposit(pool_id,amount,leverage,sender){
+    try{
+       const res = await axios.post('https://levstake.frwd.one/api/sign_deposit/',{
+        pool_id: pool_id,
+  amount: amount,
+  leverage: leverage,
+  sender: sender
+       },{
+        headers:{
+            Authorization: `Bearer ${localStorage.load('TOKEN')}`
+        }
+       })
+      
+      Notify.success('Success authorization!')
+
+       return res.data
+    } catch (err){
+Notify.failure('Something go wrong! Please, try again!')
+    }
+ 
+}
+
+
+export default {getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit}

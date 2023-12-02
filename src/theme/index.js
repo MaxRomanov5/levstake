@@ -111,6 +111,14 @@ textAlign: 'left',
     }
     },
     components:{
+        MuiModal:{
+            styleOverrides:{
+                root:{
+                    textAlign:'end',
+                    zIndex: '43'
+                }
+            }
+        },
         MuiPaper:{
             styleOverrides:{
             root:{

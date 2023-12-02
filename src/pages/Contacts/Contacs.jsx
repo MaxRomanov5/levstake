@@ -3,10 +3,18 @@ import FeedbackForm from "../../components/FeedbackForm/FeedbackForm";
 import { useTheme } from '@emotion/react';
 import localStorage from '../../helpers/localStorage.js'
 import { useUser } from "../../Context/userContext";
+import api from '../../API/levstake.js'
+
 const Contacts = () => {
     const theme = useTheme()
 const desk = useMediaQuery(theme.breakpoints.up('lg'))
 const { isLoggedIn, username, logIn, logOut } = useUser()
+
+
+
+// api.signDeposit(0,'100',10,'0x36f2D62E805E45382A1A4dF329A9b4031af1A6c8').then(
+//     data=>{console.log(data);}
+// )
 
 
     return (

@@ -9,14 +9,17 @@ body{
 
     
 }
+#menu-{
+    z-index: 11111115;
+}
 #root{
     background: linear-gradient(to left,#24243c, #182035);
-    z-index: -11111;
+    z-index: -11;
 }
 .bgEff{
   
 
-    z-index: -1000;
+    z-index: -10;
     position: absolute;
 height: 100%;
 left: 0;
@@ -47,7 +50,7 @@ screen and (min-device-pixel-ratio: 2) {
 
     .container{
         position: relative;
-        z-index: 100000;
+        z-index: 5;
         padding-left: 16px;
         padding-right: 16px;
     }

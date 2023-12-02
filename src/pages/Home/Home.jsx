@@ -8,24 +8,13 @@ import StackingAssetsSection from "../../sections/StackingAssetsSection/Stacking
 import LiquidityPoolSection from "../../sections/LiquidityPoolSection/LiquidityPoolSection.jsx";
 import { NavLink } from "react-router-dom";
 import { useUser } from '../../Context/userContext.jsx'
+import links from '../../helpers/links.js'
 const Home = () => {
  
   const { isLoggedIn } = useUser();
   const theme = useTheme();
   const mob = useMediaQuery(theme.breakpoints.down("md"));
-function route(params) {
-  if (isLoggedIn) {
-  return '/levstake/dashboard'
-  } else {
-    if(mob){
-      return '/levstake/connectWallet'
-    }else{
-      return '/levstake/connectWalletDesk'
-    }
 
-  }
-  
-}
 
 
     return (
@@ -42,8 +31,8 @@ function route(params) {
            </Stack>
            </NavLink>
            <Stack flexDirection='row' sx={{marginBottom:'24px'}}>
-           <NavLink to={route()}> <Button variant="contained" sx={{marginRight:'16px', backgroundColor:'purpleBG.main',padding:"12px 16px",borderRadius:'8px',display:'flex'}}><img style={{marginRight:'8px'}} src={images.buySell} alt="digitalKey"></img><Typography variant="subtitle1" sx={{fontSize:'14px',lineHeight:'16.24px',color:'primary.main',fontWeight:'500'}}>BUY/SELL</Typography></Button></NavLink>
-          <NavLink to={isLoggedIn?'/levstake/dashboard':'/levstake/connectWallet'}> <Button variant="contained" sx={{backgroundColor:'transparent',padding:"10px 16px",borderRadius:'8px',display:'flex',border:'2px solid white'}}><img style={{marginRight:'8px'}} src={images.hdmi} alt="hdmi"></img><Typography variant="subtitle1" sx={{fontSize:'14px',lineHeight:'16.24px',color:'primary.main',fontWeight:'500'}}>Connect wallet</Typography></Button></NavLink>
+           <NavLink to={links(isLoggedIn,mob)}> <Button variant="contained" sx={{marginRight:'16px', backgroundColor:'purpleBG.main',padding:"12px 16px",borderRadius:'8px',display:'flex'}}><img style={{marginRight:'8px'}} src={images.buySell} alt="digitalKey"></img><Typography variant="subtitle1" sx={{fontSize:'14px',lineHeight:'16.24px',color:'primary.main',fontWeight:'500'}}>BUY/SELL</Typography></Button></NavLink>
+          <NavLink to={links(isLoggedIn,mob)}> <Button variant="contained" sx={{backgroundColor:'transparent',padding:"10px 16px",borderRadius:'8px',display:'flex',border:'2px solid white'}}><img style={{marginRight:'8px'}} src={images.hdmi} alt="hdmi"></img><Typography variant="subtitle1" sx={{fontSize:'14px',lineHeight:'16.24px',color:'primary.main',fontWeight:'500'}}>Connect wallet</Typography></Button></NavLink>
            </Stack>
         
         </div>
