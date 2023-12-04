@@ -1,16 +1,16 @@
 import {TableRow,TableCell} from '@mui/material'
 import { useState } from 'react';
 import images from '../../assets/images';
-const TableRowBuy = () => {
+const TableRowBuy = (data) => {
   const [open, setOpen] = useState(false);
 
 
     return (<>
-        <TableRow onClick={()=>setOpen(!open)}  sx={{'& .MuiTableCell-root.MuiTableCell-body':{
+        <TableRow   sx={{'& .MuiTableCell-root.MuiTableCell-body':{
               borderBottomColor:'#3A3B3C',paddingLeft:'8px'
           }}}>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),position:'relative',fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px','&&&&':{paddingLeft:'24px'}}} >
-        <img src={open ? images.tableArrowOpen:images.tableArrowClose} alt="arrow" style={{position:'absolute',top:'50%',left:'8px',transform:'translateY(-50%)'}} />
+        {/* <img src={open ? images.tableArrowOpen:images.tableArrowClose} alt="arrow" style={{position:'absolute',top:'50%',left:'8px',transform:'translateY(-50%)'}} /> */}
         <div style={{display:'flex',gap:'8px',alignItems:'center'}}> <img src={images.ethereum} style={{width:'24px',height:'24px'}} alt='coin'></img>BTC </div>
         </TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}>

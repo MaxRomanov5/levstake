@@ -17,6 +17,7 @@ import linkGreen from './linkGreen.svg'
 import status from './Status.svg'
 import iconClose from './iconClose.svg'
 import metaLogo from './full-metamask-logo.png'
+import exit from './exit.svg'
 export default {
     levlion,
     levtext,
@@ -35,5 +36,6 @@ export default {
     linkGreen,
     status,
     iconClose
-    ,metaLogo
+    ,metaLogo,
+    exit
 }

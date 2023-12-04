@@ -1,15 +1,23 @@
-import React from 'react';
+
 import styled from './UserBlock.module.css'
 import images from '../../assets/images';
+import localStorage from '../../helpers/localStorage';
+import { useState } from 'react';
+import { useUser } from '../../Context/userContext';
 const UserBlock = () => {
+const {logOut} = useUser()
+ const wallet = localStorage.load('wallet')
+const [open, setOpen] = useState(false);
     return (
-        <div className={styled.block}>
+        <div onClick={()=>{setOpen(!open)}} className={styled.block}>
             <img width='30px' height='28px' src={images.metaLogo} alt="metamask Logo" />
-            <div>
-                <p className={styled.name}>Guest</p>
-                <p className={styled.wallet}>BTC 1.468...</p>
-            </div>
-            <img src={images.tableArrowClose} alt="arrow" />
+           
+               <p>{wallet.slice(0,4)+'...'+wallet.slice(wallet.length-3,wallet.length)}</p>
+            
+            <img src={images.tableArrowClose} style={{...(open&&{transform:"rotate(180deg)"})}} alt="arrow" />
+           {open && <div onClick={()=>{logOut()}} className={styled.dropDown}><img width='15px'height='20px' src={images.exit} alt="exit" />
+            <p>Logout</p>
+            </div>}
         </div>
     );
 }

@@ -1,26 +1,33 @@
 import { createContext, useContext, useState } from "react";
 import localStorage from "../helpers/localStorage";
+
 const UserContext = createContext();
+
 
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState(null);
+  const [wallet, setWallet] = useState(null);
 
-  const logIn = () => {
+  const logIn = (userWallet) => {
     setIsLoggedIn(true);
-    setUsername("Mango");
+    setWallet(userWallet)
+    localStorage.save('wallet',userWallet)
   };
 
   const logOut = () => {
     setIsLoggedIn(false);
 localStorage.save('TOKEN',"")
-    setUsername(null);
+window.ethereum.request({
+  method: "eth_requestAccounts",
+  params: [{eth_accounts: {}}]
+})
+    setWallet(null);
   };
 
   return (
-    <UserContext.Provider value={{ isLoggedIn, username, logIn, logOut }}>
+    <UserContext.Provider value={{ isLoggedIn, wallet, logIn, logOut }}>
       {children}
     </UserContext.Provider>
   );

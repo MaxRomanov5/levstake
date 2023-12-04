@@ -3,10 +3,12 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import hexer from 'browser-string-hexer';
 import localStorage from "../helpers/localStorage";
 
- async function getAuthData(){
-     try{
-        const res = await axios.get('https://levstake.frwd.one/api/auth/data/')
-        const a = hexer(res.data.auth_data_string[0])
+ async function getAuthData(address){
+     try{console.log(address);
+        const res = await axios.get(`https://levstake.frwd.one/api/auth/data/?user_address=${address}`)
+     
+
+        const a = hexer(res.data.auth_data_string)
         return a
      } catch (err){
 Notify.failure('Something go wrong! Please, try again!')
@@ -33,18 +35,18 @@ Notify.failure('Something go wrong! Please, try again!')
 async function getPositions(){
     try{
        
-       const res = await axios.get('https://levstake.frwd.one/api/positions/',{},{
+       const res = await axios.get('https://levstake.frwd.one/api/positions/',{
         headers:{
             Authorization: `Bearer ${localStorage.load('TOKEN')}`
         }
        })
 console.log(res);
       Notify.success('Success authorization!')
-    
+    return res
     } catch (err){
 Notify.failure('Something go wrong! Please, try again!')
     }
- 
+
 }
 
 function metaMaskConnecting(){
@@ -99,7 +101,7 @@ return sign
         }
        })
       
-      Notify.success('Success authorization!')
+
 
        return res.data
     } catch (err){
@@ -109,4 +111,40 @@ Notify.failure('Something go wrong! Please, try again!')
 }
 
 
-export default {getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit}
+async function blockChainData(){
+  try{
+     const res = await axios.get('https://levstake.frwd.one/api/blockchain_data/',{
+      headers:{
+          Authorization: `Bearer ${localStorage.load('TOKEN')}`
+      }
+     })
+    
+
+
+     return res.data
+  } catch (err){
+Notify.failure('Something go wrong! Please, try again!')
+  }
+
+}
+
+async function getPools(){
+  try{
+     const res = await axios.get('https://levstake.frwd.one/api/pools/',{
+      headers:{
+          Authorization: `Bearer ${localStorage.load('TOKEN')}`
+      }
+     })
+    
+
+
+     return res.data
+  } catch (err){
+Notify.failure('Something go wrong! Please, try again!')
+  }
+
+}
+
+
+
+export default {getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit,blockChainData,getPools}

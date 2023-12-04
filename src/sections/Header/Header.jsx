@@ -11,15 +11,14 @@ import MobileMenu from "../../components/MobileMenu/MobileMenu.jsx";
 import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import styled from "./Header.module.css";
 import ConnectWallet from "../../pages/ConnectWallet/ConnectWallet.jsx";
-import localStorage from "../../helpers/localStorage.js";
-import { useUser } from '../../Context/userContext.jsx'
+import ConnectWalletDesk from "../../components/ConnectWalletDesk/ConnectWalletDesk.jsx";
 import UserBlock from "../../components/UserBlock/UserBlock.jsx";
 import { MetaMaskProvider } from '@metamask/sdk-react';
 const Header = ({isLogin}) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-
+  
   return (
     <>
       <header
@@ -132,7 +131,7 @@ const Header = ({isLogin}) => {
     }}><ConnectWallet/> </MetaMaskProvider>}></Route>
        
         
-        <Route path="/levstake/connectWalletDesk" element={<ConnectWallet/>}></Route>
+        <Route path="/levstake/connectWalletDesk" element={<ConnectWalletDesk/>}></Route>
 
         <Route
           path="/levstake/dashboard"

@@ -6,9 +6,10 @@ import img from "../../assets/images";
 import images from "../../assets/images";
 import StackingAssetsSection from "../../sections/StackingAssetsSection/StackingAssetsSection.jsx";
 import LiquidityPoolSection from "../../sections/LiquidityPoolSection/LiquidityPoolSection.jsx";
-import { NavLink } from "react-router-dom";
 import { useUser } from '../../Context/userContext.jsx'
+import { NavLink } from "react-router-dom";
 import links from '../../helpers/links.js'
+
 const Home = () => {
  
   const { isLoggedIn } = useUser();
@@ -23,7 +24,7 @@ const Home = () => {
          <Advantages></Advantages>
          <StackingTable></StackingTable>
          <StackingAssetsSection></StackingAssetsSection>
-         <LiquidityPoolSection></LiquidityPoolSection>
+        <LiquidityPoolSection ></LiquidityPoolSection>}
          <NavLink to='/levstake/'>
          <Stack sx={{marginBottom:'24px'}} justifyContent='left' alignItems='center' flexDirection='row' height='40px' flexWrap='wrap' >
             <img style={{height:'inherit',marginRight:'14px'}} src={img.levlion} alt="levstake" />

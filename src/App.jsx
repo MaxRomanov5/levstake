@@ -12,7 +12,7 @@ function App() {
 useEffect(() => {
 
   if(localStorage.load('TOKEN')){
-logIn()
+logIn(localStorage.load('wallet'))
   }
  
 }, []);

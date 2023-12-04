@@ -1,7 +1,7 @@
 import {ToggleButtonGroup,useMediaQuery,ToggleButton,Typography,TableContainer,Table,TableHead,TableRow,TableCell,TableBody,} from '@mui/material'
 import {useState} from 'react'
 import TableRowBuy from '../TableRowBuy/TableRowBuy';
-import FilterOrders from '../FilterOrders/FilterOrders';
+// import FilterOrders from '../FilterOrders/FilterOrders';
 import { useTheme } from '@emotion/react';
 // import images from '../../assets/images';
 
@@ -19,7 +19,7 @@ function handleActive(e) {
         <div style={{display:'flex',flexDirection:'column',gap:'10px',...(tab&&{flexDirection:'row',justifyContent:'space-between'})}}>
           <Typography variant='subtitle1' sx={{fontWeight:'600',color:'white',textAlign:'center'}}>Buy Orders</Typography>
           <div style={{display:'flex',gap:'10px',flexDirection:mob?'row':'column',alignItems:'center',justifyContent:'center'}}>
-          <FilterOrders></FilterOrders>
+          {/* <FilterOrders></FilterOrders> */}
              <ToggleButtonGroup
         sx={{display:'flex',justifyContent:'center',alignItems:'center',maxWidth:'159px',position:'relative',marginBottom:mob?'0px':'8px',gap:'2px',width:'100%',padding:'4px',border:'1px solid #F7F7F71A',borderRadius:'8px',borderTopRightRadius:'8px',
         '& .MuiButtonBase-root.MuiToggleButton-root.Mui-selected':{

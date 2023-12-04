@@ -1,7 +1,14 @@
-import {  Stack, Typography } from "@mui/material";
+import {  Stack, Typography,useTheme,useMediaQuery } from "@mui/material";
 import images from "../../assets/images";
 import styled from './StakingCard.module.css'
+import { NavLink } from "react-router-dom";
+import links from '../../helpers/links.js'
+import { useUser } from '../../Context/userContext.jsx'
 const StackingCard = () => {
+
+    const { isLoggedIn } = useUser();
+    const theme = useTheme();
+    const mob = useMediaQuery(theme.breakpoints.down("md"));
     return (
         <div className={styled.card}>
             <div className={styled.cardWrap}>
@@ -15,7 +22,7 @@ const StackingCard = () => {
           <Typography color='primary.main' sx={{fontSize:'14px'}} variant='caption'>daily</Typography>
           </Stack>
           </div>
-          <button  className={styled.btn}><img src={images.rocketPrpl} style={{marginRight:'16px'}} alt="rocket" /> Flexible Stake</button>
+          <NavLink to={links(isLoggedIn,mob)}> <button  className={styled.btn}><img src={images.rocketPrpl} style={{marginRight:'16px'}} alt="rocket" /> Flexible Stake</button></NavLink>
         </div>
     );
 }
