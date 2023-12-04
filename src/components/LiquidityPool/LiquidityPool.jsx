@@ -48,14 +48,14 @@ const LiquidityPool = ({type,pools,setSelectedPool}) => {
   lineHeight: '17px',
   color:'white',
   letterSpacing: '0.04em',
-  textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">-</TableCell>
+  textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">{pool.pool_duration}</TableCell>
             <TableCell sx={{padding:'0px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',
   fontWeight: '500',
   lineHeight: '17px',
   color:'white',
   letterSpacing: '0.04em',
-  textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">{ pool.pool_conditions.min_leverage+'X'+" > "+pool.pool_conditions.max_leverage+'X'}</TableCell>
+  textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">{ pool.pool_conditions.min_leverage+'x'+" - "+pool.pool_conditions.max_leverage+'x'}</TableCell>
         { type === 'home' &&    <TableCell sx={{ borderBottomColor:'#3A3B3C'}} align="left" ><NavLink to={links(isLoggedIn,spec)}><Button sx={ {padding:'0px 8px',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',color:'purple.main'}} ><span style={{marginRight:'8px'}}>$</span>BUY {
             mob && 'Stake now'
            }</Button></NavLink></TableCell>}

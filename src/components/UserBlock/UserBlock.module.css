@@ -19,11 +19,11 @@ text-align: left;
 .wallet{
     font-family: Montserrat;
 font-size: 10px;
-font-weight: 500;
+font-weight: 600;
 line-height: 14px;
 letter-spacing: 0.02em;
 text-align: left;
-
+color: #3A3B3C;
 }
 .dropDown{
     width: 100%;
