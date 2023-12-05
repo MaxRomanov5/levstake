@@ -40,9 +40,8 @@ async function getPositions(){
             Authorization: `Bearer ${localStorage.load('TOKEN')}`
         }
        })
-console.log(res);
-      Notify.success('Success authorization!')
-    return res
+
+    return res.data
     } catch (err){
 Notify.failure('Something go wrong! Please, try again!')
     }
@@ -52,7 +51,7 @@ Notify.failure('Something go wrong! Please, try again!')
 function metaMaskConnecting(){
    return window.ethereum.request({ method: 'eth_requestAccounts' })
     .then(data=>{
-    console.log(data[0]);
+    console.log(data);
         return data[0]    
 }
     )

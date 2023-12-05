@@ -3,9 +3,10 @@ import {useState} from 'react'
 import TableRowBuy from '../TableRowBuy/TableRowBuy';
 // import FilterOrders from '../FilterOrders/FilterOrders';
 import { useTheme } from '@emotion/react';
+import ControlPools from '../ControlPools/ControlPools';
 // import images from '../../assets/images';
 
-const BuyOrdersBlock = () => {
+const BuyOrdersBlock = ({positions}) => {
   const theme = useTheme()
   const mob = useMediaQuery(theme.breakpoints.up('sm'))
   const tab  = useMediaQuery(theme.breakpoints.up('md'))
@@ -14,8 +15,10 @@ const [active, setActive] = useState('active');
 function handleActive(e) {
    setActive(e.target.value)
 }
-
-    return (<div style={{backgroundColor:'#161C2A',borderRadius:'8px',marginBottom:'8px',padding:'16px'}}>
+const activePos = positions.filter(pos=>pos.status === 'waiting_for_funds')
+const historyPos = positions.filter(pos=>pos.status === 'funds_are_withdrawn')
+console.log(activePos);
+    return (<div style={{backgroundColor:'#161C2A',borderRadius:'8px',marginBottom:'8px',padding:'16px',maxHeight:'700px',overflow:'scroll'}}>
         <div style={{display:'flex',flexDirection:'column',gap:'10px',...(tab&&{flexDirection:'row',justifyContent:'space-between'})}}>
           <Typography variant='subtitle1' sx={{fontWeight:'600',color:'white',textAlign:'center'}}>Buy Orders</Typography>
           <div style={{display:'flex',gap:'10px',flexDirection:mob?'row':'column',alignItems:'center',justifyContent:'center'}}>
@@ -57,15 +60,21 @@ function handleActive(e) {
               <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Interest payment</TableCell>
               <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Liquidation price</TableCell>
               <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Status</TableCell>
-              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Maturity</TableCell>
-              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em',textWrap:'nowrap'}} align="left" >Interest paid</TableCell>
-              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Commision</TableCell>
+              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Period</TableCell>
+              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em',textWrap:'nowrap'}} align="left" ></TableCell>
+              
             </TableRow>
           </TableHead>
           <TableBody>
-          <TableRowBuy></TableRowBuy>
-          <TableRowBuy></TableRowBuy>
-          <TableRowBuy></TableRowBuy>
+            {active ==='active' && activePos.map((position)=>{
+             return <TableRowBuy position={position}></TableRowBuy>
+
+            })}
+          
+          {active ==='history' && historyPos.map((position)=>{
+             return <TableRowBuy position={position}></TableRowBuy>
+
+            })}
               </TableBody>
 </Table>
 </TableContainer>

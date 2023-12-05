@@ -24,7 +24,7 @@ const BuySellSwitch = ({action,handleAction}) => {
               <ToggleButton sx={{color:'primary.main',fontFamily:'Montserrat',fontWeight:'500',fontSize:'12px',lineHeight:'12px',padding:'6px 12px',width:'100%',backgroundColor:'transparent',borderRadius:'8px','&&&&':{borderTopRightRadius:'8px',borderBottomRightRadius:'8px'}}} value="buy" aria-label="action">
              Buy
               </ToggleButton>
-              <ToggleButton sx={{color:'primary.main',fontFamily:'Montserrat',fontWeight:'500',fontSize:'12px',lineHeight:'12px',padding:'6px 12px',width:'100%',backgroundColor:'transparent',borderRadius:'8px','&&&&':{borderTopLeftRadius:'8px',borderBottomLeftRadius:'8px'}}} value="sell" aria-label="action">
+              <ToggleButton disabled sx={{color:'white',fontFamily:'Montserrat',fontWeight:'500',fontSize:'12px',lineHeight:'12px',padding:'6px 12px',width:'100%',backgroundColor:'transparent',borderRadius:'8px','&&&&':{borderTopLeftRadius:'8px',borderBottomLeftRadius:'8px'}}} value="sell" aria-label="action">
               Sell
               </ToggleButton>
             </ToggleButtonGroup>

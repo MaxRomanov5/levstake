@@ -13,7 +13,7 @@ useEffect(() => {
     api.getPools().then(data=>setPools(data))
 
 }, []);
-console.log(pools);
+
     return (
         <div className={styled.mainBox}>
         <div className={styled.buySell}>

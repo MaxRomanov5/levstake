@@ -20,22 +20,20 @@ useEffect(() => {
 }, [selectedPool]);
 
 const currentPoolData = pools.find(pool=>pool.id == instrument)
-console.log(currentPoolData.id);
+
 async function submitF(e) {
   e.preventDefault()
 const lev =document.querySelector('#lev').value
 const amounT =document.querySelector('#amounT').value
 
-console.log(currentPoolData.id);
-console.log(Number(amounT));
-console.log(Number(lev));
+
 
 const wallet = localStorage.load('wallet')
 console.log(wallet);
 
-  // const dataContr = await api.signDeposit(currentPoolData.id,100,10,'0xea73fe36682e1db92239eb93d34fc12e3b397a6e')
-console.log(dataContr);
-  
+  const dataContr = await api.signDeposit(currentPoolData.id,100,10,'0xEa73Fe36682E1Db92239EB93D34fC12E3b397a6E')
+
+  console.log(dataContr);
 
    const abi = await  api.blockChainData().then(
     data=>{
@@ -51,26 +49,31 @@ const web3 = new Web3(window.ethereum)
   
 
 const myContract = new web3.eth.Contract(abi,contractorAddres)
-console.log(dataContr.signature);
-// const myFunc = myContract.methods.stakeAssets(dataContr.signed_data[1],dataContr.signed_data[2],dataContr.signed_data[3],dataContr.signed_data[4],dataContr.signed_data[4],dataContr.signed_data[6],dataContr.signature)
+const myApprove = new web3.eth.Contract(abi,'0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92')
+const approve = myApprove.methods.approve('0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000',100)
 
-const myFunc = myContract.methods.stakeAssets(2,100,'0x86F44e1282F33Ded63c616d90804d4faE00548f2',43148373,0,'deposit',dataContr.signature)
+const result = await window.ethereum.request({
+  method: 'eth_sendTransaction',
+  params:[approve]
+  })
+
+const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,dataContr.signed_data.amount,dataContr.signed_data.address,dataContr.signed_data.max_blocks,dataContr.signed_data.nonce,'deposit',dataContr.signature)
 
 const currentAccount ='0x36f2D62E805E45382A1A4dF329A9b4031af1A6c8'
 
 const transaction = {
-    from: currentAccount,
+    from: '0xEa73Fe36682E1Db92239EB93D34fC12E3b397a6E',
     to: contractorAddres,
     data:myFunc.encodeABI(),
-    gas:(5000).toString()
+    gas:(150000).toString()
 }
+// (5000).toString()
+// const result = await window.ethereum.request({
+// method: 'eth_sendTransaction',
+// params:[transaction]
+// })
 
-const result = await window.ethereum.request({
-method: 'eth_sendTransaction',
-params:[transaction]
-})
-console.log(1);
-console.log(result);
+
 }
 
 
@@ -249,7 +252,7 @@ border:'0'
   <input required id='lev' style={{fontFamily: 'Montserrat',
      fontSize: '16px',backgroundColor:'#161C2A',
      fontWeight: '400',borderRadius:'8px',
-     lineHeight: '25px',padding:'8px 12px',color:'white'}} min={currentPoolData.pool_conditions.min_leverage} max={currentPoolData.pool_conditions.max_leverage} placeholder="1" className={styled.input} type="number"  />
+     lineHeight: '25px',padding:'12px 12px',color:'white'}} min={currentPoolData.pool_conditions.min_leverage} max={currentPoolData.pool_conditions.max_leverage} placeholder="1" className={styled.input} type="number"  />
 </Box>
           <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Interest yearly <Typography sx={{fontWeight:'500'}}>5%</Typography></Typography>
           <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Leveraged Yearly interest <Typography sx={{fontWeight:'500'}}>75%</Typography></Typography>
