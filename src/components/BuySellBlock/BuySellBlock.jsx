@@ -82,10 +82,12 @@ const web3 = new Web3(window.ethereum)
 
 
 const wallet = localStorage.load('wallet')
+console.log(wallet);
 
 const normalWallet = web3.utils.toChecksumAddress(wallet)
 
-const dataContr = await api.signDeposit(currentPoolData.id,userAmount,leverage,normalWallet)
+console.log(normalWallet);
+  const dataContr = await api.signDeposit(currentPoolData.id,Number(userAmount),Number(leverage),normalWallet)
 
   console.log(dataContr);
 
@@ -104,17 +106,17 @@ const contractorAddres = '0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000'
   
 
 const myContract = new web3.eth.Contract(abi,contractorAddres)
-// const myApprove = new web3.eth.Contract(abi,'0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92')
-// const approve = myApprove.methods.approve('0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000',100)
+const myApprove = new web3.eth.Contract(abi,'0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92')
+const approve = myApprove.methods.approve('0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000',100)
 
-// const result = await window.ethereum.request({
-//   method: 'eth_sendTransaction',
-//   params:[approve]
-//   })
+const result = await window.ethereum.request({
+  method: 'eth_sendTransaction',
+  params:[approve]
+  })
 
 const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,dataContr.signed_data.amount,dataContr.signed_data.address,dataContr.signed_data.max_blocks,dataContr.signed_data.nonce,'deposit',dataContr.signature)
 
-
+const currentAccount ='0x36f2D62E805E45382A1A4dF329A9b4031af1A6c8'
 
 const transaction = {
     from: '0xEa73Fe36682E1Db92239EB93D34fC12E3b397a6E',
@@ -123,10 +125,10 @@ const transaction = {
     gas:(150000).toString()
 }
 // (5000).toString()
-const result = await window.ethereum.request({
-method: 'eth_sendTransaction',
-params:[transaction]
-})
+// const result = await window.ethereum.request({
+// method: 'eth_sendTransaction',
+// params:[transaction]
+// })
 
 
 }
@@ -298,11 +300,11 @@ border:'0'
   </p>
   <Field id='lev' name='leverage' value={leverage} onInput={handleLeverage} required  style={{fontFamily: 'Montserrat',
      fontSize: '16px',backgroundColor:'#161C2A',
-     fontWeight: '400',borderRadius:'8px',
-     lineHeight: '25px',padding:'12px 12px',color:'white'}} min={currentPoolData.pool_conditions.min_leverage} max={currentPoolData.pool_conditions.max_leverage} placeholder="1" className={styled.input} type="number"  />
+     fontWeight: '400',borderRadius:'8px',width:'calc(100% - 10px)',
+     lineHeight: '25px',padding:'12px 5px',color:'white'}} min={currentPoolData.pool_conditions.min_leverage} max={currentPoolData.pool_conditions.max_leverage} placeholder="1" className={styled.input} type="range"  />
      {touched.leverage && errors.leverage && <div>{errors.leverage}</div>}
 </Box>
-          <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Interest yearly <Typography sx={{fontWeight:'500'}}>5%</Typography></Typography>
+    <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Leverage <Typography sx={{fontWeight:'500'}}>{leverage}</Typography></Typography>
           <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Leveraged Yearly interest <Typography sx={{fontWeight:'500'}}>75%</Typography></Typography>
           <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Volume commission <Typography sx={{fontWeight:'500'}}>1%</Typography></Typography>
     <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Max Interest <Typography sx={{fontWeight:'500'}}>{maxProfit(userAmount,leverage)}</Typography></Typography>
