@@ -8,10 +8,10 @@ const TableRowBuy = ({position}) => {
 
   function statusMaker(status){
     if(status==='waiting_for_funds'){
-      return <span style={{color:'#9578F9'}} >Active</span>
+      return <span style={{color:'#3AADA4'}} >waiting for funds</span>
     }
     if(status==='funds_are_withdrawn'){
-      return <span style={{color:'#C23221'}} >Liquidated</span>
+      return <span style={{color:'#C23221'}} >funds are withdrawn</span>
     }
   }
 
@@ -27,8 +27,8 @@ const TableRowBuy = ({position}) => {
         {(Number(position.user_amount)).toFixed(3)}
         </TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px',textWrap:'nowrap'}}>{position.leverage}</TableCell>
-        <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}>XS</TableCell>
-        <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}>5%</TableCell>
+        <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}>{Number(position.staking_pool.profit_rate).toFixed(1)+'%'}</TableCell>
+        <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}><a><img src={images.linkGreen}></img></a></TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px',textWrap:'nowrap'}}>On maturity</TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}>{(Number(position.liquidation_price)).toFixed(3)}</TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',fontFamily:'Montserrat',lineHeight:'16px',color:'#9A9B9B',textWrap:'nowrap',paddingTop:'9px',paddingBottom:'9px'}}>{statusMaker(position.status)}</TableCell>

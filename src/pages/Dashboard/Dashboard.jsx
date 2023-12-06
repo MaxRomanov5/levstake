@@ -15,7 +15,7 @@ setInterval(() => {
     
         setPositions(data)
     })
-}, 7000);
+}, 4000);
 }, []);
 
 

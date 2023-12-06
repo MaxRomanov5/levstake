@@ -40,7 +40,7 @@ async function getPositions(){
             Authorization: `Bearer ${localStorage.load('TOKEN')}`
         }
        })
-       console.log(res.data);
+   
     return res.data
     } catch (err){
 Notify.failure('Something go wrong! Please, try again!')
@@ -135,7 +135,7 @@ async function getPools(){
       }
      })
     
-console.log(res.data);
+
 
      return res.data
   } catch (err){
