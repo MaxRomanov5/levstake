@@ -6,6 +6,12 @@ import Web3 from 'web3';
 import images from "../../assets/images";
 import api from '../../API/levstake.js'
 import localStorage from "../../helpers/localStorage";
+import React from 'react';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+
+
+
 const BuySellBlock = ({pools,selectedPool}) => {
     const [action, setAction] = useState('buy');
     
@@ -13,18 +19,49 @@ const [instrument, setInstrument] = useState(pools[0]?.id);
 
 const [leverage, setLeverage] = useState('');
 const [userAmount, setUserAmount] = useState('');
+
+
+
+
+
+const handleLeverage = (e) => {
+  setLeverage(e.target.value);
+};
+const handleInstrument = (e) => {
+  setInstrument(e.target.value);
+};
+
+
+  const  handleAction =(e, newAction)=>{
+      if (newAction !== null) {
+        setAction(newAction);
+      }
+    
+    }
+
+
 function handleUserAmount(e) {
   setUserAmount(e.target.value)
 }
+
+
 useEffect(() => {
  if( typeof selectedPool === "number"){
   setInstrument(selectedPool)
  }
-
 }, [selectedPool]);
 
-const currentPoolData = pools.find(pool=>pool.id == instrument)
 
+const currentPoolData = pools.find(pool=>pool.id == instrument)
+console.log(currentPoolData.pool_conditions.max_leverage);
+
+const DisplayingErrorMessagesSchema = Yup.object().shape({
+  leverage: Yup.number().positive()
+    .min(currentPoolData.pool_conditions.min_leverage, 'Enter bigger leverage!')
+    .max(currentPoolData.pool_conditions.max_leverage, 'Enter smaller leverage!')
+    .required('Required'),
+  // amount: Yup.string().email('Invalid email').required('Required'),
+});
 
 function maxProfit(amount,lever){
   if(!amount || !lever){
@@ -33,19 +70,25 @@ return '-'
   return amount*lever
 }
 
+
+
+
+
 async function submitF(e) {
   e.preventDefault()
 const lev =document.querySelector('#lev').value
 const amounT =document.querySelector('#amounT').value
-
+const web3 = new Web3(window.ethereum)
 
 
 const wallet = localStorage.load('wallet')
-console.log(wallet);
 
-  const dataContr = await api.signDeposit(currentPoolData.id,100,10,'0xEa73Fe36682E1Db92239EB93D34fC12E3b397a6E')
+const normalWallet = web3.utils.toChecksumAddress(wallet)
+
+const dataContr = await api.signDeposit(currentPoolData.id,userAmount,leverage,normalWallet)
 
   console.log(dataContr);
+
 
    const abi = await  api.blockChainData().then(
     data=>{
@@ -57,21 +100,21 @@ console.log(wallet);
 const contractorAddres = '0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000'
 
 
-const web3 = new Web3(window.ethereum)
+
   
 
 const myContract = new web3.eth.Contract(abi,contractorAddres)
-const myApprove = new web3.eth.Contract(abi,'0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92')
-const approve = myApprove.methods.approve('0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000',100)
+// const myApprove = new web3.eth.Contract(abi,'0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92')
+// const approve = myApprove.methods.approve('0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000',100)
 
-const result = await window.ethereum.request({
-  method: 'eth_sendTransaction',
-  params:[approve]
-  })
+// const result = await window.ethereum.request({
+//   method: 'eth_sendTransaction',
+//   params:[approve]
+//   })
 
 const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,dataContr.signed_data.amount,dataContr.signed_data.address,dataContr.signed_data.max_blocks,dataContr.signed_data.nonce,'deposit',dataContr.signature)
 
-const currentAccount ='0x36f2D62E805E45382A1A4dF329A9b4031af1A6c8'
+
 
 const transaction = {
     from: '0xEa73Fe36682E1Db92239EB93D34fC12E3b397a6E',
@@ -80,33 +123,25 @@ const transaction = {
     gas:(150000).toString()
 }
 // (5000).toString()
-// const result = await window.ethereum.request({
-// method: 'eth_sendTransaction',
-// params:[transaction]
-// })
+const result = await window.ethereum.request({
+method: 'eth_sendTransaction',
+params:[transaction]
+})
 
 
 }
 
 
-const handleLeverage = (e) => {
-    setLeverage(e.target.value);
-  };
-const handleInstrument = (e) => {
-    setInstrument(e.target.value);
-  };
 
-
-    const  handleAction =(e, newAction)=>{
-        if (newAction !== null) {
-          setAction(newAction);
-        }
-      
-      }
 
 
     return (
-      <form onSubmit={submitF}  className={styled.block}>
+      <Formik initialValues={{
+        leverage: '',
+        amount: '',
+      }} validationSchema={DisplayingErrorMessagesSchema} >
+         {({ errors, touched }) => (
+      <Form onSubmit={submitF}  className={styled.block}>
           <BuySellSwitch action={action} handleAction={handleAction}></BuySellSwitch>
           <Box sx={{display:'flex',gap:'12px'}}>
           <FormControl  fullWidth>
@@ -258,13 +293,14 @@ border:'0'
      </FormControl>} */}
           {/* </Box> */}
 <Box sx={{display:'flex',flexDirection:'column',gap:'12px',marginTop:'12px',marginBottom:'12px'}}>
-<p style={{fontSize:'12px',color:'white',top:'6px',left:'-12px',fontFamily:'Montserrat',fontWeight:'500'}}  htmlFor="Leverage X">
+<p style={{fontSize:'12px',color:'white',top:'6px',left:'-12px',fontFamily:'Montserrat',fontWeight:'500'}}  htmlFor="leverage">
           Leverage X
   </p>
-  <input value={leverage} onInput={handleLeverage} required id='lev' style={{fontFamily: 'Montserrat',
+  <Field id='lev' name='leverage' value={leverage} onInput={handleLeverage} required  style={{fontFamily: 'Montserrat',
      fontSize: '16px',backgroundColor:'#161C2A',
      fontWeight: '400',borderRadius:'8px',
      lineHeight: '25px',padding:'12px 12px',color:'white'}} min={currentPoolData.pool_conditions.min_leverage} max={currentPoolData.pool_conditions.max_leverage} placeholder="1" className={styled.input} type="number"  />
+     {touched.leverage && errors.leverage && <div>{errors.leverage}</div>}
 </Box>
           <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Interest yearly <Typography sx={{fontWeight:'500'}}>5%</Typography></Typography>
           <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Leveraged Yearly interest <Typography sx={{fontWeight:'500'}}>75%</Typography></Typography>
@@ -282,7 +318,9 @@ border:'0'
      </Box>
      
      
-      </form>
+      </Form>
+       )}
+      </Formik>
     );
 }
 
