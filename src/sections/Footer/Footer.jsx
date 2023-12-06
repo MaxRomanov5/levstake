@@ -5,7 +5,7 @@ const Footer = () => {
     const theme = useTheme()
 const tab = useMediaQuery(theme.breakpoints.up('md'))
     return (
-       <footer style={{paddingBottom:'8px',...(tab&&{display:'flex',justifyContent:'space-between'})}}>
+       <footer style={{paddingBottom:'8px',...(tab&&{display:'flex',justifyContent:'space-between',marginTop:'auto'})}}>
           
            <Typography sx={{marginBottom:'24px',display:'block'}} variant="tableCellMain">All rights reserved @ Levstake Ltd. 2022</Typography>
            <Stack flexDirection='row' gap='32px' justifyContent='start'>

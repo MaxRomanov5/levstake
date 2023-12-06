@@ -17,7 +17,7 @@ const BuySellBlock = ({pools,selectedPool}) => {
     
 const [instrument, setInstrument] = useState(pools[0]?.id);
 
-const [leverage, setLeverage] = useState('');
+const [leverage, setLeverage] = useState(pools[0]?.pool_conditions.min_leverage);
 const [userAmount, setUserAmount] = useState('');
 
 
@@ -29,6 +29,7 @@ const handleLeverage = (e) => {
 };
 const handleInstrument = (e) => {
   setInstrument(e.target.value);
+  setLeverage(pools.find(pool=>pool.id == instrument).pool_conditions.min_leverage)
 };
 
 
@@ -48,12 +49,13 @@ function handleUserAmount(e) {
 useEffect(() => {
  if( typeof selectedPool === "number"){
   setInstrument(selectedPool)
+  setLeverage(pools.find(pool=>pool.id == instrument).pool_conditions.min_leverage)
  }
 }, [selectedPool]);
 
 
 const currentPoolData = pools.find(pool=>pool.id == instrument)
-console.log(currentPoolData.pool_conditions.max_leverage);
+console.log(currentPoolData);
 
 const DisplayingErrorMessagesSchema = Yup.object().shape({
   leverage: Yup.number().positive()
@@ -76,20 +78,20 @@ return '-'
 
 async function submitF(e) {
   e.preventDefault()
-const lev =document.querySelector('#lev').value
-const amounT =document.querySelector('#amounT').value
+
 const web3 = new Web3(window.ethereum)
-
-
 const wallet = localStorage.load('wallet')
-console.log(wallet);
-
 const normalWallet = web3.utils.toChecksumAddress(wallet)
 
-console.log(normalWallet);
+// const approveDataLink = await api.getAssetId(currentPoolData.asset.id)
+
+// console.log(approveDataLink);
+
   const dataContr = await api.signDeposit(currentPoolData.id,Number(userAmount),Number(leverage),normalWallet)
 
   console.log(dataContr);
+console.log(currentPoolData);
+
 
 
    const abi = await  api.blockChainData().then(
@@ -301,14 +303,16 @@ border:'0'
   <Field id='lev' name='leverage' value={leverage} onInput={handleLeverage} required  style={{fontFamily: 'Montserrat',
      fontSize: '16px',backgroundColor:'#161C2A',
      fontWeight: '400',borderRadius:'8px',width:'calc(100% - 10px)',
-     lineHeight: '25px',padding:'12px 5px',color:'white'}} min={currentPoolData.pool_conditions.min_leverage} max={currentPoolData.pool_conditions.max_leverage} placeholder="1" className={styled.input} type="range"  />
+     lineHeight: '25px',padding:'12px 5px',color:'white',}} min={currentPoolData.pool_conditions.min_leverage} max={currentPoolData.pool_conditions.max_leverage} placeholder="1" className={styled.input} type="range"  />
      {touched.leverage && errors.leverage && <div>{errors.leverage}</div>}
 </Box>
-    <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Leverage <Typography sx={{fontWeight:'500'}}>{leverage}</Typography></Typography>
-          <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Leveraged Yearly interest <Typography sx={{fontWeight:'500'}}>75%</Typography></Typography>
+<Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Leverage <Typography sx={{fontWeight:'500'}}>{leverage+'x'}</Typography></Typography>
+    <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Interest yearly <Typography sx={{fontWeight:'500'}}>{(Number(currentPoolData.profit_rate)).toFixed(1)+'%'}</Typography></Typography>
+          <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Leveraged Yearly interest <Typography sx={{fontWeight:'500'}}>{(Number(currentPoolData.profit_rate)*Number(leverage)).toFixed(1)+'%'}</Typography></Typography>
           <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Volume commission <Typography sx={{fontWeight:'500'}}>1%</Typography></Typography>
-    <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Max Interest <Typography sx={{fontWeight:'500'}}>{maxProfit(userAmount,leverage)}</Typography></Typography>
-     
+          <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Settlement <Typography sx={{fontWeight:'500'}}>3-5%</Typography></Typography>
+    <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Asset Price <Typography sx={{fontWeight:'500'}}>{maxProfit(userAmount,leverage)}</Typography></Typography>
+    <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Liquidation price <Typography sx={{fontWeight:'500'}}>{maxProfit(userAmount,leverage)}</Typography></Typography>
      <Box sx={{backgroundColor:'#161C2A',borderRadius:'8px',padding:'8px 8px 8px 12px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
 <div className={styled.wrapAmount}><img width='16px' height='16px' src={currentPoolData.asset.picture} alt="coin" /><input value={userAmount} onInput={handleUserAmount} required id="amounT" placeholder="1.1234" className={styled.input} type="number" /></div>
      <button type="submit"  style={{backgroundColor:action==='buy' ? '#3AADA4':'#F33E29',padding:"12px 16px",borderRadius:'8px',display:'flex',alignItems:'center'}}> <img src={images.rocket} alt="rocket" /><Typography variant="subtitle1" sx={{fontSize:'14px',lineHeight:'16px',marginLeft:'16px',fontWeight:'500'}} color="primary">{action==='buy' ? 'Buy':'Sell'}</Typography></button>

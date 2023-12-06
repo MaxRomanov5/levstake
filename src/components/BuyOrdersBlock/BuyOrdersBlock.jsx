@@ -17,10 +17,10 @@ function handleActive(e) {
 }
 const activePos = positions.filter(pos=>pos.status === 'waiting_for_funds')
 const historyPos = positions.filter(pos=>pos.status === 'funds_are_withdrawn')
-console.log(activePos);
+
     return (<div style={{backgroundColor:'#161C2A',borderRadius:'8px',marginBottom:'8px',padding:'16px',maxHeight:'700px',overflow:'scroll'}}>
         <div style={{display:'flex',flexDirection:'column',gap:'10px',...(tab&&{flexDirection:'row',justifyContent:'space-between'})}}>
-          <Typography variant='subtitle1' sx={{fontWeight:'600',color:'white',textAlign:'center'}}>Buy Orders</Typography>
+          <Typography variant='subtitle1' sx={{fontWeight:'600',color:'white',textAlign:'center'}}>Positions</Typography>
           <div style={{display:'flex',gap:'10px',flexDirection:mob?'row':'column',alignItems:'center',justifyContent:'center'}}>
           {/* <FilterOrders></FilterOrders> */}
              <ToggleButtonGroup
@@ -66,6 +66,7 @@ console.log(activePos);
             </TableRow>
           </TableHead>
           <TableBody>
+            
             {active ==='active' && activePos.map((position)=>{
              return <TableRowBuy position={position}></TableRowBuy>
 
@@ -77,6 +78,8 @@ console.log(activePos);
             })}
               </TableBody>
 </Table>
+{active ==='history' && historyPos.length === 0 && <p style={{padding:'40px',textAlign:'center',color:'white',fontSize:'40px',fontFamily:'Montserrat'}}>No positions to display!</p>}
+{active ==='active' && activePos.length === 0 && <p style={{padding:'40px',textAlign:'center',color:'white',fontSize:'40px',fontFamily:'Montserrat'}}>No positions to display!</p>}
 </TableContainer>
         </div>
     );

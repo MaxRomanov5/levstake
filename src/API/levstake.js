@@ -40,7 +40,7 @@ async function getPositions(){
             Authorization: `Bearer ${localStorage.load('TOKEN')}`
         }
        })
-
+       console.log(res.data);
     return res.data
     } catch (err){
 Notify.failure('Something go wrong! Please, try again!')
@@ -135,7 +135,7 @@ async function getPools(){
       }
      })
     
-
+console.log(res.data);
 
      return res.data
   } catch (err){
@@ -144,6 +144,25 @@ Notify.failure('Something go wrong! Please, try again!')
 
 }
 
+async function getAssetId(id){
+  try{
+     const res = await axios.get(`https://levstake.frwd.one/api/asset_data/?asset_id=${id}`,{
+      headers:{
+          Authorization: `Bearer ${localStorage.load('TOKEN')}`
+      }
+     })
+     console.log(res);
+     const abi = await axios.get(`${res.data.abi_url}`)
+console.log(abi);
+
+     return abi.data
+  } catch (err){
+Notify.failure('Something go wrong! Please, try again!')
+  }
+
+}
 
 
-export default {getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit,blockChainData,getPools}
+
+
+export default {getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit,blockChainData,getPools,getAssetId}

@@ -49,6 +49,9 @@ screen and (min-device-pixel-ratio: 2) {
     } */
 
     .container{
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
         position: relative;
         z-index: 5;
         padding-left: 16px;

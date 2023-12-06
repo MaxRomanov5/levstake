@@ -12,6 +12,7 @@ api.getPositions().then(data=>{
 })
 setInterval(() => {
     api.getPositions().then(data=>{
+    
         setPositions(data)
     })
 }, 7000);

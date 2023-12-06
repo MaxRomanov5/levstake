@@ -12,7 +12,7 @@ const LiquidityPool = ({type,pools,setSelectedPool}) => {
 
     return (
         
-            <TableContainer sx={{overflow:'scroll',borderTopLeftRadius:'8px',borderTopRightRadius:'8px',height:'397px'}}>
+            <TableContainer sx={{overflow:'scroll',borderTopLeftRadius:'8px',borderTopRightRadius:'8px',height:'508px'}}>
       <Table sx={{padding:'8px',overflow:'scroll'}}  aria-label="customized table">
         <TableHead sx={{backgroundColor:'#3A3B3C',color:'#CACBCB',}}>
           <TableRow >
@@ -40,8 +40,8 @@ const LiquidityPool = ({type,pools,setSelectedPool}) => {
   fontWeight: '500',
   lineHeight: '17px',
   color:'white',
-  letterSpacing: '0.04em',
-  textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">{Number(pool.profit_rate).toFixed(1)}</TableCell>
+  letterSpacing: '0.04em',paddingLeft:'20px',
+  textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">{Number(pool.profit_rate).toFixed(1)+'%'}</TableCell>
             <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',
   fontWeight: '500',
