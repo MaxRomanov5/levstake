@@ -73,8 +73,7 @@ return '-'
 }
 
 
-
-
+console.log(currentPoolData);
 
 async function submitF(e) {
   e.preventDefault()
@@ -84,15 +83,11 @@ try {
   const web3 = new Web3(window.ethereum)
   const wallet = localStorage.load('wallet')
   const normalWallet = web3.utils.toChecksumAddress(wallet)
-  
-  // const approveDataLink = await api.getAssetId(currentPoolData.asset.id)
-  
-  // console.log(approveDataLink);
+
+
   
     const dataContr = await api.signDeposit(currentPoolData.id,Number(userAmount),Number(leverage),normalWallet)
-    console.log(1);
-    console.log(dataContr);
-  console.log(currentPoolData);
+
   
   
   
@@ -101,29 +96,35 @@ try {
           console.log(data);
          return data[1].data.abi_old})
   
-      console.log(abi);
+      // console.log(abi);
   
   const contractorAddres = '0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000'
   
-  
-  
-    
-  
+
   const myContract = new web3.eth.Contract(abi,contractorAddres)
-  // const myApprove = new web3.eth.Contract(abi,'0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92')
-  // const approve = myApprove.methods.approve('0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000',100)
-  
-  // const result = await window.ethereum.request({
-  //   method: 'eth_sendTransaction',
-  //   params:[approve]
-  //   })
+
+
+  const myApprove = new web3.eth.Contract(currentPoolData.asset.abi,'0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92')
+  const approve = myApprove.methods.approve('0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000',1000000000000000000)
+  const transactionApr={
+    from: normalWallet,
+    to: '0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92',
+    data:approve.encodeABI(),
+    // Initial value, to be set by the spending cap function
+    gas: '0x5208'
+  }
+
+  const resultapr = await window.ethereum.request({
+    method: 'eth_sendTransaction',
+    params:[transactionApr]
+    })
   
   const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,dataContr.signed_data.amount,dataContr.signed_data.address,dataContr.signed_data.max_blocks,dataContr.signed_data.nonce,'deposit',dataContr.signature)
   
-  const currentAccount ='0x36f2D62E805E45382A1A4dF329A9b4031af1A6c8'
+
   
   const transaction = {
-      from: '0xEa73Fe36682E1Db92239EB93D34fC12E3b397a6E',
+      from: normalWallet,
       to: contractorAddres,
       data:myFunc.encodeABI(),
       gas:(150000).toString()

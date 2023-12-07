@@ -9,7 +9,7 @@ const [activePositions, setActivePositions] = useState('');
 const [historyPositions, setHistoryPositions] = useState('');
 useEffect(() => {
 api.getPositions('active').then(data=>{
-    console.log(data);
+   
     setActivePositions(data)
 })
 setInterval(() => {
@@ -22,12 +22,12 @@ setInterval(() => {
 
 useEffect(() => {
 api.getPositions('history').then(data=>{
-    console.log(data);
+   
     setHistoryPositions(data)
 })
 setInterval(() => {
     api.getPositions('history').then(data=>{
-    console.log(data);
+
         setHistoryPositions(data)
     })
 }, 4000);

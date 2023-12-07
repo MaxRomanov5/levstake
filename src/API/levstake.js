@@ -40,7 +40,7 @@ async function getPositions(type){
             Authorization: `Bearer ${localStorage.load('TOKEN')}`
         }
        })
-   console.log(res.data);
+  
     return res.data
     } catch (err){
 Notify.failure('Something go wrong! Please, try again!')
@@ -104,7 +104,8 @@ return sign
 
        return res.data
     } catch (err){
-Notify.failure('Something go wrong! Please, try again!')
+      if(err){
+Notify.failure('Pool is closed!')}
     }
  
 }
