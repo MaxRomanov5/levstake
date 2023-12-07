@@ -118,8 +118,8 @@ console.log(dataContr);
     method: 'eth_sendTransaction',
     params:[transactionApr]
     })
-  
-  const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,dataContr.signed_data.amount,dataContr.signed_data.address,dataContr.signed_data.max_blocks,dataContr.signed_data.nonce,'deposit',dataContr.signature)
+
+  const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,dataContr.signed_data.amount,dataContr.signed_data.pool_address,dataContr.signed_data.max_blocks,dataContr.signed_data.nonce,'deposit',dataContr.signature)
   
 
   
