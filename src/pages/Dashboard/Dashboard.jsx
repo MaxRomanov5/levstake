@@ -5,15 +5,30 @@ import ControlPools from "../../components/ControlPools/ControlPools";
 import {useState,useEffect} from 'react'
 import api from '../../API/levstake.js'
 const Dashboard = () => {
-const [positions, setPositions] = useState('');
+const [activePositions, setActivePositions] = useState('');
+const [historyPositions, setHistoryPositions] = useState('');
 useEffect(() => {
-api.getPositions().then(data=>{
-    setPositions(data)
+api.getPositions('active').then(data=>{
+    console.log(data);
+    setActivePositions(data)
 })
 setInterval(() => {
-    api.getPositions().then(data=>{
+    api.getPositions('active').then(data=>{
     
-        setPositions(data)
+        setActivePositions(data)
+    })
+}, 4000);
+}, []);
+
+useEffect(() => {
+api.getPositions('history').then(data=>{
+    console.log(data);
+    setHistoryPositions(data)
+})
+setInterval(() => {
+    api.getPositions('history').then(data=>{
+    console.log(data);
+        setHistoryPositions(data)
     })
 }, 4000);
 }, []);
@@ -24,7 +39,7 @@ setInterval(() => {
         <div>
            <ControlPools></ControlPools>
          
-                {positions && <BuyOrdersBlock positions={positions}></BuyOrdersBlock>}
+                {activePositions && <BuyOrdersBlock activePositions={activePositions} historyPositions={historyPositions}></BuyOrdersBlock>}
             {/* <SellOrdersBlock></SellOrdersBlock> */}
         </div>
     );

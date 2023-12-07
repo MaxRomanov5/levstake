@@ -35,7 +35,7 @@ Notify.failure('Something go wrong! Please, try again!')
 async function getPositions(type){
     try{
        
-       const res = await axios.get('https://levstake.frwd.one/api/positions/?position_type=history',{
+       const res = await axios.get(`https://levstake.frwd.one/api/positions/?position_type=${type}`,{
         headers:{
             Authorization: `Bearer ${localStorage.load('TOKEN')}`
         }
