@@ -15,6 +15,7 @@ const [active, setActive] = useState('active');
 function handleActive(e) {
    setActive(e.target.value)
 }
+console.log(positions);
 const activePos = positions.reverse().filter(pos=>pos.status === 'waiting_for_funds')
 const historyPos = positions.reverse().filter(pos=>pos.status === 'funds_are_withdrawn')
 

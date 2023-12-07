@@ -72,7 +72,7 @@ return '-'
   return amount*lever
 }
 
-console.log(currentPoolData.current_price);
+
 
 
 
@@ -143,7 +143,7 @@ try {
 
 }
 
-console.log(currentPoolData);
+
 
 
 

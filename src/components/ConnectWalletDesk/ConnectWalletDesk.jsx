@@ -16,7 +16,7 @@ const ConnectWalletDesk = () => {
     try {
   console.log(1);
       const wallet = await api.metaMaskConnecting()
-console.log(wallet);
+
 
           const authString =  await api.getAuthData(wallet)
 
@@ -24,9 +24,10 @@ console.log(wallet);
   if(authString){
   
     const signature = await api.signSign(authString,wallet)
-   
+ 
     if(wallet){
-
+      console.log(signature);
+      console.log(wallet);
       const token=  await api.getToken(wallet,signature)
     
       if(token){

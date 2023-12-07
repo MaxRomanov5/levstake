@@ -32,15 +32,15 @@ Notify.failure('Something go wrong! Please, try again!')
  
 }
 
-async function getPositions(){
+async function getPositions(type){
     try{
        
-       const res = await axios.get('https://levstake.frwd.one/api/positions/',{
+       const res = await axios.get('https://levstake.frwd.one/api/positions/?position_type=history',{
         headers:{
             Authorization: `Bearer ${localStorage.load('TOKEN')}`
         }
        })
-   
+   console.log(res.data);
     return res.data
     } catch (err){
 Notify.failure('Something go wrong! Please, try again!')
@@ -51,7 +51,7 @@ Notify.failure('Something go wrong! Please, try again!')
 function metaMaskConnecting(){
    return window.ethereum.request({ method: 'eth_requestAccounts' })
     .then(data=>{
-    console.log(data);
+  
         return data[0]    
 }
     )
