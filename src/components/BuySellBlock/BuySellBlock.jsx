@@ -102,16 +102,16 @@ try {
   
 
   const myContract = new web3.eth.Contract(abi,contractorAddres)
-
+console.log(dataContr);
 
   const myApprove = new web3.eth.Contract(currentPoolData.asset.abi,'0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92')
-  const approve = myApprove.methods.approve('0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000',1000000000000000000)
+  const approve = myApprove.methods.approve('0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000',dataContr.signed_data.amount)
   const transactionApr={
     from: normalWallet,
     to: '0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92',
     data:approve.encodeABI(),
     // Initial value, to be set by the spending cap function
-    gas: '0x5208'
+    gas: (150000).toString()
   }
 
   const resultapr = await window.ethereum.request({
