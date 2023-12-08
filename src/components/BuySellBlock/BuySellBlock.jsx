@@ -29,7 +29,7 @@ const handleLeverage = (e) => {
 };
 const handleInstrument = (e) => {
   setInstrument(e.target.value);
-  setLeverage(pools.find(pool=>pool.id == instrument).pool_conditions.min_leverage)
+  setLeverage(pools.find(pool=>pool.id == e.target.value).pool_conditions.min_leverage)
 };
 
 
@@ -138,7 +138,7 @@ try {
   params:[transaction]
   })
 
-  // setIsLoading(false)
+  setIsLoading(false)
   buyBtn.disabled = false
 } catch (error) {
   buyBtn.disabled = false
