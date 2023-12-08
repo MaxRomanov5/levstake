@@ -24,7 +24,7 @@ async function getAssetPrice(ticker){
  
      return res.data.current_price
   } catch (err){
-Notify.failure('ass')
+Notify.failure('Something go wrong! Please, try again!')
   }
 
 }
@@ -43,6 +43,21 @@ async function getToken(address,signature){
 Notify.failure('Something go wrong! Please, try again!')
     }
  
+}
+
+async function postFeedback(userData){
+  try{
+     const res = await axios.post('https://levstake.frwd.one/api/contact_data/',{
+         data:userData
+     })
+    
+    Notify.success('Success sending message!')
+
+     return res.data
+  } catch (err){
+Notify.failure('Something go wrong! Please, try again!')
+  }
+
 }
 
 async function getPositions(type){
@@ -180,4 +195,4 @@ Notify.failure('Something go wrong! Please, try again!')
 
 
 
-export default {getAssetPrice,getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit,blockChainData,getPools,getAssetId}
+export default {postFeedback,getAssetPrice,getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit,blockChainData,getPools,getAssetId}
