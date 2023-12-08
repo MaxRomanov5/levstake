@@ -8,7 +8,7 @@ export default createTheme({
             md: 768 ,
             mt:920,
             lg:1024,
-            lt:1230,
+            lt:1236,
             xl: 1440,
         }
     },

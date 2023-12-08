@@ -1,9 +1,10 @@
-import {TableRow,TableCell,Button} from '@mui/material'
+import {TableRow,TableCell,Button,useTheme,useMediaQuery} from '@mui/material'
 import { useState } from 'react';
 import images from '../../assets/images';
 const TableRowBuy = ({position,active}) => {
   const [open, setOpen] = useState(false);
-
+  const theme = useTheme();
+  const noDEsk = useMediaQuery(theme.breakpoints.down("lt"));
 
 
   function statusMaker(status){
@@ -28,7 +29,7 @@ const TableRowBuy = ({position,active}) => {
         </TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px',textWrap:'nowrap'}}>{position.leverage}</TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}>{Number(position.staking_pool.profit_rate).toFixed(1)+'%'}</TableCell>
-        <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}><a style={{display:'block',position:'relative'}} href={position.transition_url} ><img src={images.linkGreen}></img>{!position.transition_url && <span style={{position:'absolute',top:'-5px',right:'-5px'}} className="loader"></span>}</a></TableCell>
+        <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}><a style={{display:'block',position:'relative'}} href={position.transition_url} ><img src={images.linkGreen}></img>{!position.transition_url && <span style={{position:'absolute',top:'-5px',right:'-5px',...(noDEsk&&{right:'-12px'})}} className="loader"></span>}</a></TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px',textWrap:'nowrap'}}>On maturity</TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}>{(Number(position.liquidation_price)).toFixed(3)}</TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',fontFamily:'Montserrat',lineHeight:'16px',color:'#9A9B9B',textWrap:'nowrap',paddingTop:'9px',paddingBottom:'9px'}}>{position.status.split('_').join(' ')}</TableCell>

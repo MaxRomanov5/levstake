@@ -18,7 +18,11 @@ Notify.failure('Something go wrong! Please, try again!')
 
 async function getAssetPrice(ticker){
   try{
-     const res = await axios.get(`https://levstake.frwd.one/api/asset_price/?ticker=${ticker}`)
+     const res = await axios.get(`https://levstake.frwd.one/api/asset_price/?ticker=${ticker}`,{
+      headers:{
+          Authorization: `Bearer ${localStorage.load('TOKEN')}`
+      }
+     })
   
 
  

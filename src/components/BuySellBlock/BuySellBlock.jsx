@@ -14,6 +14,7 @@ import Assetprice from "../AssetPrice/AssetPrice";
 
 
 const BuySellBlock = ({pools,selectedPool}) => {
+  const [isLoading, setIsLoading] = useState(false);
     const [action, setAction] = useState('buy');
 const [instrument, setInstrument] = useState(pools[0]?.id);
 const [leverage, setLeverage] = useState(pools[0]?.pool_conditions.min_leverage);
@@ -48,13 +49,13 @@ function handleUserAmount(e) {
 useEffect(() => {
  if( typeof selectedPool === "number"){
   setInstrument(selectedPool)
-  setLeverage(pools.find(pool=>pool.id == instrument).pool_conditions.min_leverage)
+  setLeverage(pools.find(pool=>pool.id == selectedPool).pool_conditions.min_leverage)
  }
 }, [selectedPool]);
 
 
 const currentPoolData = pools.find(pool=>pool.id == instrument)
-
+console.log(currentPoolData);
 
 const DisplayingErrorMessagesSchema = Yup.object().shape({
   leverage: Yup.number().positive()
@@ -76,6 +77,9 @@ return '-'
 
 async function submitF(e) {
   e.preventDefault()
+ const buyBtn = document.querySelector('#buyBtn')
+ buyBtn.disabled = true
+//  setIsLoading(true)
 try {
   
 
@@ -94,16 +98,13 @@ try {
   
   
   
-     const abi = await  api.blockChainData().then(
-      data=>{
-      
-         return data[1].data.abi_old})
+
   
 
   const contractorAddres = '0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000'
   
 
-  const myContract = new web3.eth.Contract(abi,contractorAddres)
+  const myContract = new web3.eth.Contract(currentPoolData.asset.blockchain.master_contract_abi,contractorAddres)
 
 
   const myApprove = new web3.eth.Contract(currentPoolData.asset.abi,'0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92')
@@ -137,10 +138,11 @@ try {
   params:[transaction]
   })
 
-
-
+  // setIsLoading(false)
+  buyBtn.disabled = false
 } catch (error) {
-  
+  buyBtn.disabled = false
+  // setIsLoading(false)
 }
 
 
@@ -150,7 +152,7 @@ try {
 
 
 
-    return (
+    return (<>
       <Formik initialValues={{
         leverage: '',
         amount: '',
@@ -320,12 +322,12 @@ border:'0'
 <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Leverage <Typography sx={{fontWeight:'500'}}>{leverage+'x'}</Typography></Typography>
     <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Interest yearly <Typography sx={{fontWeight:'500'}}>{(Number(currentPoolData.profit_rate)).toFixed(1)+'%'}</Typography></Typography>
           <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Leveraged Yearly interest <Typography sx={{fontWeight:'500'}}>{(Number(currentPoolData.profit_rate)*Number(leverage)).toFixed(1)+'%'}</Typography></Typography>
-          <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Volume commission <Typography sx={{fontWeight:'500'}}>1%</Typography></Typography>
-          <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Settlement <Typography sx={{fontWeight:'500'}}>3-5%</Typography></Typography>
+    <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Volume commission <Typography sx={{fontWeight:'500'}}>{Number(currentPoolData.commission).toFixed(0)+'%'}</Typography></Typography>
+    <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Settlement <Typography sx={{fontWeight:'500'}}>{Number(currentPoolData.settlement_commission).toFixed(0)+'%'}</Typography></Typography>
   <Assetprice settlementCommission={Number(currentPoolData.settlement_commission)} currentPoolData={currentPoolData} leverage={leverage}></Assetprice>
      <Box sx={{backgroundColor:'#161C2A',borderRadius:'8px',padding:'8px 8px 8px 12px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
 <div className={styled.wrapAmount}><img width='16px' height='16px' src={currentPoolData.asset.picture} alt="coin" /><input value={userAmount} onInput={handleUserAmount} required id="amounT" placeholder="1.1234" className={styled.input} type="number" /></div>
-     <button type="submit"  style={{backgroundColor:action==='buy' ? '#3AADA4':'#F33E29',padding:"12px 16px",borderRadius:'8px',display:'flex',alignItems:'center'}}> <img src={images.rocket} alt="rocket" /><Typography variant="subtitle1" sx={{fontSize:'14px',lineHeight:'16px',marginLeft:'16px',fontWeight:'500'}} color="primary">{action==='buy' ? 'Buy':'Sell'}</Typography></button>
+     <button className={styled.button} id='buyBtn' type="submit"  style={{backgroundColor:action==='buy' ? '#3AADA4':'#F33E29',padding:"12px 16px",borderRadius:'8px',display:'flex',alignItems:'center'}}> <img src={images.rocket} alt="rocket" /><Typography variant="subtitle1" sx={{fontSize:'14px',lineHeight:'16px',marginLeft:'16px',fontWeight:'500'}} color="primary">{action==='buy' ? 'Buy':'Sell'}</Typography></button>
      {/* <Button sx={{padding:"12px 16px",borderRadius:'8px',
     
     ...(action==='buy' && {backgroundColor:'#3AADA4'}),
@@ -337,6 +339,8 @@ border:'0'
       </Form>
        )}
       </Formik>
+      {isLoading && <div className={styled.mainLoader}><span className={styled.loaderMain}></span></div>}
+      </>
     );
 }
 
