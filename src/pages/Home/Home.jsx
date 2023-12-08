@@ -24,7 +24,7 @@ const Home = () => {
          <Advantages></Advantages>
          <StackingTable></StackingTable>
          <StackingAssetsSection></StackingAssetsSection>
-        <LiquidityPoolSection ></LiquidityPoolSection>}
+        <LiquidityPoolSection ></LiquidityPoolSection>
          <NavLink to='/levstake/'>
          <Stack sx={{marginBottom:'24px'}} justifyContent='left' alignItems='center' flexDirection='row' height='40px' flexWrap='wrap' >
             <img style={{height:'inherit',marginRight:'14px'}} src={img.levlion} alt="levstake" />

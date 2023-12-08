@@ -19,6 +19,7 @@ export const UserProvider = ({ children }) => {
   const logOut = () => {
     setIsLoggedIn(false);
 localStorage.save('TOKEN',"")
+
 window.ethereum.request({
   method: "eth_requestAccounts",
   params: [{eth_accounts: {}}]

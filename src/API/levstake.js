@@ -16,6 +16,19 @@ Notify.failure('Something go wrong! Please, try again!')
   
 }
 
+async function getAssetPrice(ticker){
+  try{
+     const res = await axios.get(`https://levstake.frwd.one/api/asset_price/?ticker=${ticker}`)
+  
+
+ 
+     return res.data.current_price
+  } catch (err){
+Notify.failure('ass')
+  }
+
+}
+
 
 async function getToken(address,signature){
     try{
@@ -104,7 +117,8 @@ return sign
 
        return res.data
     } catch (err){
-      if(err){
+   
+      if(err.response.status === 400){
 Notify.failure('Pool is closed!')}
     }
  
@@ -166,4 +180,4 @@ Notify.failure('Something go wrong! Please, try again!')
 
 
 
-export default {getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit,blockChainData,getPools,getAssetId}
+export default {getAssetPrice,getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit,blockChainData,getPools,getAssetId}

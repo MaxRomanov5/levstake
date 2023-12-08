@@ -224,7 +224,7 @@ border:'0'
                 <TableCell sx={{borderBottom:'0',padding:'0px'}} align="left" ><Button sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em'}}><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</Button></TableCell>
               </StyledTableRow> */}
 
-              <StyledTableRow >
+              <StyledTableRow key='5'>
               <TableCell sx={{borderBottom:'0', display:'flex', padding:'8px', color:'primary.main',fontFamily: 'IBM Plex Mono',fontSize: '21px',fontWeight: '600',lineHeight: '34px',letterSpacing: '0.04em'}} align="left" ><img style={{marginRight:'16px'}} src={dataPool[0].asset.picture} alt="coin" width={32} height={32}></img> {dataPool[0].asset.ticker}</TableCell>
                 <TableCell sx={{padding:'7px 8px', fontFamily: 'Montserrat',
       fontSize: '18px',
@@ -274,7 +274,7 @@ border:'0'
               </StyledTableRow>
 
 
-              <StyledTableRow >
+              <StyledTableRow key='4'>
               <TableCell sx={{borderBottom:'0', display:'flex', padding:'8px', color:'primary.main',fontFamily: 'IBM Plex Mono',fontSize: '21px',fontWeight: '600',lineHeight: '34px',letterSpacing: '0.04em'}} align="left" ><img style={{marginRight:'16px'}} src={dataPool[0].asset.picture} alt="coin" width={32} height={32}></img> {dataPool[0].asset.ticker}</TableCell>
                 <TableCell sx={{padding:'7px 8px', fontFamily: 'Montserrat',
       fontSize: '18px',
@@ -322,7 +322,7 @@ border:'0'
       
       <TableCell sx={{borderBottom:'0',padding:'0px'}} align="left" ><NavLink to={links(isLoggedIn,mob)}><Button sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em'}}><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</Button></NavLink></TableCell>
               </StyledTableRow>
-              <StyledTableRow >
+              <StyledTableRow key='3'>
               <TableCell sx={{borderBottom:'0', display:'flex', padding:'8px', color:'primary.main',fontFamily: 'IBM Plex Mono',fontSize: '21px',fontWeight: '600',lineHeight: '34px',letterSpacing: '0.04em'}} align="left" ><img style={{marginRight:'16px'}} src={dataPool[0].asset.picture} alt="coin" width={32} height={32}></img> {dataPool[0].asset.ticker}</TableCell>
                 <TableCell sx={{padding:'7px 8px', fontFamily: 'Montserrat',
       fontSize: '18px',
@@ -370,7 +370,7 @@ border:'0'
       
       <TableCell sx={{borderBottom:'0',padding:'0px'}} align="left" ><NavLink to={links(isLoggedIn,mob)}><Button sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em'}}><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</Button></NavLink></TableCell>
               </StyledTableRow>
-              <StyledTableRow >
+              <StyledTableRow key='2'>
               <TableCell sx={{borderBottom:'0', display:'flex', padding:'8px', color:'primary.main',fontFamily: 'IBM Plex Mono',fontSize: '21px',fontWeight: '600',lineHeight: '34px',letterSpacing: '0.04em'}} align="left" ><img style={{marginRight:'16px'}} src={dataPool[0].asset.picture} alt="coin" width={32} height={32}></img> {dataPool[0].asset.ticker}</TableCell>
                 <TableCell sx={{padding:'7px 8px', fontFamily: 'Montserrat',
       fontSize: '18px',
@@ -418,7 +418,7 @@ border:'0'
       
       <TableCell sx={{borderBottom:'0',padding:'0px'}} align="left" ><NavLink to={links(isLoggedIn,mob)}><Button sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em'}}><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</Button></NavLink></TableCell>
               </StyledTableRow>
-              <StyledTableRow >
+              <StyledTableRow key='1'>
               <TableCell sx={{borderBottom:'0', display:'flex', padding:'8px', color:'primary.main',fontFamily: 'IBM Plex Mono',fontSize: '21px',fontWeight: '600',lineHeight: '34px',letterSpacing: '0.04em'}} align="left" ><img style={{marginRight:'16px'}} src={dataPool[0].asset.picture} alt="coin" width={32} height={32}></img> {dataPool[0].asset.ticker}</TableCell>
                 <TableCell sx={{padding:'7px 8px', fontFamily: 'Montserrat',
       fontSize: '18px',
