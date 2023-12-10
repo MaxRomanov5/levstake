@@ -61,8 +61,7 @@ const BuySellBlock = ({ pools, selectedPool }) => {
   }, [selectedPool]);
 
   const currentPoolData = pools.find((pool) => pool.id == instrument);
-console.log(pools);
-console.log();
+  console.log(currentPoolData);
 
   const DisplayingErrorMessagesSchema = Yup.object().shape({
     leverage: Yup.number()
@@ -95,7 +94,10 @@ console.log();
       const web3 = new Web3(window.ethereum);
       const wallet = localStorage.load("wallet");
       const normalWallet = web3.utils.toChecksumAddress(wallet);
-
+// console.log(currentPoolData.id);
+// console.log(Number(userAmount));
+// console.log(Number(leverage));
+// console.log(normalWallet);
       const dataContr = await api.signDeposit(
         currentPoolData.id,
         Number(userAmount),
@@ -103,7 +105,7 @@ console.log();
         normalWallet
       );
 
-      const contractorAddres = "0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000";
+      const contractorAddres = currentPoolData.asset.blockchain.master_contract_address
 
       const myContract = new web3.eth.Contract(
         currentPoolData.asset.blockchain.master_contract_abi,
@@ -114,10 +116,10 @@ console.log();
         currentPoolData.asset.abi,
         "0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92"
       );
-      
+
       const approve = myApprove.methods.approve(
-        "0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000",
-        dataContr.signed_data.amount*10**currentPoolData.asset.decimal
+        contractorAddres,
+        dataContr.signed_data.amount
       );
       const transactionApr = {
         from: normalWallet,
@@ -131,13 +133,13 @@ console.log();
         method: "eth_sendTransaction",
         params: [transactionApr],
       });
-
+console.log(dataContr);
       const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,
         dataContr.signed_data.amount,
         dataContr.signed_data.currency,
         dataContr.signed_data.max_block,
         dataContr.signed_data.nonce,
-        "deposit",
+        dataContr.signed_data.action,
         dataContr.signature
       );
 
@@ -478,13 +480,13 @@ border:'0'
                 {Number(currentPoolData.settlement_commission).toFixed(0) + "%"}
               </Typography>
             </Typography>
-            <Assetprice
+            {/* <Assetprice
               settlementCommission={Number(
                 currentPoolData.settlement_commission
               )}
               currentPoolData={currentPoolData}
               leverage={leverage}
-            ></Assetprice>
+            ></Assetprice> */}
             <Box
               sx={{
                 backgroundColor: "#161C2A",

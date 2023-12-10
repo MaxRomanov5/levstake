@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import api from "../../API/levstake.js";
 const ControlPools = () => {
-  const [pools, setPools] = useState([]);
+  const [pools, setPools] = useState(null);
   const [selectedPool, setSelectedPool] = useState({});
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const ControlPools = () => {
   return (
     <div className={styled.mainBox}>
       <div className={styled.buySell}>
-        {pools.length !== 0  && (
+        {pools && pools.length !== 0  && (
           <BuySellBlock
             selectedPool={selectedPool}
             pools={pools}
@@ -32,7 +32,7 @@ const ControlPools = () => {
           Available pools
         </Typography>
 
-        {pools.length !== 0 && (
+        {pools && pools.length !== 0 && (
           <LiquidityPool
             type="dashboard"
             setSelectedPool={setSelectedPool}

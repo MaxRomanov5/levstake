@@ -8,7 +8,7 @@ const LiquidityPool = ({type,pools,setSelectedPool}) => {
     const mob = useMediaQuery(theme.breakpoints.up('md'))
     const width = type === 'home'? '18%' : '25%'
     const spec = useMediaQuery(theme.breakpoints.down("md"));
-console.log(pools);
+
 
     return (
         
@@ -16,10 +16,10 @@ console.log(pools);
       <Table sx={{padding:'8px',overflow:'scroll'}}  aria-label="customized table">
         <TableHead sx={{backgroundColor:'#3A3B3C',color:'#CACBCB',}}>
           <TableRow >
-            <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Currency</TableCell>
-            <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Profit Rate</TableCell>
-            <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em',margin:'0 auto'}} align="left" >Period</TableCell>
-           <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Leverage</TableCell>
+            <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Currency</TableCell>
+            <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Profit Rate</TableCell>
+            <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em',margin:'0 auto'}} align="center" >Period</TableCell>
+           <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Leverage</TableCell>
            {type === 'home' &&  <TableCell></TableCell>}  
           </TableRow>
         </TableHead>
@@ -29,10 +29,10 @@ console.log(pools);
             <TableCell sx={{padding:'18px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',
   fontWeight: '500',display:'flex',gap:'15px',textWrap:'nowrap',
-  lineHeight: '17px',
+  lineHeight: '17px',justifyContent:'center',
   color:'white',
   letterSpacing: '0.04em',
-  textAlign: 'left',borderBottomColor:'#3A3B3C'}} >
+  textAlign: 'center',borderBottomColor:'#3A3B3C'}}  align="center">
           <img width='16' height='16' src={pool.asset.picture} alt="" /> <p>{pool.asset.name}</p>
             </TableCell>
             <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
@@ -40,22 +40,22 @@ console.log(pools);
   fontWeight: '500',
   lineHeight: '17px',
   color:'white',
-  letterSpacing: '0.04em',paddingLeft:'20px',
-  textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">{Number(pool.profit_rate).toFixed(1)+'%'}</TableCell>
+  letterSpacing: '0.04em',
+  textAlign: 'center',borderBottomColor:'#3A3B3C'}} align="center">{Number(pool.profit_rate).toFixed(1)+'%'}</TableCell>
             <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',
   fontWeight: '500',
   lineHeight: '17px',
   color:'white',
   letterSpacing: '0.04em',
-  textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">{pool.pool_duration}</TableCell>
+  textAlign: 'center',borderBottomColor:'#3A3B3C'}} align="center">{pool.pool_duration}</TableCell>
             <TableCell sx={{padding:'0px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',
   fontWeight: '500',
   lineHeight: '17px',
   color:'white',
   letterSpacing: '0.04em',
-  textAlign: 'left',borderBottomColor:'#3A3B3C'}} align="left">{ pool.pool_conditions.min_leverage+'x'+" - "+pool.pool_conditions.max_leverage+'x'}</TableCell>
+  textAlign: 'center',borderBottomColor:'#3A3B3C'}} align="center">{ pool.pool_conditions.min_leverage+'x'+" - "+pool.pool_conditions.max_leverage+'x'}</TableCell>
         { type === 'home' &&    <TableCell sx={{ borderBottomColor:'#3A3B3C'}} align="left" ><NavLink to={links(isLoggedIn,spec)}><Button sx={ {padding:'0px 8px',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',color:'purple.main'}} ><span style={{marginRight:'8px'}}>$</span>BUY {
             mob && 'Stake now'
            }</Button></NavLink></TableCell>}
