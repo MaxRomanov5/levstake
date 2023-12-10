@@ -62,7 +62,7 @@ const result = await window.ethereum.request({
 
 
 
-console.log(position.transaction_url);
+console.log(!!position.transaction_url);
 
 
 
@@ -80,7 +80,7 @@ console.log(position.transaction_url);
         </TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px',textWrap:'nowrap'}}>{position.leverage}</TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}>{Number(position.staking_pool.profit_rate).toFixed(1)+'%'}</TableCell>
-        <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}><a style={{display:'block',position:'relative'}} href={position.transition_url} >{position.transition_url === true ? <img src={images.linkGreen}></img> :'no'}</a></TableCell>
+        <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}><a style={{display:'block',position:'relative'}} href={position.transaction_url} >{position.transaction_url ? <img src={images.linkGreen}></img> :<span style={{position:'absolute',top:'0px',right:'0px'}} className="loader"></span>}</a></TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px',textWrap:'nowrap'}}>On maturity</TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}>{(Number(position.liquidation_price)).toFixed(3)}</TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',fontFamily:'Montserrat',lineHeight:'16px',color:'#9A9B9B',textWrap:'nowrap',paddingTop:'9px',paddingBottom:'9px'}}>{position.status.split('_').join(' ')}</TableCell>
