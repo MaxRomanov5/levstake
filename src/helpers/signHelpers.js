@@ -64,7 +64,7 @@ export const send_eth_signTypedData_v4 = async (provider, chainId) => {
 
   let from = provider?.selectedAddress;
 
-  console.debug(`sign from: ${from}`);
+
   try {
     if (!from) {
       alert(
@@ -75,8 +75,7 @@ export const send_eth_signTypedData_v4 = async (provider, chainId) => {
 
     const params = [from, msgParams];
     const method = 'eth_signTypedData_v4';
-    console.debug(`ethRequest ${method}`, JSON.stringify(params, null, 4));
-    console.debug(`sign params`, params);
+
     return await provider?.request({ method, params });
   } catch (e) {
     console.log(e);
@@ -84,10 +83,10 @@ export const send_eth_signTypedData_v4 = async (provider, chainId) => {
   }
 };
 
-export const send_personal_sign = async (provider) => {
+export const send_personal_sign = async (provider,message) => {
   try {
     const from = provider.selectedAddress;
-    const message = 'Hello World from the Create React dapp!';
+   
     const hexMessage = hexer(message)
 
     const sign = await window.ethereum.request({

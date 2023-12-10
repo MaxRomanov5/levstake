@@ -117,7 +117,7 @@ const Header = ({isLogin}) => {
         <Route path="/levstake/faq" element={<FAQ />} />
 
        
-        <Route path="/levstake/connectWallet" element={ <MetaMaskProvider debug={false} sdkOptions={{
+        <Route path="/levstake/connectWallet" element={ <MetaMaskProvider  sdkOptions={{
       logging:{
           developerMode: false,
         },

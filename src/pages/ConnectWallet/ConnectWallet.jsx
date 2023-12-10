@@ -5,7 +5,7 @@ import {Typography,Stack,Button} from '@mui/material'
 import api from '../../API/levstake.js'
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../../Context/userContext.jsx'
-import { send_eth_signTypedData_v4, send_personal_sign } from '../../helpers/signHelpers.js';
+import { WalletConnectModal } from 'https://unpkg.com/@walletconnect/modal'
 import { useSDK } from '@metamask/sdk-react';
 
 const ConnectWallet = () => {
@@ -20,29 +20,19 @@ const [click, setclick] = useState(0);
 // const { address, isConnecting, isDisconnected } = useAccount()
 
 
-const { sdk, connected, connecting, provider, chainId } = useSDK();
-const eth_personal_sign = async () => {
-  if (!provider) {
-    setResponse(`invalid ethereum provider`);
-    return;
-  }
-  const result = await send_personal_sign(provider);
-  // setResponse(result);
-};
+  const { sdk } = useSDK();
+
 
 // console.log(sdk);
   const connectAndSign = async () => {
     try {
       
 
-  
+  console.log(sdk);
      const mobWallet =  await sdk.connect()
       // setclick(1)
-
-      console.log(provider);
       const authString = await api.getAuthData(mobWallet)
-      console.log(authString);
-      eth_personal_sign()
+      // console.log(authString);
       // const signResult = await sdk.connectAndSign({
       //   msg: authString,
       // });
