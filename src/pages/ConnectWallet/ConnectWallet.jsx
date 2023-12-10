@@ -5,7 +5,7 @@ import {Typography,Stack,Button} from '@mui/material'
 import api from '../../API/levstake.js'
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../../Context/userContext.jsx'
-
+import { send_eth_signTypedData_v4, send_personal_sign } from '../../helpers/signHelpers.js';
 import { useSDK } from '@metamask/sdk-react';
 
 const ConnectWallet = () => {
@@ -20,8 +20,15 @@ const [click, setclick] = useState(0);
 // const { address, isConnecting, isDisconnected } = useAccount()
 
 
-  const { sdk } = useSDK();
-
+const { sdk, connected, connecting, provider, chainId } = useSDK();
+const eth_personal_sign = async () => {
+  if (!provider) {
+    setResponse(`invalid ethereum provider`);
+    return;
+  }
+  const result = await send_personal_sign(provider);
+  // setResponse(result);
+};
 
 // console.log(sdk);
   const connectAndSign = async () => {
@@ -30,12 +37,15 @@ const [click, setclick] = useState(0);
 
   
      const mobWallet =  await sdk.connect()
-      setclick(1)
-      const authString = await api.getAuthData()
-      
-      const signResult = await sdk.connectAndSign({
-        msg: authString,
-      });
+      // setclick(1)
+
+      console.log(provider);
+      const authString = await api.getAuthData(mobWallet)
+      console.log(authString);
+      eth_personal_sign()
+      // const signResult = await sdk.connectAndSign({
+      //   msg: authString,
+      // });
 
 if(signResult){
 
@@ -127,7 +137,7 @@ if(signResult){
 
     return (
         <section className={styled.section}>
-         
+         <div></div>
         <div className={styled.box}>
         
             <Typography color='primary.main' variant='h2' sx={{fontSize:'32px',lineHeight:'35px',marginBottom:'32px'}}>{click ===0 ?'Connect wallet to start mob' : 'Please Sign'}</Typography>

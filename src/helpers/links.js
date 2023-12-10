@@ -2,11 +2,11 @@ function links(isLoggedIn,mob) {
     if (isLoggedIn) {
     return '/levstake/dashboard'
     } else {
-      if(mob){
+      // if(mob){
         return '/levstake/connectWallet'
-      }else{
-        return '/levstake/connectWalletDesk'
-      }
+      // }else{
+        // return '/levstake/connectWalletDesk'
+      // }
   
     }
     
