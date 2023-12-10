@@ -119,7 +119,7 @@ const BuySellBlock = ({ pools, selectedPool }) => {
 
       const approve = myApprove.methods.approve(
         contractorAddres,
-        dataContr.signed_data.amount
+        Number(userAmount)*10**currentPoolData.asset.decimal
       );
       const transactionApr = {
         from: normalWallet,

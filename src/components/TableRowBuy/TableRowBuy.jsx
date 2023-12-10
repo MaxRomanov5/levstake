@@ -20,7 +20,7 @@ const TableRowBuy = ({position,active}) => {
   }
 
 
-  console.log(position);
+
 
 async function withdrawPosition(e) {
 console.log(e.target.id);
@@ -28,7 +28,7 @@ const web3 = new Web3(window.ethereum);
 const wallet = localStorage.load("wallet");
 const normalWallet = web3.utils.toChecksumAddress(wallet);
 const dataContr = await api.signWithdraw(Number(e.target.id),normalWallet)
-console.log(data);
+console.log(dataContr);
 
 const contractorAddres = position.blockchain.master_contract_address
 
@@ -48,8 +48,8 @@ const myFunc = myContract.methods.unstakeAssets(dataContr.signed_data.position_i
 );
 
 const transaction = {
-  from: normalWallet,
-  to: contractorAddres,
+  from: contractorAddres,
+  to: normalWallet,
   data: myFunc.encodeABI(),
   gas: (150000).toString(),
 };
