@@ -480,13 +480,13 @@ border:'0'
                 {Number(currentPoolData.settlement_commission).toFixed(0) + "%"}
               </Typography>
             </Typography>
-            {/* <Assetprice
+            <Assetprice
               settlementCommission={Number(
                 currentPoolData.settlement_commission
               )}
               currentPoolData={currentPoolData}
               leverage={leverage}
-            ></Assetprice> */}
+            ></Assetprice>
             <Box
               sx={{
                 backgroundColor: "#161C2A",
