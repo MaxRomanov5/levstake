@@ -59,8 +59,8 @@ width: 100%;
     align-items: center;
 }
 .loaderMain {
-    width: 480px;
-    height: 480px;
+    width: 250px;
+    height: 250px;
     border: 10px solid #FFF;
     border-bottom-color: rgb(58, 173, 164);
     border-radius: 50%;

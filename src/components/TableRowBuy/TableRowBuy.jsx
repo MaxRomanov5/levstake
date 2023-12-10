@@ -1,6 +1,8 @@
 import {TableRow,TableCell,Button,useTheme,useMediaQuery} from '@mui/material'
 import { useState } from 'react';
 import images from '../../assets/images';
+import api from '../../API/levstake.js'
+import localStorage from '../../helpers/localStorage';
 const TableRowBuy = ({position,active}) => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
@@ -15,6 +17,51 @@ const TableRowBuy = ({position,active}) => {
       return <span style={{color:'#C23221'}} >funds are withdrawn</span>
     }
   }
+console.log(position);
+async function withdrawPosition(e) {
+console.log(e.target.id);
+const web3 = new Web3(window.ethereum);
+const wallet = localStorage.load("wallet");
+const normalWallet = web3.utils.toChecksumAddress(wallet);
+const data = await api.signWithdraw(Number(e.target.id),normalWallet)
+console.log(data);
+
+const contractorAddres = "0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000";
+
+const myContract = new web3.eth.Contract(
+  currentPoolData.asset.blockchain.master_contract_abi,
+  contractorAddres
+);
+
+
+const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,
+  dataContr.signed_data.amount,
+  dataContr.signed_data.currency,
+  dataContr.signed_data.max_block,
+  dataContr.signed_data.nonce,
+  "deposit",
+  dataContr.signature
+);
+
+const transaction = {
+  from: normalWallet,
+  to: contractorAddres,
+  data: myFunc.encodeABI(),
+  gas: (150000).toString(),
+};
+console.log(1);
+const result = await window.ethereum.request({
+  method: "eth_sendTransaction",
+  params: [transaction],
+});
+}
+
+
+
+
+
+
+
 
     return (<>
         <TableRow   sx={{'& .MuiTableCell-root.MuiTableCell-body':{
@@ -29,12 +76,12 @@ const TableRowBuy = ({position,active}) => {
         </TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px',textWrap:'nowrap'}}>{position.leverage}</TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}>{Number(position.staking_pool.profit_rate).toFixed(1)+'%'}</TableCell>
-        <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}><a style={{display:'block',position:'relative'}} href={position.transition_url} ><img src={images.linkGreen}></img>{!position.transition_url && <span style={{position:'absolute',top:'-5px',right:'-5px',...(noDEsk&&{right:'-12px'})}} className="loader"></span>}</a></TableCell>
+        <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}><a style={{display:'block',position:'relative'}} href={position.transition_url} >{position.transition_url && <img src={images.linkGreen}></img>}{!position.transition_url && <span style={{position:'absolute',top:'0px',right:'0px'}} className="loader"></span>}</a></TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px',textWrap:'nowrap'}}>On maturity</TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',color:'white',fontFamily:'Montserrat',lineHeight:'16px'}}>{(Number(position.liquidation_price)).toFixed(3)}</TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',fontFamily:'Montserrat',lineHeight:'16px',color:'#9A9B9B',textWrap:'nowrap',paddingTop:'9px',paddingBottom:'9px'}}>{position.status.split('_').join(' ')}</TableCell>
         <TableCell sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',fontFamily:'Montserrat',lineHeight:'16px',color:'#9A9B9B',textWrap:'nowrap',paddingTop:'9px',paddingBottom:'9px'}}>{position.staking_pool.pool_duration}</TableCell>
-        {active === 'active' && <TableCell  sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',fontFamily:'Montserrat',lineHeight:'16px',color:'#9A9B9B',padding:'0px 10px'}}>{status==='funds_are_withdrawn'? <Button disabled sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',textWrap:'nowrap'}}>Claim interest</Button> :<Button  sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',textWrap:'nowrap'}}>Claim interest</Button>} </TableCell>}
+        {active === 'active' && <TableCell  sx={{...(open&&{borderBottom:'0px solid white'}),fontWeight:'500', fontSize:'12px',fontFamily:'Montserrat',lineHeight:'16px',color:'#9A9B9B',padding:'0px 10px'}}>{position.status==='closed'? <Button disabled sx={{display:'flex',padding:'16px 8px',"&&&&&": {color:'grey'},fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',textWrap:'nowrap'}}>Claim interest</Button> :<Button id={position.id} onClick={withdrawPosition}  sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',textWrap:'nowrap'}}>Claim interest</Button>} </TableCell>}
 
       </TableRow>
 

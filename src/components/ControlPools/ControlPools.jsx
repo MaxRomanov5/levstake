@@ -32,7 +32,7 @@ const ControlPools = () => {
           Available pools
         </Typography>
 
-        {pools && (
+        {pools.length !== 0 && (
           <LiquidityPool
             type="dashboard"
             setSelectedPool={setSelectedPool}

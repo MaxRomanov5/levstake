@@ -114,9 +114,10 @@ console.log();
         currentPoolData.asset.abi,
         "0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92"
       );
+      
       const approve = myApprove.methods.approve(
         "0xC8324c4bd3C3d6388F6DB7572B0Dd2cc0638f000",
-        dataContr.signed_data.amount
+        dataContr.signed_data.amount*10**currentPoolData.asset.decimal
       );
       const transactionApr = {
         from: normalWallet,
@@ -131,11 +132,10 @@ console.log();
         params: [transactionApr],
       });
 
-      const myFunc = myContract.methods.stakeAssets(
-        dataContr.signed_data.position_id,
+      const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,
         dataContr.signed_data.amount,
-        dataContr.signed_data.pool_address,
-        dataContr.signed_data.max_blocks,
+        dataContr.signed_data.currency,
+        dataContr.signed_data.max_block,
         dataContr.signed_data.nonce,
         "deposit",
         dataContr.signature
@@ -147,7 +147,7 @@ console.log();
         data: myFunc.encodeABI(),
         gas: (150000).toString(),
       };
-
+console.log(1);
       const result = await window.ethereum.request({
         method: "eth_sendTransaction",
         params: [transaction],

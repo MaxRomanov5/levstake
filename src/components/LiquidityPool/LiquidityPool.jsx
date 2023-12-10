@@ -8,7 +8,7 @@ const LiquidityPool = ({type,pools,setSelectedPool}) => {
     const mob = useMediaQuery(theme.breakpoints.up('md'))
     const width = type === 'home'? '18%' : '25%'
     const spec = useMediaQuery(theme.breakpoints.down("md"));
-
+console.log(pools);
 
     return (
         
@@ -33,7 +33,7 @@ const LiquidityPool = ({type,pools,setSelectedPool}) => {
   color:'white',
   letterSpacing: '0.04em',
   textAlign: 'left',borderBottomColor:'#3A3B3C'}} >
-          <img width='16' height='16' src={pool.asset.picture} alt="" /> {pool.asset.blockchain.currency_name}
+          <img width='16' height='16' src={pool.asset.picture} alt="" /> <p>{pool.asset.name}</p>
             </TableCell>
             <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',

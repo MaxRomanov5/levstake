@@ -144,6 +144,29 @@ Notify.failure('Pool is closed!')}
 }
 
 
+async function signWithdraw(id,wallet){
+  try{
+     const res = await axios.post('https://levstake.frwd.one/api/sign_withdraw/',{
+      position_id:id,
+      sender:wallet
+     },{
+      headers:{
+          Authorization: `Bearer ${localStorage.load('TOKEN')}`
+      }
+     })
+    
+
+
+     return res.data
+  } catch (err){
+ 
+    if(err.response.status === 400){
+Notify.failure('Something go wrong! Please, try again!')}
+  }
+
+}
+
+
 async function blockChainData(){
   try{
      const res = await axios.get('https://levstake.frwd.one/api/blockchain_data/',{
@@ -199,4 +222,4 @@ Notify.failure('Something go wrong! Please, try again!')
 
 
 
-export default {postFeedback,getAssetPrice,getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit,blockChainData,getPools,getAssetId}
+export default {signWithdraw,postFeedback,getAssetPrice,getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit,blockChainData,getPools,getAssetId}

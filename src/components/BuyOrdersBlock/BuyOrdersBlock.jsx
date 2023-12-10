@@ -78,8 +78,8 @@ function handleActive(e) {
             })}
               </TableBody>
 </Table>
-{active ==='history' && historyPositions.length === 0 && <p style={{padding:'40px',textAlign:'center',color:'grey',fontSize:'30px',fontFamily:'Montserrat'}}>No positions to display!</p>}
-{active ==='active' && activePositions.length === 0 && <p style={{padding:'40px',textAlign:'center',color:'grey',fontSize:'30px',fontFamily:'Montserrat'}}>No positions to display!</p>}
+{active ==='history' && historyPositions.length === 0 && <p style={{padding:'40px',textAlign:'center',color:'grey',fontSize:'15px',fontFamily:'Montserrat'}}>No positions to display</p>}
+{active ==='active' && activePositions.length === 0 && <p style={{padding:'40px',textAlign:'center',color:'grey',fontSize:'15px',fontFamily:'Montserrat'}}>No positions to display</p>}
 </TableContainer>
         </div>
     );
