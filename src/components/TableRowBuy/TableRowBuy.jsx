@@ -28,12 +28,12 @@ const web3 = new Web3(window.ethereum);
 const wallet = localStorage.load("wallet");
 const normalWallet = web3.utils.toChecksumAddress(wallet);
 const dataContr = await api.signWithdraw(Number(e.target.id),normalWallet)
-console.log(dataContr);
+console.log(position.blockchain.master_contract_abi);
 
 const contractorAddres = position.blockchain.master_contract_address
 
 const myContract = new web3.eth.Contract(
-  position.staking_pool.asset.blockchain.master_contract_abi,
+  position.blockchain.master_contract_abi,
   contractorAddres
 );
 
@@ -48,8 +48,8 @@ const myFunc = myContract.methods.unstakeAssets(dataContr.signed_data.position_i
 );
 
 const transaction = {
-  from: contractorAddres,
-  to: normalWallet,
+  from: normalWallet,
+  to: contractorAddres,
   data: myFunc.encodeABI(),
   gas: (150000).toString(),
 };

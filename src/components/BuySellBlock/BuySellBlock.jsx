@@ -61,7 +61,7 @@ const BuySellBlock = ({ pools, selectedPool }) => {
   }, [selectedPool]);
 
   const currentPoolData = pools.find((pool) => pool.id == instrument);
-  console.log(currentPoolData);
+
 
   const DisplayingErrorMessagesSchema = Yup.object().shape({
     leverage: Yup.number()
@@ -133,7 +133,7 @@ const BuySellBlock = ({ pools, selectedPool }) => {
         method: "eth_sendTransaction",
         params: [transactionApr],
       });
-console.log(dataContr);
+
       const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,
         dataContr.signed_data.amount,
         dataContr.signed_data.currency,
@@ -149,7 +149,7 @@ console.log(dataContr);
         data: myFunc.encodeABI(),
         gas: (150000).toString(),
       };
-console.log(1);
+
       const result = await window.ethereum.request({
         method: "eth_sendTransaction",
         params: [transaction],
