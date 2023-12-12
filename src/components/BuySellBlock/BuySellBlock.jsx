@@ -39,12 +39,7 @@ const {isPending,startPending,endPending} = useUser()
         .min_leverage
     );
   };
-  // fetch(`https://api.polygonscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=0x3de5b60e81e3a0ee967090237bac0f053122c709c5fd57a067acefb2f2495a62&apikey=XHV9XRQJXWJITE659S9KFESQGYEPM8U2SF`)
-  // .then((data)=>{
-  //   return data.json()
-  // }).then(data=>{
-  //   console.log(data);
-  // })
+
   const handleAction = (e, newAction) => {
     if (newAction !== null) {
       setAction(newAction);
@@ -96,6 +91,7 @@ const {isPending,startPending,endPending} = useUser()
     const buyBtn = document.querySelector("#buyBtn");
     
     startPending()
+    setIsLoading(true)
     try {
       const web3 = new Web3(window.ethereum);
       const wallet = localStorage.load("wallet");
@@ -168,9 +164,10 @@ console.log('end approve');
   console.log(data);
 })
       endPending()
-      
+      setIsLoading(false)
     } catch (error) {
       endPending()
+      setIsLoading(false)
     }
   }
 
@@ -554,7 +551,7 @@ border:'0'
                   {action === "buy" ? "Buy" : "Sell"}
                   
                 </Typography>
-                {isPending?<span className={styled.loaderMain}></span>:''}
+                {isLoading?<span className={styled.loaderMain}></span>:''}
               </button>
               {/* <Button sx={{padding:"12px 16px",borderRadius:'8px',
     

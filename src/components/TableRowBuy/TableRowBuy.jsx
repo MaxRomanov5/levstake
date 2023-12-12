@@ -158,7 +158,7 @@ const TableRowBuy = ({ position, active }) => {
               <img src={images.linkGreen}></img>
             ) : (
               <span
-                style={{ position: "absolute", top: "0px", right: "0px" }}
+               
                 className="loader"
               ></span>
             )}

@@ -113,8 +113,8 @@ screen and (min-device-pixel-ratio: 2) {
     }
 
     .loader {
-        width: 8px;
-        height: 8px;
+        width: 10px;
+        height: 10px;
         border: 1px solid #FFF;
         border-bottom-color: rgb(58, 173, 164);
         border-radius: 50%;
