@@ -16,7 +16,8 @@ const LiquidityPool = ({type,pools,setSelectedPool}) => {
       <Table sx={{padding:'8px',overflow:'scroll'}}  aria-label="customized table">
         <TableHead sx={{backgroundColor:'#3A3B3C',color:'#CACBCB',}}>
           <TableRow >
-            <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Currency</TableCell>
+         
+            <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Currency</TableCell>
             <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Profit Rate</TableCell>
             <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em',margin:'0 auto'}} align="center" >Period</TableCell>
            <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Leverage</TableCell>
@@ -26,14 +27,19 @@ const LiquidityPool = ({type,pools,setSelectedPool}) => {
         <TableBody >
          {pools.map(pool=>{
            return <TableRow onClick={()=>{setSelectedPool(pool.id)}} key={pool.id}>
+             {/* <TableCell sx={{width:'40px', borderBottomColor:'#3A3B3C'}}>
+            
+             </TableCell> */}
+
             <TableCell sx={{padding:'18px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',
   fontWeight: '500',display:'flex',gap:'15px',textWrap:'nowrap',
-  lineHeight: '17px',justifyContent:'center',
+  lineHeight: '17px',justifyContent:'left',
   color:'white',
   letterSpacing: '0.04em',
-  textAlign: 'center',borderBottomColor:'#3A3B3C'}}  align="center">
-          <img width='16' height='16' src={pool.asset.picture} alt="" /> <p>{pool.asset.name}</p>
+  textAlign: 'center',borderBottomColor:'#3A3B3C'}}  align="left">
+     <img width='16' height='16' src={pool.asset.picture} alt="" />
+          <p>{pool.asset.name}</p>
             </TableCell>
             <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',

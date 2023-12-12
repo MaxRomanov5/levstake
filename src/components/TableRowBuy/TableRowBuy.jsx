@@ -81,6 +81,7 @@ const TableRowBuy = ({ position, active }) => {
           },
         }}
       >
+     
         <TableCell
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
@@ -103,19 +104,19 @@ const TableRowBuy = ({ position, active }) => {
             {position.staking_pool.asset.name}
           </div>
         </TableCell>
-        <TableCell
+        <TableCell  align="center"
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
             fontWeight: "500",
             fontSize: "12px",
             color: "white",
             fontFamily: "Montserrat",
-            lineHeight: "16px",
+            lineHeight: "16px",paddingRight:'8px'
           }}
         >
           {Number(position.user_amount).toFixed(3)}
         </TableCell>
-        <TableCell
+        <TableCell align="center"
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
             fontWeight: "500",
@@ -123,31 +124,31 @@ const TableRowBuy = ({ position, active }) => {
             color: "white",
             fontFamily: "Montserrat",
             lineHeight: "16px",
-            textWrap: "nowrap",
+            textWrap: "nowrap",paddingRight:'8px'
           }}
         >
           {position.leverage}
         </TableCell>
-        <TableCell
+        <TableCell align="center"
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
             fontWeight: "500",
             fontSize: "12px",
             color: "white",
             fontFamily: "Montserrat",
-            lineHeight: "16px",
+            lineHeight: "16px",paddingRight:'8px'
           }}
         >
           {Number(position.staking_pool.profit_rate).toFixed(1) + "%"}
         </TableCell>
-        <TableCell
+        <TableCell align="center"
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
             fontWeight: "500",
             fontSize: "12px",
             color: "white",
             fontFamily: "Montserrat",
-            lineHeight: "16px",
+            lineHeight: "16px",paddingRight:'8px'
           }}
         >
           <a
@@ -164,7 +165,7 @@ const TableRowBuy = ({ position, active }) => {
             )}
           </a>
         </TableCell>
-        <TableCell
+        <TableCell align="center"
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
             fontWeight: "500",
@@ -172,24 +173,24 @@ const TableRowBuy = ({ position, active }) => {
             color: "white",
             fontFamily: "Montserrat",
             lineHeight: "16px",
-            textWrap: "nowrap",
+            textWrap: "nowrap",paddingRight:'8px'
           }}
         >
           On maturity
         </TableCell>
-        <TableCell
+        <TableCell align="center"
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
             fontWeight: "500",
             fontSize: "12px",
             color: "white",
             fontFamily: "Montserrat",
-            lineHeight: "16px",
+            lineHeight: "16px",paddingRight:'8px'
           }}
         >
           {Number(position.liquidation_price).toFixed(3)}
         </TableCell>
-        <TableCell
+        <TableCell align="center"
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
             fontWeight: "500",
@@ -199,12 +200,12 @@ const TableRowBuy = ({ position, active }) => {
             color: "#9A9B9B",
             textWrap: "nowrap",
             paddingTop: "9px",
-            paddingBottom: "9px",
+            paddingBottom: "9px",paddingRight:'8px'
           }}
         >
           {position.status.split("_").join(" ")}
         </TableCell>
-        <TableCell
+        <TableCell align="center"
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
             fontWeight: "500",
@@ -214,7 +215,7 @@ const TableRowBuy = ({ position, active }) => {
             color: "#9A9B9B",
             textWrap: "nowrap",
             paddingTop: "9px",
-            paddingBottom: "9px",
+            paddingBottom: "9px",paddingRight:'8px'
           }}
         >
           {position.staking_pool.pool_duration}
@@ -326,6 +327,7 @@ const TableRowBuy = ({ position, active }) => {
             lineHeight: "16px",
             color: "#9A9B9B",
           }}
+          align="center"
         >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             0 <img src={images.linkGreen} alt="link" />
@@ -339,6 +341,7 @@ const TableRowBuy = ({ position, active }) => {
             lineHeight: "16px",
             color: "#9A9B9B",
           }}
+          align="center"
         >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             0 <img src={images.linkGreen} alt="link" />

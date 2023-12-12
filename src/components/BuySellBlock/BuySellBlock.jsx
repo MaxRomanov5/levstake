@@ -63,10 +63,10 @@ const {isPending,startPending,endPending} = useUser()
   const currentPoolData = pools.find((pool) => pool.id == instrument);
 
 
-
+console.log(currentPoolData);
   const DisplayingErrorMessagesSchema = Yup.object().shape({
     leverage: Yup.number()
-      .positive()
+      .positive(pools)
       .min(
         currentPoolData.pool_conditions.min_leverage,
         "Enter bigger leverage!"
@@ -246,13 +246,14 @@ console.log('end approve');
                           height="16px"
                           src={pool.asset.picture}
                         ></img>
-                        {pool.id} {pool.asset.blockchain.currency_name}{" "}
+                        {pool.id} {pool.asset.blockchain.currency_name}{" | "}
+                        {pool.pool_duration}{" | "}
                         {pool.pool_conditions.min_leverage +
-                          "X" +
-                          " > " +
+                          "x" +
+                          " - " +
                           pool.pool_conditions.max_leverage +
-                          "X"}{" "}
-                        {Number(pool.profit_rate).toFixed(1)}
+                          "x"}{" | "}
+                        {Number(pool.profit_rate).toFixed(1)}{'%  APY'}
                       </MenuItem>
                     );
                   })}
@@ -548,7 +549,7 @@ border:'0'
                   }}
                   color="primary"
                 >
-                  {action === "buy" ? "Buy" : "Sell"}
+                  {action === "buy" ? "Stake" : "Unstake"}
                   
                 </Typography>
                 {isLoading?<span className={styled.loaderMain}></span>:''}

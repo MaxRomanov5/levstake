@@ -15,13 +15,18 @@ const Home = () => {
   const { isLoggedIn } = useUser();
   const theme = useTheme();
   const mob = useMediaQuery(theme.breakpoints.down("md"));
+  const [favpools, setFavPools] = useState([]);
   const [pools, setPools] = useState([]);
-
-async function fetchPools() {
+async function fetchFavPools() {
     const res = await api.getPools(true)
+    setFavPools(res)
+}
+async function fetchPools() {
+    const res = await api.getPools()
     setPools(res)
 }
 useEffect(() => {
+    fetchFavPools()
     fetchPools()
 }, []);
  
@@ -31,10 +36,10 @@ useEffect(() => {
 
     return (
         <div>
-         <Hero pool={pools[0]}></Hero>
+         <Hero pool={favpools[0]}></Hero>
          <Advantages></Advantages>
-         <StackingTable pools={pools}></StackingTable>
-         <StackingAssetsSection></StackingAssetsSection>
+         <StackingTable pools={favpools}></StackingTable>
+         <StackingAssetsSection pools={pools}></StackingAssetsSection>
         {/* <LiquidityPoolSection ></LiquidityPoolSection> */}
          <NavLink to='/levstake/'>
          <Stack sx={{marginBottom:'24px'}} justifyContent='left' alignItems='center' flexDirection='row' height='40px' flexWrap='wrap' >
