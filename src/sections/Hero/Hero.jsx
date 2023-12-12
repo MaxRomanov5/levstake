@@ -6,7 +6,7 @@ import { useTheme } from '@emotion/react';
 import { NavLink } from "react-router-dom";
 import links from '../../helpers/links.js'
 import { useUser } from '../../Context/userContext.jsx'
-const Hero = () => {
+const Hero = ({pool}) => {
     const theme = useTheme()
     const desk = useMediaQuery(theme.breakpoints.up('lt'))
 
@@ -15,7 +15,7 @@ const Hero = () => {
     const mob = useMediaQuery(theme.breakpoints.down("md"));
     return (
         <div className={styled.box} >
-           <HeroCard></HeroCard> 
+           <HeroCard pool={pool}></HeroCard> 
            <div className={styled.textBlock}>
            <h1  className={styled.text} >Decentralized Leveraged Staking at Levstake</h1>
            <Typography variant="h2" color='primary' sx={{fontSize:'24px',lineHeight:'29px',marginBottom:'24px',...(desk&&{fontSize:'32px'})}} >Boost your staking income up to 5x and Earn 105% Yearly</Typography>

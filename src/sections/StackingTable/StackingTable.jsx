@@ -3,16 +3,9 @@ import StackingCard from "../../components/StackingCard/StackingCard";
 import styled from './StackingTable.module.css'
 import { useState,useEffect } from "react";
 import api from '../../API/levstake.js'
-const StackingTable = () => {
-const [pools, setPools] = useState([]);
-async function fetchPools(params) {
-    const res = await api.getPools()
-    setPools(res)
-}
-useEffect(() => {
-    fetchPools()
-}, []);
-console.log(pools);
+const StackingTable = ({pools}) => {
+
+
     return (
         <section className={styled.sec}>
            <Typography sx={{marginBottom:'16px',textAlign:'center'}} color='primary.main' variant="h2">Staking table</Typography> 

@@ -16,7 +16,8 @@ function handleActive(e) {
    setActive(e.target.value)
 }
 
-console.log(activePositions);
+
+
 
     return (<div style={{backgroundColor:'#161C2A',borderRadius:'8px',marginBottom:'8px',padding:'16px',maxHeight:'700px',overflow:'scroll'}}>
         <div style={{display:'flex',flexDirection:'column',gap:'10px',...(tab&&{flexDirection:'row',justifyContent:'space-between'})}}>

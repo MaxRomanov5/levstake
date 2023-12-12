@@ -9,22 +9,33 @@ import LiquidityPoolSection from "../../sections/LiquidityPoolSection/LiquidityP
 import { useUser } from '../../Context/userContext.jsx'
 import { NavLink } from "react-router-dom";
 import links from '../../helpers/links.js'
-
+import {useState,useEffect} from 'react'
+import api from '../../API/levstake.js'
 const Home = () => {
- 
   const { isLoggedIn } = useUser();
   const theme = useTheme();
   const mob = useMediaQuery(theme.breakpoints.down("md"));
+  const [pools, setPools] = useState([]);
+
+async function fetchPools() {
+    const res = await api.getPools(true)
+    setPools(res)
+}
+useEffect(() => {
+    fetchPools()
+}, []);
+ 
+
 
 
 
     return (
         <div>
-         <Hero></Hero>
+         <Hero pool={pools[0]}></Hero>
          <Advantages></Advantages>
-         <StackingTable></StackingTable>
+         <StackingTable pools={pools}></StackingTable>
          <StackingAssetsSection></StackingAssetsSection>
-        <LiquidityPoolSection ></LiquidityPoolSection>
+        {/* <LiquidityPoolSection ></LiquidityPoolSection> */}
          <NavLink to='/levstake/'>
          <Stack sx={{marginBottom:'24px'}} justifyContent='left' alignItems='center' flexDirection='row' height='40px' flexWrap='wrap' >
             <img style={{height:'inherit',marginRight:'14px'}} src={img.levlion} alt="levstake" />

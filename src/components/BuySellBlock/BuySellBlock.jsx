@@ -19,7 +19,7 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import Assetprice from "../AssetPrice/AssetPrice";
-
+import {useUser} from '../../Context/userContext.jsx'
 const BuySellBlock = ({ pools, selectedPool }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [action, setAction] = useState("buy");
@@ -28,7 +28,7 @@ const BuySellBlock = ({ pools, selectedPool }) => {
     pools[0]?.pool_conditions.min_leverage
   );
   const [userAmount, setUserAmount] = useState("");
-
+const {isPending,startPending,endPending} = useUser()
   const handleLeverage = (e) => {
     setLeverage(e.target.value);
   };
@@ -39,7 +39,12 @@ const BuySellBlock = ({ pools, selectedPool }) => {
         .min_leverage
     );
   };
-
+  // fetch(`https://api.polygonscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=0x3de5b60e81e3a0ee967090237bac0f053122c709c5fd57a067acefb2f2495a62&apikey=XHV9XRQJXWJITE659S9KFESQGYEPM8U2SF`)
+  // .then((data)=>{
+  //   return data.json()
+  // }).then(data=>{
+  //   console.log(data);
+  // })
   const handleAction = (e, newAction) => {
     if (newAction !== null) {
       setAction(newAction);
@@ -61,6 +66,7 @@ const BuySellBlock = ({ pools, selectedPool }) => {
   }, [selectedPool]);
 
   const currentPoolData = pools.find((pool) => pool.id == instrument);
+
 
 
   const DisplayingErrorMessagesSchema = Yup.object().shape({
@@ -88,8 +94,8 @@ const BuySellBlock = ({ pools, selectedPool }) => {
   async function submitF(e) {
     e.preventDefault();
     const buyBtn = document.querySelector("#buyBtn");
-    buyBtn.disabled = true;
-    setIsLoading(true);
+    
+    startPending()
     try {
       const web3 = new Web3(window.ethereum);
       const wallet = localStorage.load("wallet");
@@ -128,12 +134,12 @@ const BuySellBlock = ({ pools, selectedPool }) => {
         // Initial value, to be set by the spending cap function
         gas: (150000).toString(),
       };
-
+console.log('start approve');
       const resultapr = await window.ethereum.request({
         method: "eth_sendTransaction",
         params: [transactionApr],
       });
-
+console.log('end approve');
       const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,
         dataContr.signed_data.amount,
         dataContr.signed_data.currency,
@@ -149,17 +155,22 @@ const BuySellBlock = ({ pools, selectedPool }) => {
         data: myFunc.encodeABI(),
         gas: (150000).toString(),
       };
-
+      console.log('start trans');
       const result = await window.ethereum.request({
         method: "eth_sendTransaction",
         params: [transaction],
       });
-
-      setIsLoading(false);
-      buyBtn.disabled = false;
+      console.log(result);
+      fetch(`https://api.polygonscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=${result}&apikey=XHV9XRQJXWJITE659S9KFESQGYEPM8U2SF`)
+.then((data)=>{
+  return data.json()
+}).then(data=>{
+  console.log(data);
+})
+      endPending()
+      
     } catch (error) {
-      buyBtn.disabled = false;
-      setIsLoading(false);
+      endPending()
     }
   }
 
@@ -505,6 +516,7 @@ border:'0'
                   alt="coin"
                 />
                 <input
+                disabled={isPending? true : false}
                   value={userAmount}
                   onInput={handleUserAmount}
                   required
@@ -518,6 +530,7 @@ border:'0'
                 className={styled.button}
                 id="buyBtn"
                 type="submit"
+                disabled={isPending? true : false}
                 style={{
                   backgroundColor: action === "buy" ? "#3AADA4" : "#F33E29",
                   padding: "12px 16px",
@@ -530,7 +543,7 @@ border:'0'
                 <img src={images.rocket} alt="rocket" />
                 <Typography
                   variant="subtitle1"
-                  sx={{
+                  sx={{position:'relative',
                     fontSize: "14px",
                     lineHeight: "16px",
                     marginLeft: "16px",
@@ -539,7 +552,9 @@ border:'0'
                   color="primary"
                 >
                   {action === "buy" ? "Buy" : "Sell"}
+                  
                 </Typography>
+                {isPending?<span className={styled.loaderMain}></span>:''}
               </button>
               {/* <Button sx={{padding:"12px 16px",borderRadius:'8px',
     
@@ -550,11 +565,11 @@ border:'0'
           </Form>
         )}
       </Formik>
-      {isLoading && (
+      {/* {isPending && (
         <div className={styled.mainLoader}>
           <span className={styled.loaderMain}></span>
         </div>
-      )}
+      )} */}
     </>
   );
 };

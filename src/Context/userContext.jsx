@@ -9,7 +9,15 @@ export const useUser = () => useContext(UserContext);
 export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [wallet, setWallet] = useState(null);
-
+const [isPending, setIsPending] = useState(false);
+const startPending = ()=>{
+  setIsPending(true)
+  localStorage.save('isPending',true)
+}
+const endPending = ()=>{
+  setIsPending(false)
+  localStorage.save('isPending',false)
+}
   const logIn = (userWallet) => {
     setIsLoggedIn(true);
     setWallet(userWallet)
@@ -28,7 +36,7 @@ window.ethereum.request({
   };
 
   return (
-    <UserContext.Provider value={{ isLoggedIn, wallet, logIn, logOut }}>
+    <UserContext.Provider value={{ isLoggedIn, wallet, logIn, logOut,isPending,startPending,endPending }}>
       {children}
     </UserContext.Provider>
   );

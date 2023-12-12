@@ -59,9 +59,13 @@ width: 100%;
     align-items: center;
 }
 .loaderMain {
-    width: 250px;
-    height: 250px;
-    border: 10px solid #FFF;
+    /* position: absolute;
+    top:0;
+    right: -5px; */
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    border: 1px solid #FFF;
     border-bottom-color: rgb(58, 173, 164);
     border-radius: 50%;
     display: inline-block;

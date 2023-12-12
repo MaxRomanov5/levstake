@@ -184,9 +184,9 @@ Notify.failure('Something go wrong! Please, try again!')
 
 }
 
-async function getPools(){
+async function getPools(query){
   try{
-     const res = await axios.get('https://levstake.frwd.one/api/pools/',{
+     const res = await axios.get(`https://levstake.frwd.one/api/pools/${query?'?search=featured' : ''}`,{
       headers:{
           Authorization: `Bearer ${localStorage.load('TOKEN')}`
       }
