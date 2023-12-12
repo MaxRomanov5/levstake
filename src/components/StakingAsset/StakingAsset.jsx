@@ -164,7 +164,7 @@ fontWeight: '500',
 lineHeight: '25px',
 color:'white',
 letterSpacing: '0.04em',
-textAlign: 'left',borderBottom:'0',textAlign:'center'}} align="center">
+textAlign: 'left',borderBottom:'0',textAlign:'center',textWrap:'nowrap'}} align="center">
 
  {pool.pool_duration}
 
@@ -175,7 +175,7 @@ fontWeight: '500',
 lineHeight: '25px',
 color:'white',
 letterSpacing: '0.04em',
-textAlign: 'left',borderBottom:'0',textAlign:'center'}} align="center">
+textAlign: 'left',borderBottom:'0',textAlign:'center',textWrap:'nowrap'}} align="center">
 
 {pool.pool_conditions.min_leverage}x-{pool.pool_conditions.max_leverage}x
 

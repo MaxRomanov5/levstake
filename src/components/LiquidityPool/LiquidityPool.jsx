@@ -54,7 +54,7 @@ const LiquidityPool = ({type,pools,setSelectedPool}) => {
   lineHeight: '17px',
   color:'white',
   letterSpacing: '0.04em',
-  textAlign: 'center',borderBottomColor:'#3A3B3C'}} align="center">{pool.pool_duration}</TableCell>
+  textAlign: 'center',borderBottomColor:'#3A3B3C',textWrap:'nowrap'}} align="center">{pool.pool_duration}</TableCell>
             <TableCell sx={{padding:'0px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',
   fontWeight: '500',
