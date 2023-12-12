@@ -7,7 +7,7 @@ console.log(pool);
        <div className={styled.card}>
 <Stack flexDirection='row' alignItems='center' sx={{marginBottom:'32px'}}>
     <img width='48px' height='48px' src={pool?.asset?.picture || images.ethereum} alt="coin" />
-    <Typography variant='h2' sx={{fontSize:"24px",lineHeight:'31px',color:'primary.main',marginLeft:'17px'}}>{pool?.asset?.blockchain?.currency_name || '-'}</Typography>
+    <Typography variant='h2' sx={{fontSize:"24px",lineHeight:'31px',color:'primary.main',marginLeft:'17px'}}>{pool?.asset?.name || '-'}</Typography>
  
 </Stack>
 <Stack sx={{marginBottom:'32px'}}>

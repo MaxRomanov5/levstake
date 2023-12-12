@@ -20,7 +20,7 @@ const StackingCard = ({ pool }) => {
           <img
             style={{ height: "48px", width: "48px" }}
             src={pool.asset.picture}
-            alt={pool.asset.blockchain.currency_name}
+            alt={pool.asset.name}
           />
 
           <Typography
@@ -37,7 +37,7 @@ const StackingCard = ({ pool }) => {
           color="primary.main"
           variant="p"
         >
-          {pool.asset.blockchain.currency_name}
+          {pool.asset.name}
         </Typography>
       </div>
       <NavLink to={links(isLoggedIn, mob)}>

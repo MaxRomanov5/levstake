@@ -246,7 +246,7 @@ console.log('end approve');
                           height="16px"
                           src={pool.asset.picture}
                         ></img>
-                        {pool.id} {pool.asset.blockchain.currency_name}{" | "}
+                        {pool.asset.blockchain.currency_name}{" | "}
                         {pool.pool_duration}{" | "}
                         {pool.pool_conditions.min_leverage +
                           "x" +

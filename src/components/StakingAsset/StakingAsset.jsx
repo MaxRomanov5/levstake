@@ -27,7 +27,7 @@ console.log(pools);
         <Table sx={{padding:'8px'}}  aria-label="customized table">
           <TableHead sx={{color:'#CACBCB'}}>
             <TableRow >
-              <TableCell sx={{padding:'8px', color:'primary.main',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Asset</TableCell>
+              <TableCell sx={{width:'15%',padding:'8px', color:'primary.main',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Asset</TableCell>
               <TableCell sx={{padding:'8px', color:'primary.main',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Term</TableCell>
               <TableCell sx={{padding:'8px', color:'primary.main',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Leverage</TableCell>
               <TableCell sx={{padding:'8px', color:'primary.main',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Yearly interest</TableCell>
@@ -186,7 +186,7 @@ fontWeight: '500',
 lineHeight: '25px',
 color:'white',
 letterSpacing: '0.04em',
-textAlign: 'left',borderBottom:'0',textAlign:'center'}} align="center">16%</TableCell>
+textAlign: 'left',borderBottom:'0',textAlign:'center'}} align="center">{Number(pool.profit_rate).toFixed(0) + "%"}</TableCell>
 <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
 fontSize: '18px',
 fontWeight: '500',
