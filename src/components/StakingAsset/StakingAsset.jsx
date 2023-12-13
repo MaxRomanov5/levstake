@@ -23,7 +23,7 @@ console.log(pools);
         },
       }));
     return (
-        <TableContainer >
+        <TableContainer sx={{height:'508px',overflow:'scroll'}}>
         <Table sx={{padding:'8px'}}  aria-label="customized table">
           <TableHead sx={{color:'#CACBCB'}}>
             <TableRow >
@@ -36,7 +36,7 @@ console.log(pools);
               <TableCell sx={{padding:'8px', color:'primary.main',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" ></TableCell>
             </TableRow>
           </TableHead>
-          <TableBody >
+          <TableBody  >
            
               {/* <StyledTableRow >
               <TableCell sx={{borderBottom:'0', display:'flex', padding:'8px', color:'primary.main',fontFamily: 'IBM Plex Mono',fontSize: '21px',fontWeight: '600',lineHeight: '34px',letterSpacing: '0.04em'}} align="left" ><img style={{marginRight:'16px'}} src={images.ethereum} alt="coin" width={32} height={32}></img> Coin</TableCell>
@@ -199,8 +199,6 @@ textAlign: 'left',borderBottom:'0',textAlign:'center'}} align="center">Maturity<
 <TableCell sx={{borderBottom:'0',padding:'0px'}} align="left" ><NavLink to={links(isLoggedIn,mob)}><Button sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em'}}><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</Button></NavLink></TableCell>
   </StyledTableRow>
 })}
-
-
 
 
               

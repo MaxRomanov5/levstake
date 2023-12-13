@@ -12,7 +12,7 @@ const StackingTable = ({pools}) => {
            <Typography sx={{marginBottom:'56px',textAlign:'center'}} variant="subtitle1" color='#CACBCB'>Some great description about how it works and what it does.</Typography>
            <Stack gap='24px' flexWrap='wrap' flexDirection='row' justifyContent='center'>
                {pools && pools.map((pool)=>{
-                   return <StackingCard pool={pool}></StackingCard>
+                   return <StackingCard key={pool.id} pool={pool}></StackingCard>
                })}
 
            </Stack>
