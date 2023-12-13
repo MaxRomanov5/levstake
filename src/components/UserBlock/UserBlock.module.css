@@ -36,4 +36,11 @@ color: #3A3B3C;
     display: flex;
     gap: 20px;
     align-items: center;
+    font-family: Montserrat;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 14px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color: #3A3B3C;
 }

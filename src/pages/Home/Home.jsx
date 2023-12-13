@@ -36,10 +36,10 @@ useEffect(() => {
 
     return (
         <div>
-         <Hero pool={favpools[0]}></Hero>
+         <Hero pool={favpools}></Hero>
          <Advantages></Advantages>
          <StackingTable pools={favpools}></StackingTable>
-         <StackingAssetsSection pools={pools}></StackingAssetsSection>
+         {pools &&<StackingAssetsSection pools={pools}></StackingAssetsSection>}
         {/* <LiquidityPoolSection ></LiquidityPoolSection> */}
          <NavLink to='/levstake/'>
          <Stack sx={{marginBottom:'24px'}} justifyContent='left' alignItems='center' flexDirection='row' height='40px' flexWrap='wrap' >
