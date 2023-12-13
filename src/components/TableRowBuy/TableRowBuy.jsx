@@ -5,6 +5,7 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useState } from "react";
 import images from "../../assets/images";
 import api from "../../API/levstake.js";
@@ -29,12 +30,21 @@ const TableRowBuy = ({ position, active }) => {
   async function withdrawPosition(e) {
     try {
       console.log(e.target.id);
+      e.target.insertAdjacentHTML('beforeend',`<span style=" width: 10px;
+      height: 10px;
+      margin-left: 5px;
+      border: 1px solid #FFF;
+      border-bottom-color: rgb(58, 173, 164);
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;"></span>`)
     startPending()
     const web3 = new Web3(window.ethereum);
     const wallet = localStorage.load("wallet");
     const normalWallet = web3.utils.toChecksumAddress(wallet);
     const dataContr = await api.signWithdraw(Number(e.target.id), normalWallet);
-    console.log(dataContr);
+    
 
     const contractorAddres = position.blockchain.master_contract_address;
 
@@ -64,9 +74,17 @@ const TableRowBuy = ({ position, active }) => {
       method: "eth_sendTransaction",
       params: [transaction],
     });
+    e.target.innerHTML = 'Claimed!'
+    e.target.disabled = true
     endPending()
     } catch (error) {
       endPending()
+      console.log(e.target.querySelector('span'));
+      e.target.innerHTML = 'CLAIM INTEREST'
+      if(error){
+
+      }
+      Notify.failure('You reject transaction! Please, try again!')
     }
     
   }
@@ -233,12 +251,13 @@ const TableRowBuy = ({ position, active }) => {
             }}
           >
             <Button
-              disabled={position.status !== "closed" || isPending ? true : false}
+              // disabled={position.status !== "closed" || isPending ? true : false}
               id={position.id}
               onClick={withdrawPosition}
               sx={{
                 display: "flex",
                 padding: "16px 8px",
+                position:'relative',
                 color:'#7A56F8',
                 ...(position.status !== "closed"&&{"&&&&&": { color: "grey" }})
                 ,
@@ -251,14 +270,16 @@ const TableRowBuy = ({ position, active }) => {
                 textWrap: "nowrap",
               }}
             >
+
               Claim interest
+             
             </Button>
            
           </TableCell>
         )}
       </TableRow>
 
-      <TableRow
+      {/* <TableRow
         sx={{
           "& .MuiTableCell-root.MuiTableCell-body": {
             borderBottomColor: "#3A3B3C",
@@ -347,7 +368,7 @@ const TableRowBuy = ({ position, active }) => {
             0 <img src={images.linkGreen} alt="link" />
           </div>
         </TableCell>
-      </TableRow>
+      </TableRow> */}
     </>
   );
 };

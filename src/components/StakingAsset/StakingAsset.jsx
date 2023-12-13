@@ -23,11 +23,12 @@ console.log(pools);
         },
       }));
     return (
-        <TableContainer sx={{height:'508px',overflow:'scroll'}}>
+        <TableContainer sx={{maxHeight:'508px',overflow:'scroll'}}>
         <Table sx={{padding:'8px'}}  aria-label="customized table">
           <TableHead sx={{color:'#CACBCB'}}>
             <TableRow >
-              <TableCell sx={{width:'15%',padding:'8px', color:'primary.main',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Asset</TableCell>
+              <TableCell></TableCell>
+              <TableCell sx={{width:'15%',padding:'8px', color:'primary.main',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Asset</TableCell>
               <TableCell sx={{padding:'8px', color:'primary.main',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Term</TableCell>
               <TableCell sx={{padding:'8px', color:'primary.main',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Leverage</TableCell>
               <TableCell sx={{padding:'8px', color:'primary.main',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Yearly interest</TableCell>
@@ -157,7 +158,8 @@ border:'0'
               </StyledTableRow> */}
 {pools.map((pool)=>{
   return <StyledTableRow key={pool.id}>
-  <TableCell sx={{borderBottom:'0', display:'flex', padding:'8px', color:'primary.main',fontFamily: 'IBM Plex Mono',fontSize: '21px',fontWeight: '600',lineHeight: '34px',letterSpacing: '0.04em'}} align="left" ><img style={{marginRight:'16px'}} src={pool.asset.picture} alt="coin" width={32} height={32}></img>{pool.asset.name} </TableCell>
+    <TableCell align="center" sx={{width:'50px',borderBottom:'0'}}><img style={{marginRight:'16px'}} src={pool.asset.picture} alt="coin" width={32} height={32}></img></TableCell>
+  <TableCell align="center" sx={{textAlign:'center',borderBottom:'0', display:'flex',justifyContent:'center', padding:'8px', color:'primary.main',fontFamily: 'IBM Plex Mono',fontSize: '21px',fontWeight: '600',lineHeight: '50.5px',letterSpacing: '0.04em'}}  >{pool.asset.name} </TableCell>
     <TableCell sx={{padding:'7px 8px', fontFamily: 'Montserrat',
 fontSize: '18px',
 fontWeight: '500',
@@ -199,6 +201,8 @@ textAlign: 'left',borderBottom:'0',textAlign:'center'}} align="center">Maturity<
 <TableCell sx={{borderBottom:'0',padding:'0px'}} align="left" ><NavLink to={links(isLoggedIn,mob)}><Button sx={{display:'flex',padding:'16px 8px', color:'#9578F9',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em'}}><img src={images.rocketPrpl} style={{marginRight:'16px'}}></img>Stake</Button></NavLink></TableCell>
   </StyledTableRow>
 })}
+
+
 
 
               
