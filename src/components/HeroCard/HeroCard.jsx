@@ -1,10 +1,33 @@
 import { Stack, Typography } from '@mui/material';
 import images from '../../assets/images';
 import styled from './HeroCard.module.css'
+import {useState,useEffect} from 'react'
 const HeroCard = ({pool}) => {
+const [date, setDate] = useState('-');
+
 if(!pool){
     pool = {}
 }
+
+
+useEffect(() => {
+    if(pool[0]?.start_date !== undefined){
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      ];
+        const date = Date.parse(pool[0]?.start_date)
+        const newDate = new Date(date)
+        console.log(newDate.getDate());
+        // const a = date.getDay()
+        setDate(`${newDate.getDate()} ${monthNames[newDate.getMonth()]}`)
+    }
+
+
+}, [pool]);
+// console.log(date);
+// console.log(
+//     pool[0]
+// );
     return (
        <div className={styled.card}>
 <Stack flexDirection='row' alignItems='center' sx={{marginBottom:'32px'}}>
@@ -20,13 +43,14 @@ if(!pool){
 <Typography variant='h2' sx={{fontSize:"24px",lineHeight:'31px',color:'primary.main'}}>Leverage</Typography>
 <Typography  variant='h2' sx={{fontSize:"24px",lineHeight:'31px',color:'primary.main'}}>{pool[0]?.pool_conditions ? `${pool[0]?.pool_conditions?.min_leverage}x-${pool[0]?.pool_conditions?.max_leverage}x`:'-'}</Typography>
 </Stack>
-<Stack flexDirection='row' sx={{marginBottom:'8px'}} justifyContent='space-between'>
-<Typography variant='h2' sx={{fontSize:"24px",lineHeight:'31px',color:'primary.main'}}>Period</Typography>
-<Typography  variant='h2' sx={{fontSize:"24px",lineHeight:'31px',color:'primary.main'}}>{pool[0]?.period || '-'}</Typography>
-</Stack>
+
 <Stack flexDirection='row' justifyContent='space-between'>
-<Typography variant='h2' sx={{fontSize:"24px",lineHeight:'31px',color:'primary.main'}}>Duration</Typography>
+<Typography variant='h2' sx={{marginBottom:'8px',fontSize:"24px",lineHeight:'31px',color:'primary.main'}}>Duration</Typography>
 <Typography  variant='h2' sx={{fontSize:"24px",lineHeight:'31px',color:'primary.main'}}>{pool[0]?.pool_duration || '-'}</Typography>
+</Stack>
+<Stack flexDirection='row' sx={{marginBottom:'8px'}} justifyContent='space-between'>
+<Typography variant='h2' sx={{fontSize:"24px",lineHeight:'31px',color:'primary.main'}}>Start date</Typography>
+<Typography  variant='h2' sx={{fontSize:"24px",lineHeight:'31px',color:'primary.main'}}>{date ? date : '-'}</Typography>
 </Stack>
        </div>
     );
