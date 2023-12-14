@@ -251,7 +251,7 @@ const TableRowBuy = ({ position, active }) => {
             }}
           >
             <Button
-              // disabled={position.status !== "closed" || isPending ? true : false}
+              disabled={position.status !== "closed" || isPending ? true : false}
               id={position.id}
               onClick={withdrawPosition}
               sx={{
