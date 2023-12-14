@@ -208,6 +208,40 @@ const TableRowBuy = ({ position, active }) => {
         >
           {Number(position.liquidation_price).toFixed(3)}
         </TableCell>
+
+        <TableCell align="center"
+          sx={{
+            ...(open && { borderBottom: "0px solid white" }),
+            fontWeight: "500",
+            fontSize: "12px",
+            fontFamily: "Montserrat",
+            lineHeight: "16px",
+            color: "#9A9B9B",
+            textWrap: "nowrap",
+            paddingTop: "9px",
+            paddingBottom: "9px",paddingRight:'8px'
+          }}
+        >
+          21/05/2023 14:53
+        </TableCell>
+        <TableCell align="center"
+          sx={{
+            ...(open && { borderBottom: "0px solid white" }),
+            fontWeight: "500",
+            fontSize: "12px",
+            fontFamily: "Montserrat",
+            lineHeight: "16px",
+            color: "#9A9B9B",
+            textWrap: "nowrap",
+            paddingTop: "9px",
+            paddingBottom: "9px",paddingRight:'8px'
+          }}
+        >
+          21/05/2023 14:53
+        </TableCell>
+
+
+
         <TableCell align="center"
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
