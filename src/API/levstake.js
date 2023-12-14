@@ -34,6 +34,22 @@ Notify.failure('Something go wrong! Please, try again!')
 }
 
 
+async function getProfit(id,amount,leverage){
+  try{
+     const res = await axios.get(`https://levstake.frwd.one/api/profit/?pool_id=${id}&amount=${amount}&leverage=${leverage}`,{
+      headers:{
+          Authorization: `Bearer ${localStorage.load('TOKEN')}`
+      }
+     })
+    
+
+     return res.data
+  } catch (err){
+Notify.failure('Something go wrong! Please, try again!')
+  }
+
+}
+
 async function getToken(address,signature){
     try{
        const res = await axios.post('https://levstake.frwd.one/api/auth/',{
@@ -222,4 +238,4 @@ Notify.failure('Something go wrong! Please, try again!')
 
 
 
-export default {signWithdraw,postFeedback,getAssetPrice,getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit,blockChainData,getPools,getAssetId}
+export default {getProfit,signWithdraw,postFeedback,getAssetPrice,getAuthData,signSign,metaMaskConnecting,getToken,getPositions,signDeposit,blockChainData,getPools,getAssetId}

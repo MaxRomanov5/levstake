@@ -1,5 +1,5 @@
 import BuySellSwitch from "../BuySellSwitch/BuySellSwitch";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useCallback } from "react";
 import {
   Box,
   FormControl,
@@ -10,6 +10,7 @@ import {
   Button,
   TextField,
 } from "@mui/material";
+import debounce from "lodash/debounce";
 import styled from "./BuySellBlock.module.css";
 import Web3 from "web3";
 import images from "../../assets/images";
@@ -27,10 +28,13 @@ const BuySellBlock = ({ pools, selectedPool }) => {
   const [leverage, setLeverage] = useState(
     pools[0]?.pool_conditions.min_leverage
   );
+  const [profit, setProfit] = useState('-');
+
   const [userAmount, setUserAmount] = useState("");
 const {isPending,startPending,endPending} = useUser()
   const handleLeverage = (e) => {
     setLeverage(e.target.value);
+    // changeProfit()
   };
   const handleInstrument = (e) => {
     setInstrument(e.target.value);
@@ -38,7 +42,12 @@ const {isPending,startPending,endPending} = useUser()
       pools.find((pool) => pool.id == e.target.value).pool_conditions
         .min_leverage
     );
+    // changeProfit()
   };
+  // const changeProfit = useCallback(
+ 
+  // );
+
 
   const handleAction = (e, newAction) => {
     if (newAction !== null) {
@@ -48,6 +57,7 @@ const {isPending,startPending,endPending} = useUser()
 
   function handleUserAmount(e) {
     setUserAmount(e.target.value);
+    // changeProfit()
   }
 
   useEffect(() => {
@@ -61,7 +71,7 @@ const {isPending,startPending,endPending} = useUser()
   }, [selectedPool]);
 
   const currentPoolData = pools.find((pool) => pool.id == instrument);
-
+console.log(currentPoolData);
 
 console.log(currentPoolData);
   const DisplayingErrorMessagesSchema = Yup.object().shape({
@@ -170,7 +180,19 @@ console.log('end approve');
       setIsLoading(false)
     }
   }
+  useEffect(() => {
+    console.log(userAmount,leverage,currentPoolData.id);
+    // debounce(() => {
+    
+      if(userAmount && leverage ){
+      api.getProfit(currentPoolData.id,userAmount,leverage).then(data=>{
+        console.log(data.profit);
+        setProfit(data.profit.toFixed(1))
+      }
 
+      )}
+    // }, 800)
+  }, [userAmount,leverage,currentPoolData]);
   return (
     <>
       <Formik
@@ -470,9 +492,23 @@ border:'0'
                 marginBottom: "12px",
               }}
             >
-              Volume commission{" "}
+              Profit share{" "}
               <Typography sx={{ fontWeight: "500" }}>
                 {Number(currentPoolData.commission).toFixed(0) + "%"}
+              </Typography>
+            </Typography>
+            <Typography
+              color="primary.main"
+              variant="tableCellMain"
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginBottom: "12px",
+              }}
+            >
+              Calculate profit
+              <Typography sx={{ fontWeight: "500" }}>
+                {profit}
               </Typography>
             </Typography>
             <Typography
