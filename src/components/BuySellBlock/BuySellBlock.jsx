@@ -1,5 +1,6 @@
 import BuySellSwitch from "../BuySellSwitch/BuySellSwitch";
 import { useState, useEffect,useCallback } from "react";
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import {
   Box,
   FormControl,
@@ -123,7 +124,8 @@ return Number(int)
         Number(leverage),
         normalWallet
       );
-
+console.log(dataContr);
+console.log(currentPoolData);
       const contractorAddres = currentPoolData.asset.blockchain.master_contract_address
 
       const myContract = new web3.eth.Contract(
@@ -133,7 +135,7 @@ return Number(int)
 
       const myApprove = new web3.eth.Contract(
         currentPoolData.asset.abi,
-        contractorAddres
+        currentPoolData.asset.address
       );
 
       const approve = myApprove.methods.approve(
@@ -142,7 +144,7 @@ return Number(int)
       );
       const transactionApr = {
         from: normalWallet,
-        to: contractorAddres,
+        to:  currentPoolData.asset.address,
         data: approve.encodeABI(),
         // Initial value, to be set by the spending cap function
         gas: (150000).toString(),
@@ -183,6 +185,9 @@ console.log('end approve');
       endPending()
       setIsLoading(false)
     } catch (error) {
+      if(error.code === 4001){
+        Notify.failure('You denied transaction')
+      }
       endPending()
       setIsLoading(false)
     }
@@ -193,7 +198,7 @@ console.log('end approve');
     
       if(userAmount && leverage ){
       api.getProfit(currentPoolData.id,userAmount,leverage).then(data=>{
-        console.log(data.profit);
+    
         setProfit(data.profit.toFixed(1))
       }
 

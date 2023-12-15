@@ -26,7 +26,7 @@ const TableRowBuy = ({ position, active }) => {
       return <span style={{ color: "#C23221" }}>funds are withdrawn</span>;
     }
   }
-console.log(position );
+
   async function withdrawPosition(e) {
     try {
       console.log(e.target.id);
@@ -79,15 +79,13 @@ console.log(position );
     endPending()
     } catch (error) {
       endPending()
-      console.log(e.target.querySelector('span'));
-      e.target.innerHTML = 'CLAIM INTEREST'
-      if(error){
 
+      e.target.innerHTML = 'CLAIM INTEREST'
+      if(error.code === 4001){
+        Notify.failure('You denied transaction')
       }
-      Notify.failure('You reject transaction! Please, try again!')
-    }
     
-  }
+  }}
 
   return (
     <>
