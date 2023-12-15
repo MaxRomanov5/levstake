@@ -1,4 +1,4 @@
-import {Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useMediaQuery, useTheme } from "@mui/material";
+import {Button,Tooltip,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useMediaQuery, useTheme } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import links from '../../helpers/links.js'
 import { useUser } from '../../Context/userContext.jsx'
@@ -21,7 +21,7 @@ const LiquidityPool = ({type,pools,setSelectedPool,selectedPool}) => {
         
             <TableContainer sx={{overflow:'scroll',borderTopLeftRadius:'8px',borderTopRightRadius:'8px',height:'508px'}}>
       <Table sx={{padding:'8px',overflow:'scroll'}}  aria-label="customized table">
-        <TableHead sx={{backgroundColor:'#3A3B3C',color:'#CACBCB',}}>
+        <TableHead sx={{backgroundColor:'#FFFFFF0D',color:'#CACBCB',}}>
           <TableRow >
          <TableCell sx={{width:'50px',borderBottomColor:'#FFFFFF0D'}}></TableCell>
             <TableCell sx={{width,padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em',borderBottomColor:'#FFFFFF0D'}} align="center" >Asset</TableCell>
@@ -42,16 +42,16 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         const newDate = new Date(date)
         // console.log(newDate.getDate());
         // const a = date.getDay()
-        const finalDate =`${monthNames[newDate.getMonth()]} ${newDate.getDate()} ${newDate.getHours() }:${newDate.getMinutes() }:${newDate.getSeconds() }`
+        const finalDate =`${monthNames[newDate.getMonth()]} ${newDate.getDate()} `
 
 
 
-           return <TableRow sx={{...(pool.id===selectedPool&&{backgroundColor:'#FFFFFF0D'})}} onClick={()=>{setSelectedPool(pool.id)}} key={pool.id}>
+           return <TableRow sx={{...(pool.id===selectedPool&&{backgroundColor:'rgba(255,255,255, 0.3)'}),cursor:'pointer'}} onClick={()=>{setSelectedPool(pool.id)}} key={pool.id}>
              {/* <TableCell sx={{width:'40px', borderBottomColor:'#3A3B3C'}}>
             
              </TableCell> */}
-<TableCell sx={{borderBottomColor:'#FFFFFF0D'}}><img width='16' height='16' src={pool.asset.picture} alt="" /></TableCell>
-            <TableCell sx={{padding:'18px 8px', fontFamily: 'Montserrat',
+<TableCell sx={{borderBottomColor:'#FFFFFF0D',padding:'7px 16px'}}><img width='16' height='16' src={pool.asset.picture} alt="" /></TableCell>
+            <TableCell sx={{padding:'7px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',
   fontWeight: '500',textWrap:'nowrap',
   lineHeight: '17.5px',justifyContent:'left',
@@ -61,21 +61,21 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
      
           <p>{pool.asset.name}</p>
             </TableCell>
-            <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
+            <TableCell sx={{padding:'7px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',
   fontWeight: '500',
   lineHeight: '17px',
   color:'white',
   letterSpacing: '0.04em',
   textAlign: 'center',borderBottomColor:'#FFFFFF0D'}} align="center">{changeInt(Number(pool.profit_rate))+'%'}</TableCell>
-            <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
+            <TableCell sx={{padding:'7px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',
   fontWeight: '500',
   lineHeight: '17px',
   color:'white',
   letterSpacing: '0.04em',
   textAlign: 'center',borderBottomColor:'#FFFFFF0D',textWrap:'nowrap'}} align="center">{pool.pool_duration}</TableCell>
-  <TableCell sx={{padding:'16px 8px', fontFamily: 'Montserrat',
+  <TableCell sx={{padding:'7px 8px', fontFamily: 'Montserrat',
   fontSize: '12px',
   fontWeight: '500',
   lineHeight: '17px',
@@ -88,7 +88,7 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   lineHeight: '17px',
   color:'white',
   letterSpacing: '0.04em',
-  textAlign: 'center',borderBottomColor:'#FFFFFF0D',textWrap:'nowrap'}} align="center">{finalDate }</TableCell>
+  textAlign: 'center',borderBottomColor:'#FFFFFF0D',textWrap:'nowrap'}} align="center"><Tooltip sx={{display:'block'}} arrow title={`${newDate}`}>{finalDate}</Tooltip> </TableCell>
         { type === 'home' &&    <TableCell sx={{ borderBottomColor:'#FFFFFF0D'}} align="left" ><NavLink to={links(isLoggedIn,spec)}><Button sx={ {padding:'0px 8px',fontFamily: 'Montserrat',fontSize: '14px',fontWeight: '700',lineHeight: '16px',letterSpacing: '0.04em',color:'purple.main'}} ><span style={{marginRight:'8px'}}>$</span>BUY {
             mob && 'Stake now'
            }</Button></NavLink></TableCell>}

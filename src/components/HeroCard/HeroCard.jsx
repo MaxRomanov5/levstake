@@ -8,7 +8,7 @@ const [date, setDate] = useState('-');
 if(!pool){
     pool = {}
 }
-
+console.log(pool);
 
 useEffect(() => {
     if(pool[0]?.start_date !== undefined){
@@ -31,7 +31,7 @@ useEffect(() => {
     return (
        <div className={styled.card}>
 <Stack flexDirection='row' alignItems='center' sx={{marginBottom:'32px'}}>
-    <img width='48px' height='48px' src={pool?.asset?.picture || images.ethereum} alt="coin" />
+    <img width='48px' height='48px' src={pool[0]?.asset?.picture || images.ethereum} alt="coin" />
     <Typography variant='h2' sx={{fontSize:"24px",lineHeight:'31px',color:'primary.main',marginLeft:'17px'}}>{pool[0]?.asset?.blockchain?.currency_name || '-'}</Typography>
  
 </Stack>

@@ -119,6 +119,7 @@ const TableRowBuy = ({ position, active }) => {
             color: "white",
             fontFamily: "Montserrat",
             lineHeight: "16px",
+            padding:'0px 16px'
           }}
         >
  <img
@@ -137,6 +138,7 @@ const TableRowBuy = ({ position, active }) => {
             color: "white",
             fontFamily: "Montserrat",
             lineHeight: "16px",
+            padding:'7px'
           }} align="center"
         >
           {/* <img src={open ? images.tableArrowOpen:images.tableArrowClose} alt="arrow" style={{position:'absolute',top:'50%',left:'8px',transform:'translateY(-50%)'}} /> */}
@@ -153,7 +155,8 @@ const TableRowBuy = ({ position, active }) => {
             fontSize: "12px",
             color: "white",
             fontFamily: "Montserrat",
-            lineHeight: "16px",paddingRight:'8px'
+            lineHeight: "16px",
+            padding:'7px'
           }}
         >
         <Tooltip sx={{display:'block'}} arrow title={`Leveraged amount : ${Number.isInteger(Number(position?.total_amount||'1')) ? Number(position?.total_amount||'1') :Number(position.total_amount).toFixed(1)} `}>  {Number.isInteger(Number(position.user_amount)) ? Number(position.user_amount) :Number(position.user_amount).toFixed(1)}</Tooltip>
@@ -166,7 +169,8 @@ const TableRowBuy = ({ position, active }) => {
             color: "white",
             fontFamily: "Montserrat",
             lineHeight: "16px",
-            textWrap: "nowrap",paddingRight:'8px'
+            textWrap: "nowrap",
+            padding:'7px'
           }}
         >
           {position.leverage}
@@ -178,7 +182,8 @@ const TableRowBuy = ({ position, active }) => {
             fontSize: "12px",
             color: "white",
             fontFamily: "Montserrat",
-            lineHeight: "16px",paddingRight:'8px'
+            lineHeight: "16px",
+            padding:'7px'
           }}
         >
           {Number.isInteger(Number(position.staking_pool.profit_rate)) ? Number(position.staking_pool.profit_rate) + "%" :Number(position.staking_pool.profit_rate).toFixed(1) + "%"}
@@ -193,7 +198,8 @@ const TableRowBuy = ({ position, active }) => {
             color: "white",
             textWrap: "nowrap",
             paddingTop: "9px",
-            paddingBottom: "9px",paddingRight:'8px'
+            paddingBottom: "9px",
+            padding:'7px'
           }}
         >
           {position.staking_pool.pool_duration}
@@ -206,7 +212,8 @@ const TableRowBuy = ({ position, active }) => {
             color: "white",
             fontFamily: "Montserrat",
             lineHeight: "16px",
-            textWrap: "nowrap",paddingRight:'8px'
+            textWrap: "nowrap",
+            padding:'7px'
           }}
         >
           On maturity
@@ -218,7 +225,8 @@ const TableRowBuy = ({ position, active }) => {
             fontSize: "12px",
             color: "white",
             fontFamily: "Montserrat",
-            lineHeight: "16px",paddingRight:'8px'
+            lineHeight: "16px",
+            padding:'7px'
           }}
         >
           {Number(position.liquidation_price).toFixed(3)}
@@ -234,7 +242,8 @@ const TableRowBuy = ({ position, active }) => {
             color: "#9A9B9B",
             textWrap: "nowrap",
             paddingTop: "9px",
-            paddingBottom: "9px",paddingRight:'8px'
+            paddingBottom: "9px",
+            padding:'7px'
           }}
         >
          <Tooltip sx={{display:'block'}} arrow title={`${newDate}`}>{finalDate}</Tooltip> 
@@ -250,13 +259,17 @@ const TableRowBuy = ({ position, active }) => {
             fontSize: "12px",
             fontFamily: "Montserrat",
             lineHeight: "16px",
-            color: "#9A9B9B",
+            color: "#7A56F8",
+            // display:'flex',
+            // flexDirection:'column',
             textWrap: "nowrap",
-            paddingTop: "9px",
-            paddingBottom: "9px",paddingRight:'8px'
+            paddingTop: "0px",
+            paddingBottom: "0px",
+            padding:'7px'
           }}
         >
-          {statusMaker(position.status) }
+          <p>{position.status.split('_').join(' ')}</p> 
+         <p style={{color:'#9A9B9B'}}>{position.position_close_date ? position.position_close_date : ''}</p>
         </TableCell>
         <TableCell align="center"
           sx={{
@@ -265,7 +278,8 @@ const TableRowBuy = ({ position, active }) => {
             fontSize: "12px",
             color: "white",
             fontFamily: "Montserrat",
-            lineHeight: "16px",paddingRight:'8px'
+            lineHeight: "16px",
+            padding:'7px'
           }}
         >
           <a
@@ -301,7 +315,7 @@ const TableRowBuy = ({ position, active }) => {
               onClick={withdrawPosition}
               sx={{
                 display: "flex",
-                padding: "16px 8px",
+                padding: "17px 8px",
                 position:'relative',
                 color:'#7A56F8',
                 ...(position.status !== "closed"&&{"&&&&&": { color: "grey" }})

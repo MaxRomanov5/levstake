@@ -82,7 +82,7 @@ return Number(int)
   }
 
   const currentPoolData = pools.find((pool) => pool.id == instrument);
-console.log(currentPoolData);
+
   const DisplayingErrorMessagesSchema = Yup.object().shape({
     leverage: Yup.number()
       .positive(pools)
@@ -105,13 +105,47 @@ console.log(currentPoolData);
     return amount * lever;
   }
 
+
+  async function approveMain(web3,contractorAddres,normalWallet) {
+    
+    try {
+      const myApprove = new web3.eth.Contract(
+        currentPoolData.asset.abi,
+        currentPoolData.asset.address
+      );
+    
+      const approve = myApprove.methods.approve(
+        contractorAddres,
+        Number(userAmount)*10**currentPoolData.asset.decimal
+      );
+      const transactionApr = {
+        from: normalWallet,
+        to:  currentPoolData.asset.address,
+        data: approve.encodeABI(),
+        // Initial value, to be set by the spending cap function
+        gas: (150000).toString(),
+      };
+    console.log('start approve');
+    
+    const resultapr = await window.ethereum.request({
+    method: "eth_sendTransaction",
+    params: [transactionApr],
+    });
+    } catch (error) {
+      
+      console.log('err');
+    }
+
+    
+  }
+
   async function submitF(e) {
     e.preventDefault();
     const buyBtn = document.querySelector("#buyBtn");
     
     startPending()
     setIsLoading(true)
-    try {
+    // try {
       const web3 = new Web3(window.ethereum);
       const wallet = localStorage.load("wallet");
       const normalWallet = web3.utils.toChecksumAddress(wallet);
@@ -133,34 +167,16 @@ console.log(currentPoolData);
         currentPoolData.asset.blockchain.master_contract_abi,
         contractorAddres
       );
+if (dataContr.signed_data.currency !=="0x0000000000000000000000000000000000000000") {
 
-      const myApprove = new web3.eth.Contract(
-        currentPoolData.asset.abi,
-        currentPoolData.asset.address
-      );
 
-      const approve = myApprove.methods.approve(
-        contractorAddres,
-        Number(userAmount)*10**currentPoolData.asset.decimal
-      );
-      const transactionApr = {
-        from: normalWallet,
-        to:  currentPoolData.asset.address,
-        data: approve.encodeABI(),
-        // Initial value, to be set by the spending cap function
-        gas: (150000).toString(),
-      };
-console.log('start approve');
-try {
-  const resultapr = await window.ethereum.request({
-    method: "eth_sendTransaction",
-    params: [transactionApr],
-  });
-} catch (error) {
-  console.log(err);
-}
-     
+  await approveMain(web3,contractorAddres,normalWallet)
+
+ 
 console.log('end approve');
+  
+}
+try{
       const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,
         dataContr.signed_data.amount,
         dataContr.signed_data.currency,
@@ -175,6 +191,7 @@ console.log('end approve');
         to: contractorAddres,
         data: myFunc.encodeABI(),
         gas: (150000).toString(),
+        ...(dataContr.signed_data.currency ==="0x0000000000000000000000000000000000000000"&&{value:dataContr.signed_data.amount})
       };
       console.log('start trans');
       const result = await window.ethereum.request({
@@ -465,7 +482,7 @@ border:'0'
               }}
             >
               Leverage{" "}
-              <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
+              <Typography sx={{ fontWeight: "700",fontSize:'12px',fontFamily:"Montserrat" }}>
                 {leverage ? leverage + "x" : '-'}
               </Typography>
             </Typography>
@@ -479,7 +496,7 @@ border:'0'
               }}
             >
               Interest yearly{" "}
-              <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
+              <Typography sx={{ fontWeight: "700",fontSize:'12px',fontFamily:"Montserrat" }}>
                 {currentPoolData?.profit_rate ? changeInt(currentPoolData?.profit_rate) + "%" : '-'}
               </Typography>
             </Typography>
@@ -493,7 +510,7 @@ border:'0'
               }}
             >
               Leveraged yearly interest{" "}
-              <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
+              <Typography sx={{ fontWeight: "700",fontSize:'12px',fontFamily:"Montserrat" }}>
                 {currentPoolData?.profit_rate ? (
                  changeInt( Number(currentPoolData?.profit_rate) * Number(leverage)
                 )) + "%":'-'}
@@ -509,7 +526,7 @@ border:'0'
               }}
             >
               Profit share{" "}
-              <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
+              <Typography sx={{ fontWeight: "700",fontSize:'12px',fontFamily:"Montserrat" }}>
                 {currentPoolData?.commission ? Number(currentPoolData?.commission).toFixed(0) + "%":'-'}
               </Typography>
             </Typography>
@@ -524,7 +541,7 @@ border:'0'
               }}
             >
               
-              <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
+              <Typography sx={{ fontWeight: "700",fontSize:'12px',fontFamily:"Montserrat" }}>
                 {/* {currentPoolData?.settlement_commission ? Number(currentPoolData?.settlement_commission).toFixed(0)  + "%" : '-'} */}
               </Typography>
             </Typography>
@@ -546,7 +563,7 @@ border:'0'
               }}
             >
               Return
-              <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
+              <Typography sx={{ fontWeight: "700",fontSize:'12px',fontFamily:"Montserrat" }}>
 
                 {userAmount*leverage*currentPoolData.profit_rate/100*currentPoolData.duration_in_seconds/ 365 / 24 / 60 / 60 * (100 - currentPoolData.commission) / 100}
               </Typography>

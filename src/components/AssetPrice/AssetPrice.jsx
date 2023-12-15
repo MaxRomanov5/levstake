@@ -33,8 +33,8 @@ if(currentPoolData){
 }, []);
     return (
         <>
-             <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Asset price <Typography sx={{fontWeight: "700",fontFamily:"Montserrat"}}>{assetPrice || '-'}</Typography></Typography>
-    <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Liquidation price <Typography sx={{fontWeight: "700",fontFamily:"Montserrat"}}>{assetPrice ? (assetPrice - (assetPrice/leverage*(100-settlementCommission)/100)).toFixed(3) : '-'}</Typography></Typography> 
+             <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Asset price <Typography sx={{fontWeight: "700",fontSize:'12px',fontFamily:"Montserrat"}}>{assetPrice || '-'}</Typography></Typography>
+    <Typography color='primary.main' variant="tableCellMain" sx={{display:'flex',justifyContent:'space-between',marginBottom:'12px'}}>Liquidation price <Typography sx={{fontWeight: "700",fontSize:'12px',fontFamily:"Montserrat"}}>{assetPrice ? (assetPrice - (assetPrice/leverage*(100-settlementCommission)/100)).toFixed(3) : '-'}</Typography></Typography> 
         </>
     );
 }
