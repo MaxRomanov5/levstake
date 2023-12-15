@@ -21,6 +21,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import Assetprice from "../AssetPrice/AssetPrice";
 import {useUser} from '../../Context/userContext.jsx'
+
 const BuySellBlock = ({ pools, selectedPool }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [action, setAction] = useState("buy");
@@ -70,19 +71,25 @@ const {isPending,startPending,endPending} = useUser()
     }
   }, [selectedPool]);
 
-  const currentPoolData = pools.find((pool) => pool.id == instrument);
-console.log(currentPoolData);
+  function changeInt(int) {
+    if(Number.isInteger(Number(int))){
+return Number(int)
+    } else{
+      Number(int).toFixed(1)
+    }
+  }
 
-console.log(currentPoolData);
+  const currentPoolData = pools.find((pool) => pool.id == instrument);
+
   const DisplayingErrorMessagesSchema = Yup.object().shape({
     leverage: Yup.number()
       .positive(pools)
       .min(
-        currentPoolData.pool_conditions.min_leverage,
+        currentPoolData?.pool_conditions.min_leverage,
         "Enter bigger leverage!"
       )
       .max(
-        currentPoolData.pool_conditions.max_leverage,
+        currentPoolData?.pool_conditions.max_leverage,
         "Enter smaller leverage!"
       )
       .required("Required"),
@@ -126,7 +133,7 @@ console.log(currentPoolData);
 
       const myApprove = new web3.eth.Contract(
         currentPoolData.asset.abi,
-        "0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92"
+        contractorAddres
       );
 
       const approve = myApprove.methods.approve(
@@ -135,7 +142,7 @@ console.log(currentPoolData);
       );
       const transactionApr = {
         from: normalWallet,
-        to: "0x9a0dcDcD2e92b588909DCCe1351F78549d3cAE92",
+        to: contractorAddres,
         data: approve.encodeABI(),
         // Initial value, to be set by the spending cap function
         gas: (150000).toString(),
@@ -181,7 +188,7 @@ console.log('end approve');
     }
   }
   useEffect(() => {
-    console.log(userAmount,leverage,currentPoolData.id);
+    // console.log(userAmount,leverage,currentPoolData.id);
     // debounce(() => {
     
       if(userAmount && leverage ){
@@ -210,21 +217,23 @@ console.log('end approve');
             ></BuySellSwitch>
             <Box sx={{ display: "flex", gap: "12px" }}>
               <FormControl fullWidth>
-                <InputLabel
+                <Box
                   sx={{
                     fontSize: "12px",
                     color: "primary.main",
-                    top: "6px",
+                    top: "3px",
+                    // position:'absolute',
                     left: "-12px",
+                    marginBottom:'10px',
                     fontFamily: "Montserrat",
                     fontWeight: "500",
                   }}
                   htmlFor="Instrument"
                 >
-                  Instrument
-                </InputLabel>
+                  Selected pool
+                </Box>
 
-                <Select
+                <Select IconComponent={(props)=>(<img style={{right:'12px',top:'45%'}} className={props.className} src={images.arrowBuySell}></img>)} 
                   sx={{
                     fontFamily: "Montserrat",
                     fontSize: "16px",
@@ -260,22 +269,22 @@ console.log('end approve');
                   label="Instrument"
                   onChange={handleInstrument}
                 >
-                  {pools.map((pool) => {
+                  {pools.length !== 0 && pools.map((pool) => {
                     return (
-                      <MenuItem key={pool.id} value={`${pool.id}`}>
+                      <MenuItem key={pool.id} value={`${pool?.id}`}>
                         <img
                           width="16px"
                           height="16px"
-                          src={pool.asset.picture}
+                          src={pool?.asset.picture}
                         ></img>
-                        {pool.asset.name}{" | "}
-                        {pool.pool_duration}{" | "}
-                        {pool.pool_conditions.min_leverage +
+                        {pool?.asset?.name}{" | "}
+                        {pool?.pool_duration}{" | "}
+                        {pool?.pool_conditions.min_leverage +
                           "x" +
                           " - " +
-                          pool.pool_conditions.max_leverage +
+                          pool?.pool_conditions.max_leverage +
                           "x"}{" | "}
-                        {Number(pool.profit_rate).toFixed(1)}{'%  APY'}
+                        {changeInt(Number(pool?.profit_rate))}{'%  APY'}
                       </MenuItem>
                     );
                   })}
@@ -429,8 +438,8 @@ border:'0'
                   padding: "12px 5px",
                   color: "white",
                 }}
-                min={currentPoolData.pool_conditions.min_leverage}
-                max={currentPoolData.pool_conditions.max_leverage}
+                min={currentPoolData?.pool_conditions?.min_leverage}
+                max={currentPoolData?.pool_conditions?.max_leverage}
                 placeholder="1"
                 className={styled.input}
                 type="range"
@@ -449,8 +458,8 @@ border:'0'
               }}
             >
               Leverage{" "}
-              <Typography sx={{ fontWeight: "500" }}>
-                {leverage + "x"}
+              <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
+                {leverage ? leverage + "x" : '-'}
               </Typography>
             </Typography>
             <Typography
@@ -463,8 +472,8 @@ border:'0'
               }}
             >
               Interest yearly{" "}
-              <Typography sx={{ fontWeight: "500" }}>
-                {Number(currentPoolData.profit_rate).toFixed(1) + "%"}
+              <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
+                {currentPoolData?.profit_rate ? changeInt(currentPoolData?.profit_rate) + "%" : '-'}
               </Typography>
             </Typography>
             <Typography
@@ -476,11 +485,11 @@ border:'0'
                 marginBottom: "12px",
               }}
             >
-              Leveraged Yearly interest{" "}
-              <Typography sx={{ fontWeight: "500" }}>
-                {(
-                  Number(currentPoolData.profit_rate) * Number(leverage)
-                ).toFixed(1) + "%"}
+              Leveraged yearly interest{" "}
+              <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
+                {currentPoolData?.profit_rate ? (
+                 changeInt( Number(currentPoolData?.profit_rate) * Number(leverage)
+                )) + "%":'-'}
               </Typography>
             </Typography>
             <Typography
@@ -493,10 +502,11 @@ border:'0'
               }}
             >
               Profit share{" "}
-              <Typography sx={{ fontWeight: "500" }}>
-                {Number(currentPoolData.commission).toFixed(0) + "%"}
+              <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
+                {currentPoolData?.commission ? Number(currentPoolData?.commission).toFixed(0) + "%":'-'}
               </Typography>
             </Typography>
+           
             <Typography
               color="primary.main"
               variant="tableCellMain"
@@ -506,32 +516,33 @@ border:'0'
                 marginBottom: "12px",
               }}
             >
-              Calculate profit
-              <Typography sx={{ fontWeight: "500" }}>
-                {profit}
+              
+              <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
+                {/* {currentPoolData?.settlement_commission ? Number(currentPoolData?.settlement_commission).toFixed(0)  + "%" : '-'} */}
               </Typography>
             </Typography>
-            <Typography
-              color="primary.main"
-              variant="tableCellMain"
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginBottom: "12px",
-              }}
-            >
-              Settlement{" "}
-              <Typography sx={{ fontWeight: "500" }}>
-                {Number(currentPoolData.settlement_commission).toFixed(0) + "%"}
-              </Typography>
-            </Typography>
+           
             <Assetprice
               settlementCommission={Number(
-                currentPoolData.settlement_commission
+                currentPoolData?.settlement_commission
               )}
               currentPoolData={currentPoolData}
               leverage={leverage}
             ></Assetprice>
+             <Typography
+              color="primary.main"
+              variant="tableCellMain"
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginBottom: "12px",
+              }}
+            >
+              Return
+              <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
+                {profit}
+              </Typography>
+            </Typography>
             <Box
               sx={{
                 backgroundColor: "#161C2A",
@@ -546,7 +557,7 @@ border:'0'
                 <img
                   width="16px"
                   height="16px"
-                  src={currentPoolData.asset.picture}
+                  src={currentPoolData?.asset?.picture || images.ethereum}
                   alt="coin"
                 />
                 <input

@@ -53,18 +53,20 @@ function handleActive(e) {
         <Table sx={{padding:'8px'}}  aria-label="customized table">
           <TableHead sx={{color:'#CACBCB'}}>
             <TableRow >
-              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" >Asset</TableCell>
+            <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="left" ></TableCell>
+              
+              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Asset</TableCell>
               <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Amount</TableCell>
               <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Leverage</TableCell>
-              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em',textWrap:'nowrap'}} align="center" >Yearly yield</TableCell>
-              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >TX</TableCell>
+              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em',textWrap:'nowrap'}} align="center" >APY</TableCell>
+              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Period</TableCell>
               <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Interest payment</TableCell>
 
-              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Liquidation price</TableCell>
+              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Liq price</TableCell>
               <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Open date</TableCell>
-              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Close date</TableCell>
+              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" ></TableCell>
               <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Status</TableCell>
-              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Period</TableCell>
+             
              {active === 'active' && <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em',textWrap:'nowrap'}} align="left" ></TableCell>}
               
             </TableRow>

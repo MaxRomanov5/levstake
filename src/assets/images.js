@@ -18,6 +18,7 @@ import status from './Status.svg'
 import iconClose from './iconClose.svg'
 import metaLogo from './full-metamask-logo.png'
 import exit from './exit.svg'
+import arrowBuySell from './arrowBuySellBlock.svg'
 export default {
     levlion,
     levtext,
@@ -37,5 +38,6 @@ export default {
     status,
     iconClose
     ,metaLogo,
-    exit
+    exit,
+    arrowBuySell
 }

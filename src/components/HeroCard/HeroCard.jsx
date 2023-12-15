@@ -19,7 +19,7 @@ useEffect(() => {
         const newDate = new Date(date)
         console.log(newDate.getDate());
         // const a = date.getDay()
-        setDate(`${newDate.getDate()} ${monthNames[newDate.getMonth()]}`)
+        setDate(`${monthNames[newDate.getMonth()]} ${newDate.getDate()}`)
     }
 
 

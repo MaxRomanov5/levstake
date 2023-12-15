@@ -15,10 +15,10 @@ const ControlPools = () => {
   return (
     <div className={styled.mainBox}>
       <div className={styled.buySell}>
-        {pools && pools.length !== 0  && (
+        {pools && pools.length !== 0  &&(
           <BuySellBlock
             selectedPool={selectedPool}
-            pools={pools}
+            pools={pools || []}
           ></BuySellBlock> 
         )}
       </div>
@@ -32,13 +32,13 @@ const ControlPools = () => {
           Available pools
         </Typography>
 
-        {pools && pools.length !== 0 && (
+        {pools && pools.length !== 0 ? (
           <LiquidityPool
             type="dashboard"
             setSelectedPool={setSelectedPool}
             pools={pools}
           ></LiquidityPool>
-        )}
+        ):<p style={{padding:'40px',textAlign:'center',color:'grey',fontSize:'15px',fontFamily:'Montserrat'}}>No available pools</p>}
       </div>
     </div>
   );

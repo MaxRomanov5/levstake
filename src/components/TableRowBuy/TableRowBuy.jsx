@@ -3,7 +3,7 @@ import {
   TableCell,
   Button,
   useTheme,
-  useMediaQuery,
+  useMediaQuery,Tooltip
 } from "@mui/material";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useState } from "react";
@@ -26,7 +26,7 @@ const TableRowBuy = ({ position, active }) => {
       return <span style={{ color: "#C23221" }}>funds are withdrawn</span>;
     }
   }
-
+console.log(position );
   async function withdrawPosition(e) {
     try {
       console.log(e.target.id);
@@ -99,7 +99,6 @@ const TableRowBuy = ({ position, active }) => {
           },
         }}
       >
-     
         <TableCell
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
@@ -111,14 +110,28 @@ const TableRowBuy = ({ position, active }) => {
             lineHeight: "16px",
           }}
         >
-          {/* <img src={open ? images.tableArrowOpen:images.tableArrowClose} alt="arrow" style={{position:'absolute',top:'50%',left:'8px',transform:'translateY(-50%)'}} /> */}
-          <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-            {" "}
-            <img
+ <img
               src={position.staking_pool.asset.picture}
               style={{ width: "24px", height: "24px" }}
               alt="coin"
             ></img>
+        </TableCell>
+     
+        <TableCell
+          sx={{
+            ...(open && { borderBottom: "0px solid white" }),
+            position: "relative",
+            fontWeight: "500",
+            fontSize: "12px",
+            color: "white",
+            fontFamily: "Montserrat",
+            lineHeight: "16px",
+          }} align="center"
+        >
+          {/* <img src={open ? images.tableArrowOpen:images.tableArrowClose} alt="arrow" style={{position:'absolute',top:'50%',left:'8px',transform:'translateY(-50%)'}} /> */}
+          <div style={{  alignItems: "center" }}>
+            {" "}
+           
             {position.staking_pool.asset.name}
           </div>
         </TableCell>
@@ -132,7 +145,7 @@ const TableRowBuy = ({ position, active }) => {
             lineHeight: "16px",paddingRight:'8px'
           }}
         >
-          {Number(position.user_amount).toFixed(3)}
+        <Tooltip title={`Leveraged amount : ${Number.isInteger(Number(position.total_amount)) ? Number(position.total_amount) :Number(position.total_amount).toFixed(1)} `}>  {Number.isInteger(Number(position.user_amount)) ? Number(position.user_amount) :Number(position.user_amount).toFixed(1)}</Tooltip>
         </TableCell>
         <TableCell align="center"
           sx={{
@@ -157,31 +170,22 @@ const TableRowBuy = ({ position, active }) => {
             lineHeight: "16px",paddingRight:'8px'
           }}
         >
-          {Number(position.staking_pool.profit_rate).toFixed(1) + "%"}
+          {Number.isInteger(Number(position.staking_pool.profit_rate)) ? Number(position.staking_pool.profit_rate) + "%" :Number(position.staking_pool.profit_rate).toFixed(1) + "%"}
         </TableCell>
         <TableCell align="center"
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
             fontWeight: "500",
             fontSize: "12px",
-            color: "white",
             fontFamily: "Montserrat",
-            lineHeight: "16px",paddingRight:'8px'
+            lineHeight: "16px",
+            color: "white",
+            textWrap: "nowrap",
+            paddingTop: "9px",
+            paddingBottom: "9px",paddingRight:'8px'
           }}
         >
-          <a
-            style={{ display: "block", position: "relative" }}
-            href={position.transaction_url}
-          >
-            {position.transaction_url ? (
-              <img src={images.linkGreen}></img>
-            ) : (
-              <span
-               
-                className="loader"
-              ></span>
-            )}
-          </a>
+          {position.staking_pool.pool_duration}
         </TableCell>
         <TableCell align="center"
           sx={{
@@ -222,22 +226,31 @@ const TableRowBuy = ({ position, active }) => {
             paddingBottom: "9px",paddingRight:'8px'
           }}
         >
-          21/05/2023 14:53
+          date
         </TableCell>
         <TableCell align="center"
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
             fontWeight: "500",
             fontSize: "12px",
+            color: "white",
             fontFamily: "Montserrat",
-            lineHeight: "16px",
-            color: "#9A9B9B",
-            textWrap: "nowrap",
-            paddingTop: "9px",
-            paddingBottom: "9px",paddingRight:'8px'
+            lineHeight: "16px",paddingRight:'8px'
           }}
         >
-          21/05/2023 14:53
+          <a
+            style={{ display: "block", position: "relative" }}
+            href={position.transaction_url}
+          >
+            {position.transaction_url ? (
+              <img src={images.linkGreen}></img>
+            ) : (
+              <span
+               
+                className="loader"
+              ></span>
+            )}
+          </a>
         </TableCell>
 
 
@@ -257,21 +270,7 @@ const TableRowBuy = ({ position, active }) => {
         >
           {position.status.split("_").join(" ")}
         </TableCell>
-        <TableCell align="center"
-          sx={{
-            ...(open && { borderBottom: "0px solid white" }),
-            fontWeight: "500",
-            fontSize: "12px",
-            fontFamily: "Montserrat",
-            lineHeight: "16px",
-            color: "#9A9B9B",
-            textWrap: "nowrap",
-            paddingTop: "9px",
-            paddingBottom: "9px",paddingRight:'8px'
-          }}
-        >
-          {position.staking_pool.pool_duration}
-        </TableCell>
+        
         {active === "active" && (
           <TableCell
             sx={{
