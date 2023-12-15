@@ -9,18 +9,20 @@ const ControlPools = () => {
   const [selectedPool, setSelectedPool] = useState({});
 
   useEffect(() => {
-    api.getPools().then((data) => setPools(data));
+    api.getPools().then((data) =>{ setPools(data)
+    setSelectedPool(data[0].id)});
   }, []);
 
   return (
     <div className={styled.mainBox}>
       <div className={styled.buySell}>
-        {/* {pools && pools.length !== 0  &&( */}
+        {pools && pools.length !== 0  &&
           <BuySellBlock
             selectedPool={selectedPool}
-            pools={pools || []}
+            setSelectedPool={setSelectedPool}
+            pools={pools}
           ></BuySellBlock> 
-        {/* )} */}
+       } 
       </div>
 
       <div className={styled.pool}>
@@ -37,6 +39,7 @@ const ControlPools = () => {
             type="dashboard"
             setSelectedPool={setSelectedPool}
             pools={pools}
+            selectedPool={selectedPool}
           ></LiquidityPool>
         ):<p style={{padding:'40px',textAlign:'center',color:'grey',fontSize:'15px',fontFamily:'Montserrat'}}>No available pools</p>}
       </div>

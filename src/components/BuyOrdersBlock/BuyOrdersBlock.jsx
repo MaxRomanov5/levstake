@@ -64,9 +64,9 @@ function handleActive(e) {
 
               <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Liq price</TableCell>
               <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Open date</TableCell>
-              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" ></TableCell>
+
               <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" >Status</TableCell>
-             
+              <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em'}} align="center" ></TableCell>
              {active === 'active' && <TableCell sx={{borderBottomColor:'#3A3B3C', padding:'8px', color:'#CACBCB',fontFamily: 'Montserrat',fontSize: '12px',fontWeight: '400',lineHeight: '18px',letterSpacing: '0.04em',textWrap:'nowrap'}} align="left" ></TableCell>}
               
             </TableRow>

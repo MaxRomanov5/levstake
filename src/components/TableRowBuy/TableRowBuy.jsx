@@ -20,10 +20,13 @@ const TableRowBuy = ({ position, active }) => {
 
   function statusMaker(status) {
     if (status === "waiting_for_funds") {
-      return <span style={{ color: "#3AADA4" }}>waiting for funds</span>;
+      return <span style={{ color: "#7A56F8" }}>waiting for funds</span>;
     }
-    if (status === "funds_are_withdrawn") {
-      return <span style={{ color: "#C23221" }}>funds are withdrawn</span>;
+    if (status === "open") {
+      return <span style={{ color: "green" }}>open</span>;
+    }
+    if (status === "closed") {
+      return <span style={{ color: "#F33E29" }}>closed</span>;
     }
   }
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -31,7 +34,7 @@ const TableRowBuy = ({ position, active }) => {
 ]
   const date = Date.parse(position.position_open_date)
   const newDate = new Date(date)
-  console.log(newDate.getDate());
+
   // const a = date.getDay()
  const finalDate = `${monthNames[newDate.getMonth()]} ${newDate.getDate()}`
 
@@ -153,7 +156,7 @@ const TableRowBuy = ({ position, active }) => {
             lineHeight: "16px",paddingRight:'8px'
           }}
         >
-        <Tooltip sx={{display:'block'}} arrow title={`Leveraged amount : ${Number.isInteger(Number(position.total_amount)) ? Number(position.total_amount) :Number(position.total_amount).toFixed(1)} `}>  {Number.isInteger(Number(position.user_amount)) ? Number(position.user_amount) :Number(position.user_amount).toFixed(1)}</Tooltip>
+        <Tooltip sx={{display:'block'}} arrow title={`Leveraged amount : ${Number.isInteger(Number(position?.total_amount||'1')) ? Number(position?.total_amount||'1') :Number(position.total_amount).toFixed(1)} `}>  {Number.isInteger(Number(position.user_amount)) ? Number(position.user_amount) :Number(position.user_amount).toFixed(1)}</Tooltip>
         </TableCell>
         <TableCell align="center"
           sx={{
@@ -236,6 +239,25 @@ const TableRowBuy = ({ position, active }) => {
         >
          <Tooltip sx={{display:'block'}} arrow title={`${newDate}`}>{finalDate}</Tooltip> 
         </TableCell>
+        
+
+
+
+        <TableCell align="center"
+          sx={{
+            ...(open && { borderBottom: "0px solid white" }),
+            fontWeight: "500",
+            fontSize: "12px",
+            fontFamily: "Montserrat",
+            lineHeight: "16px",
+            color: "#9A9B9B",
+            textWrap: "nowrap",
+            paddingTop: "9px",
+            paddingBottom: "9px",paddingRight:'8px'
+          }}
+        >
+          {statusMaker(position.status) }
+        </TableCell>
         <TableCell align="center"
           sx={{
             ...(open && { borderBottom: "0px solid white" }),
@@ -259,24 +281,6 @@ const TableRowBuy = ({ position, active }) => {
               ></span>
             )}
           </a>
-        </TableCell>
-
-
-
-        <TableCell align="center"
-          sx={{
-            ...(open && { borderBottom: "0px solid white" }),
-            fontWeight: "500",
-            fontSize: "12px",
-            fontFamily: "Montserrat",
-            lineHeight: "16px",
-            color: "#9A9B9B",
-            textWrap: "nowrap",
-            paddingTop: "9px",
-            paddingBottom: "9px",paddingRight:'8px'
-          }}
-        >
-          {position.status.split("_").join(" ")}
         </TableCell>
         
         {active === "active" && (

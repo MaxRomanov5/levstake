@@ -23,7 +23,7 @@ import * as Yup from "yup";
 import Assetprice from "../AssetPrice/AssetPrice";
 import {useUser} from '../../Context/userContext.jsx'
 
-const BuySellBlock = ({ pools, selectedPool }) => {
+const BuySellBlock = ({ pools, selectedPool,setSelectedPool }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [action, setAction] = useState("buy");
   const [instrument, setInstrument] = useState(pools[0]?.id);
@@ -36,19 +36,18 @@ const BuySellBlock = ({ pools, selectedPool }) => {
 const {isPending,startPending,endPending} = useUser()
   const handleLeverage = (e) => {
     setLeverage(e.target.value);
-    // changeProfit()
+ 
   };
+
   const handleInstrument = (e) => {
     setInstrument(e.target.value);
+    setSelectedPool(e.target.value)
     setLeverage(
       pools.find((pool) => pool.id == e.target.value).pool_conditions
         .min_leverage
     );
-    // changeProfit()
+  
   };
-  // const changeProfit = useCallback(
- 
-  // );
 
 
   const handleAction = (e, newAction) => {
@@ -63,13 +62,15 @@ const {isPending,startPending,endPending} = useUser()
   }
 
   useEffect(() => {
+
     if (typeof selectedPool === "number") {
+
       setInstrument(selectedPool);
       setLeverage(
         pools.find((pool) => pool.id == selectedPool).pool_conditions
           .min_leverage
       );
-    }
+    } 
   }, [selectedPool]);
 
   function changeInt(int) {
@@ -81,7 +82,7 @@ return Number(int)
   }
 
   const currentPoolData = pools.find((pool) => pool.id == instrument);
-
+console.log(currentPoolData);
   const DisplayingErrorMessagesSchema = Yup.object().shape({
     leverage: Yup.number()
       .positive(pools)
@@ -150,10 +151,15 @@ console.log(currentPoolData);
         gas: (150000).toString(),
       };
 console.log('start approve');
-      const resultapr = await window.ethereum.request({
-        method: "eth_sendTransaction",
-        params: [transactionApr],
-      });
+try {
+  const resultapr = await window.ethereum.request({
+    method: "eth_sendTransaction",
+    params: [transactionApr],
+  });
+} catch (error) {
+  console.log(err);
+}
+     
 console.log('end approve');
       const myFunc = myContract.methods.stakeAssets(dataContr.signed_data.position_id,
         dataContr.signed_data.amount,
@@ -175,13 +181,8 @@ console.log('end approve');
         method: "eth_sendTransaction",
         params: [transaction],
       });
-      console.log(result);
-      fetch(`https://api.polygonscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=${result}&apikey=XHV9XRQJXWJITE659S9KFESQGYEPM8U2SF`)
-.then((data)=>{
-  return data.json()
-}).then(data=>{
-  console.log(data);
-})
+   
+
       endPending()
       setIsLoading(false)
     } catch (error) {
@@ -276,7 +277,7 @@ console.log('end approve');
                 >
                   {pools.length !== 0 && pools.map((pool) => {
                     return (
-                      <MenuItem key={pool.id} value={`${pool?.id}`}>
+                      <MenuItem key={pool.id} value={pool?.id}>
                         <img
                           width="16px"
                           height="16px"
@@ -293,6 +294,7 @@ console.log('end approve');
                       </MenuItem>
                     );
                   })}
+                  
                 </Select>
               </FormControl>
 
@@ -545,7 +547,8 @@ border:'0'
             >
               Return
               <Typography sx={{ fontWeight: "700",fontFamily:"Montserrat" }}>
-                {profit}
+
+                {userAmount*leverage*currentPoolData.profit_rate/100*currentPoolData.duration_in_seconds/ 365 / 24 / 60 / 60 * (100 - currentPoolData.commission) / 100}
               </Typography>
             </Typography>
             <Box
