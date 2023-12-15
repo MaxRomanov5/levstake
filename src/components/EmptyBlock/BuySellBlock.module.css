@@ -1,0 +1,83 @@
+.block{
+    padding: 24px;
+    border-radius: 8px;
+    background-color: #FFFFFF1A;
+}
+.wrapAmount{
+display: flex;
+gap: 8px;
+flex-grow: 1;
+align-items: center;
+}
+
+.input{
+    background-color: transparent;
+    display: block;
+
+    border: none;
+    outline: none;
+color: white;
+font-family: Montserrat;
+font-size: 16px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: 0em;
+text-align: left;
+width: 100%;
+}
+.input:hover,.input:focus{
+
+}
+
+
+/* @media screen and (min-width: 768px){
+    .mainBox{
+       flex-direction: row;
+        gap: 24px;
+        
+    }
+    .buySell{
+        max-width: 538px;
+    }
+    .pool{
+        order: -1;
+        width: 100%;
+    }
+} */
+
+
+.mainLoader{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: rgb(97, 93, 93,0.5);
+    z-index: 10000000;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loaderMain {
+    /* position: absolute;
+    top:0;
+    right: -5px; */
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    border: 1px solid #FFF;
+    border-bottom-color: rgb(58, 173, 164);
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 

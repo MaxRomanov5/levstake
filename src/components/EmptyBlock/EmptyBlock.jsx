@@ -45,7 +45,7 @@ const BuySellBlock = ({ pools, selectedPool,setSelectedPool }) => {
         
       >
         {({ errors, touched }) => (
-          <Form onSubmit={submitF} className={styled.block}>
+          <Form  className={styled.block}>
             <BuySellSwitch
               action={action}
               handleAction={handleAction}
@@ -100,13 +100,13 @@ const BuySellBlock = ({ pools, selectedPool,setSelectedPool }) => {
                   }}
                   id="Instrument"
                   variant="standard"
-                  value={instrument}
+                  
                   label="Instrument"
-                  onChange={handleInstrument}
+          
                 >
           
                     return (
-                      <MenuItem key={pool.id} value={pool?.id}>
+                      <MenuItem >
                         -
                       </MenuItem>
                
@@ -266,13 +266,11 @@ const BuySellBlock = ({ pools, selectedPool,setSelectedPool }) => {
                 <img
                   width="16px"
                   height="16px"
-                  src={currentPoolData?.asset?.picture || images.ethereum}
+                  src={images.ethereum}
                   alt="coin"
                 />
                 <input
-                disabled={isPending? true : false}
-                  value={userAmount}
-                  onInput={handleUserAmount}
+               
                   required
                   id="amounT"
                   placeholder="1.1234"
@@ -284,7 +282,7 @@ const BuySellBlock = ({ pools, selectedPool,setSelectedPool }) => {
                 className={styled.button}
                 id="buyBtn"
                 type="submit"
-                disabled={isPending? true : false}
+      
                 style={{
                   backgroundColor: action === "buy" ? "#3AADA4" : "#F33E29",
                   padding: "12px 16px",

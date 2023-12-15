@@ -32,11 +32,27 @@ const TableRowBuy = ({ position, active }) => {
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ]
-  const date = Date.parse(position.position_open_date)
-  const newDate = new Date(date)
+// position.position_open_date)
+function dateMaker(dateOpen,creationDate){
+  
+if (dateOpen) {
+  const newDate = new Date(Date.parse(dateOpen))
+  const finalDate = `${monthNames[newDate.getMonth()]} ${newDate.getDate()}`
+ return {newDate,finalDate}
+} else if(creationDate) {
+  const newDate = new Date(Date.parse(creationDate))
+  const finalDate = `${monthNames[newDate.getMonth()]} ${newDate.getDate()}`
+ return {newDate,finalDate}
+}else{
+  return null
+}
+  const newDate = new Date(Date.parse(position.position_open_date))
 
   // const a = date.getDay()
  const finalDate = `${monthNames[newDate.getMonth()]} ${newDate.getDate()}`
+ return {}
+}
+
 
 
 
@@ -246,7 +262,7 @@ const TableRowBuy = ({ position, active }) => {
             padding:'7px'
           }}
         >
-         <Tooltip sx={{display:'block'}} arrow title={`${newDate}`}>{finalDate}</Tooltip> 
+         <Tooltip sx={{display:'block'}} arrow title={`${dateMaker(position.position_open_date,position.position_creation_date)?.newDate || '-'}`}>{dateMaker(position.position_open_date,position.position_creation_date)?.finalDate || '-'}</Tooltip> 
         </TableCell>
         
 

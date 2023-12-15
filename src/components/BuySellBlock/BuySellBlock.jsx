@@ -210,19 +210,7 @@ try{
       setIsLoading(false)
     }
   }
-  useEffect(() => {
-    // console.log(userAmount,leverage,currentPoolData.id);
-    // debounce(() => {
-    
-      if(userAmount && leverage ){
-      api.getProfit(currentPoolData.id,userAmount,leverage).then(data=>{
-    
-        setProfit(data.profit.toFixed(1))
-      }
 
-      )}
-    // }, 800)
-  }, [userAmount,leverage,currentPoolData]);
   return (
     <>
       <Formik

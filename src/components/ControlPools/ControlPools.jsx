@@ -1,6 +1,7 @@
 import BuySellBlock from "../../components/BuySellBlock/BuySellBlock";
 import styled from "./Control.module.css";
 import LiquidityPool from "../../components/LiquidityPool/LiquidityPool.jsx";
+import EmptyBlock from '../EmptyBlock/EmptyBlock.jsx'
 import { Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import api from "../../API/levstake.js";
@@ -16,12 +17,15 @@ const ControlPools = () => {
   return (
     <div className={styled.mainBox}>
       <div className={styled.buySell}>
-        {pools && pools.length !== 0  &&
-          <BuySellBlock
-            selectedPool={selectedPool}
-            setSelectedPool={setSelectedPool}
-            pools={pools}
-          ></BuySellBlock> 
+        {pools && pools.length !== 0  ?
+         <BuySellBlock
+         selectedPool={selectedPool}
+         setSelectedPool={setSelectedPool}
+         pools={pools}
+       ></BuySellBlock> 
+          :  <EmptyBlock></EmptyBlock>
+        
+        
        } 
       </div>
 
