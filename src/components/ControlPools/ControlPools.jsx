@@ -15,12 +15,12 @@ const ControlPools = () => {
   return (
     <div className={styled.mainBox}>
       <div className={styled.buySell}>
-        {pools && pools.length !== 0  &&(
+        {/* {pools && pools.length !== 0  &&( */}
           <BuySellBlock
             selectedPool={selectedPool}
             pools={pools || []}
           ></BuySellBlock> 
-        )}
+        {/* )} */}
       </div>
 
       <div className={styled.pool}>

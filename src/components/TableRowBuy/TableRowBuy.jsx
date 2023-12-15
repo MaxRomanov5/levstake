@@ -26,6 +26,16 @@ const TableRowBuy = ({ position, active }) => {
       return <span style={{ color: "#C23221" }}>funds are withdrawn</span>;
     }
   }
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+]
+  const date = Date.parse(position.position_open_date)
+  const newDate = new Date(date)
+  console.log(newDate.getDate());
+  // const a = date.getDay()
+ const finalDate = `${monthNames[newDate.getMonth()]} ${newDate.getDate()}`
+
+
 
   async function withdrawPosition(e) {
     try {
@@ -143,7 +153,7 @@ const TableRowBuy = ({ position, active }) => {
             lineHeight: "16px",paddingRight:'8px'
           }}
         >
-        <Tooltip title={`Leveraged amount : ${Number.isInteger(Number(position.total_amount)) ? Number(position.total_amount) :Number(position.total_amount).toFixed(1)} `}>  {Number.isInteger(Number(position.user_amount)) ? Number(position.user_amount) :Number(position.user_amount).toFixed(1)}</Tooltip>
+        <Tooltip sx={{display:'block'}} arrow title={`Leveraged amount : ${Number.isInteger(Number(position.total_amount)) ? Number(position.total_amount) :Number(position.total_amount).toFixed(1)} `}>  {Number.isInteger(Number(position.user_amount)) ? Number(position.user_amount) :Number(position.user_amount).toFixed(1)}</Tooltip>
         </TableCell>
         <TableCell align="center"
           sx={{
@@ -224,7 +234,7 @@ const TableRowBuy = ({ position, active }) => {
             paddingBottom: "9px",paddingRight:'8px'
           }}
         >
-          date
+         <Tooltip sx={{display:'block'}} arrow title={`${newDate}`}>{finalDate}</Tooltip> 
         </TableCell>
         <TableCell align="center"
           sx={{
